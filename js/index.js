@@ -36,6 +36,7 @@ let playerDeck = [];
 let cpuDeck = [];
 let playerCard = "back-blue";
 let cpuCard = "back-red";
+let deckListDisplay = "";
 
 /*----- cached element references -----*/
 
@@ -120,43 +121,54 @@ function handleClick() {
   //if player or cpu runs out of cards, shuffle their deck
   if (playerCards.length == 0) {
     shuffle(playerDeck);
-    console.log("shufflign player deck");
   }
   if (cpuCards.length == 0) {
     shuffle(cpuDeck);
-    console.log("shufflign cpu deck");
   }
   //render function, actually did not have this seperated before so this is new
   function render() {
-    playerTallyEl.textContent = "Player Card: " + playerCard;
-    cpuTallyEl.textContent = "Cpu Card: " + cpuCard;
+    playerTallyEl.textContent =
+      "Player Card Total: " + (playerCards.length + playerDeck.length);
+    cpuTallyEl.textContent =
+      "Player Card Total: " + (cpuCards.length + cpuDeck.length);
+    // playerCardDisplay.textContent = "Player Card: " + playerCard;
+    // cpuCardDisplay.textContent = "Cpu Card: " + cpuCard;
 
     playerCardEl.classList.remove(oldPlayerCard);
     cpuCardEl.classList.remove(oldCpuCard);
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
-    deckList.textContent = playerDeck.toString() + playerCards.toString();
+    deckListDisplay = playerDeck.join(", ") + ", " + playerCards.join(", ");
+    deckListDisplay = deckListDisplay.toUpperCase();
+    deckList.textContent = deckListDisplay;
   }
   render();
-  //if cards = 0 shuffle player or cpu deck
+  //if cards == 0 shuffle player or cpu deck
   function shuffle(deck) {
-    if ((deck = playerDeck)) {
+    //my error with cards dissapearing was from a single = in this if statement
+    if (deck == playerDeck) {
       playerDeck = playerDeck.sort(() => 0.5 - Math.random());
       playerCards = playerDeck;
+      console.log("shufflign player deck");
       if (playerCards.length == 0) {
         alert("The Computer has won, get good.");
       }
+
       playerDeck = [];
     }
-    if ((deck = cpuDeck)) {
+    if (deck == cpuDeck) {
       cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
       cpuCards = cpuDeck;
+      console.log("shufflign cpu deck");
       if (cpuCards.length == 0) {
         alert("You have won, good job.");
       }
+
       cpuDeck = [];
     }
   }
 }
 
 //add sound on shuffle
+
+//found a bug, sometimes more than 1 turn is triggering at a time without being rendered

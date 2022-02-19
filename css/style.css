@@ -14,10 +14,10 @@ body {
 
 .score-area {
   position: absolute;
-  top: 180px;
+  top: 215px;
   left: 500px;
   justify-content: flex-start;
-  height: 380px;
+  height: 275px;
   width: 250px;
   border: 10px solid black;
   border-radius: 25px;
@@ -29,7 +29,7 @@ body {
   padding-top: 20px;
 
   max-width: 90%;
-  height: 80%;
+  height: 70%;
   border: 1px solid purple;
 }
 
@@ -72,5 +72,11 @@ div {
 
 .under-table {
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 5px;
+}
+.VS {
+  margin-top: -43px;
+  font-family: fantasy;
+  font-size: large;
+  -webkit-text-stroke: 2px red;
 }
