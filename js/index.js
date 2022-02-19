@@ -118,6 +118,15 @@ function handleClick() {
     cpuDeck.push(cpuCard);
     playerDeck.push(playerCard);
   }
+  //if player or cpu runs out of cards, shuffle their deck
+  if (playerCards.length == 0) {
+    shuffle(playerDeck);
+    console.log("shufflign player deck");
+  }
+  if (cpuCards.length == 0) {
+    shuffle(cpuDeck);
+    console.log("shufflign cpu deck");
+  }
   //render function, actually did not have this seperated before so this is new
   function render() {
     playerTallyEl.textContent = "Player Card: " + playerCard;
@@ -129,4 +138,26 @@ function handleClick() {
     cpuCardEl.classList.add(cpuCard);
   }
   render();
+//if cards = 0 shuffle player or cpu deck
+function shuffle(deck) {
+  if ((deck = playerDeck)) {
+    playerDeck = playerDeck.sort(() => 0.5 - Math.random());
+    playerCards = playerDeck;
+    if (playerCards.length == 0) {
+      alert("The Computer has won, get good.");
+    }
+    playerDeck = [];
+  }
+  if ((deck = cpuDeck)) {
+    cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
+    cpuCards = cpuDeck;
+    if (cpuCards.length == 0) {
+      alert("You have won, good job.");
+    }
+    cpuDeck = [];
+  }
+
 }
+
+
+//add sound on shuffle
