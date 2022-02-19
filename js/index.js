@@ -51,7 +51,7 @@ btnEl.addEventListener("click", handleClick);
 
 /*----- functions -----*/
 
-//when draw is clicked the first card is draw for the player and 2nd card is drawn for the cpu, move cards from cards array to deck array
+//handle movings cards from hands to decks based on turn win/draw conditions
 function handleClick() {
   let oldPlayerCard = playerCard;
   let oldCpuCard = cpuCard;
@@ -76,6 +76,35 @@ function handleClick() {
   }
   /// compare player vs cpu card, handle win and draw
   console.log(`${playerNum} vs ${cpuNum}`);
+  if (cpuCard[1] == "J") {
+    cpuNum = "11";
+  }
+  if (cpuCard[1] == "Q") {
+    cpuNum = "12";
+  }
+  if (cpuCard[1] == "K") {
+    cpuNum = "12";
+  }
+  if (cpuCard[1] == "A") {
+    cpuNum = "13";
+  }
+  if (playerCard[1] == "J") {
+    playerNum = "11";
+  }
+  if (playerCard[1] == "Q") {
+    playerNum = "12";
+  }
+  if (playerCard[1] == "K") {
+    playerNum = "12";
+  }
+  if (playerCard[1] == "A") {
+    playerNum = "13";
+  }
+
+  if (playerCard[1] == "J") {
+    console.log("Player jack!");
+  }
+  console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuNum > playerNum) {
     cpuDeck.push(cpuCard);
     cpuDeck.push(playerCard);
@@ -89,15 +118,13 @@ function handleClick() {
     cpuDeck.push(cpuCard);
     playerDeck.push(playerCard);
   }
-
+  //render function, actually did not have this seperated before so this is new
   function render() {
     playerTallyEl.textContent = "Player Card: " + playerCard;
     cpuTallyEl.textContent = "Cpu Card: " + cpuCard;
 
     playerCardEl.classList.remove(oldPlayerCard);
-
     cpuCardEl.classList.remove(oldCpuCard);
-
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
   }
