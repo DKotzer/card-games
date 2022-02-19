@@ -55,15 +55,13 @@ btnEl.addEventListener("click", handleClick);
 function handleClick() {
   let oldPlayerCard = playerCard;
   let oldCpuCard = cpuCard;
-  playerCardEl.classList.remove("back-blue"); //fixed issue by moving player card and cpu card declaration global and as 'back-blue/red'
+  playerCardEl.classList.remove("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
   cpuCardEl.classList.remove("back-red");
 
   playerCard = playerCards.pop();
   console.log("player card: " + playerCard);
   cpuCard = cpuCards.pop();
   console.log(`cpu card: ${cpuCard}`);
-  cpuDeck.push(cpuCard);
-  playerDeck.push(playerCard);
 
   let playerNum = playerCard[1];
   if (playerCard[2] != undefined) {
@@ -138,26 +136,25 @@ function handleClick() {
     cpuCardEl.classList.add(cpuCard);
   }
   render();
-//if cards = 0 shuffle player or cpu deck
-function shuffle(deck) {
-  if ((deck = playerDeck)) {
-    playerDeck = playerDeck.sort(() => 0.5 - Math.random());
-    playerCards = playerDeck;
-    if (playerCards.length == 0) {
-      alert("The Computer has won, get good.");
+  //if cards = 0 shuffle player or cpu deck
+  function shuffle(deck) {
+    if ((deck = playerDeck)) {
+      playerDeck = playerDeck.sort(() => 0.5 - Math.random());
+      playerCards = playerDeck;
+      if (playerCards.length == 0) {
+        alert("The Computer has won, get good.");
+      }
+      playerDeck = [];
     }
-    playerDeck = [];
-  }
-  if ((deck = cpuDeck)) {
-    cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
-    cpuCards = cpuDeck;
-    if (cpuCards.length == 0) {
-      alert("You have won, good job.");
+    if ((deck = cpuDeck)) {
+      cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
+      cpuCards = cpuDeck;
+      if (cpuCards.length == 0) {
+        alert("You have won, good job.");
+      }
+      cpuDeck = [];
     }
-    cpuDeck = [];
   }
-
 }
-
 
 //add sound on shuffle
