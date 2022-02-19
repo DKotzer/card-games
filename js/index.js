@@ -44,6 +44,7 @@ let playerCardEl = document.querySelector("#player-card");
 let cpuCardEl = document.querySelector("#cpu-card");
 let playerTallyEl = document.querySelector(".player-tally");
 let cpuTallyEl = document.querySelector(".cpu-tally");
+let deckList = document.querySelector(".deck-list");
 
 /*----- event listeners -----*/
 
@@ -134,6 +135,7 @@ function handleClick() {
     cpuCardEl.classList.remove(oldCpuCard);
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
+    deckList.textContent = playerDeck.toString() + playerCards.toString();
   }
   render();
   //if cards = 0 shuffle player or cpu deck

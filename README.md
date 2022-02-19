@@ -45,7 +45,7 @@
 
 For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, Blackjack and Poker. After the boot camp I could potentially come back and add more games to the home page.
 
-I sort of made War by mistake before actually starting the git so I am going to simulate some of the stages of how I made it with the next few commits. Also this readme is a template that I am trying out for the first time so it might look wierd.
+The progress of the game is now beyond what I had before I started my git commit. Although I think the simulating the process via staged commits broke my game in some way. Figuring it out.
 
 <img src="images/screenshot.png" width="800">
 
