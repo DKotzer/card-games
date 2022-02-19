@@ -45,7 +45,7 @@
 
 For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, Blackjack and Poker. After the boot camp I could potentially come back and add more games to the home page.
 
-The progress of the game is now beyond what I had before I started my git commit. Although I think the simulating the process via staged commits broke my game in some way. Figuring it out.
+Oops after looking up the average number of turns for a game of war I realized that two equal cards isnt a draw but a 'war'.
 
 <img src="images/screenshot.png" width="800">
 
@@ -76,6 +76,10 @@ See the [open issues](https://github.com/DKotzer/card-games/issues) for a full l
 
 <!-- CONTRIBUTING -->
 
+## Lessons Learned
+
+- watch out for single = when checking if something is equal to something else. Check for this early on when troubleshooting
+- it took me a while to figure out why some cards kept dissapearing from the decks.
 <!-- CONTACT -->
 
 ## Contact

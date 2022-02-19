@@ -1,5 +1,4 @@
 /*----- constants -----*/
-
 //Creating the deck of 52 cards and storing them in the cards array
 const suits = ["h", "s", "d", "c"];
 const values = [
@@ -19,13 +18,11 @@ const values = [
 ];
 let cards = [];
 suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
-
 //initial shuffling of the deck, feels like it does a bad job sometimes
 cards = cards.sort(() => 0.5 - Math.random());
 //split cards in to a deck for each player
 let playerCards = cards.slice(26);
 let cpuCards = cards.slice(0, 26);
-
 console.log(cards);
 console.log(cards.length);
 
@@ -37,6 +34,7 @@ let cpuDeck = [];
 let playerCard = "back-blue";
 let cpuCard = "back-red";
 let deckListDisplay = "";
+let gameOver = null;
 
 /*----- cached element references -----*/
 
@@ -128,18 +126,24 @@ function handleClick() {
   //render function, actually did not have this seperated before so this is new
   function render() {
     playerTallyEl.textContent =
-      "Player Card Total: " + (playerCards.length + playerDeck.length);
-    cpuTallyEl.textContent =
-      "Player Card Total: " + (cpuCards.length + cpuDeck.length);
+      "Player Cards: " + (playerCards.length + playerDeck.length);
+    cpuTallyEl.textContent = "CPU Cards: " + (cpuCards.length + cpuDeck.length);
     // playerCardDisplay.textContent = "Player Card: " + playerCard;
     // cpuCardDisplay.textContent = "Cpu Card: " + cpuCard;
-
     playerCardEl.classList.remove(oldPlayerCard);
     cpuCardEl.classList.remove(oldCpuCard);
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
+    // deckListDisplay = playerDeck + playerCards;
+
     deckListDisplay = playerDeck.join(", ") + ", " + playerCards.join(", ");
+    //deckListDisplay.sort();
+    // deckListDisplay = deckListDisplay.join(", ");
+    if (deckListDisplay[0] == ",") {
+      deckListDisplay = playerDeck.join(", ") + playerCards.join(", ");
+    }
     deckListDisplay = deckListDisplay.toUpperCase();
+
     deckList.textContent = deckListDisplay;
   }
   render();
@@ -152,8 +156,8 @@ function handleClick() {
       console.log("shufflign player deck");
       if (playerCards.length == 0) {
         alert("The Computer has won, get good.");
+        gameOver = true;
       }
-
       playerDeck = [];
     }
     if (deck == cpuDeck) {
@@ -162,13 +166,18 @@ function handleClick() {
       console.log("shufflign cpu deck");
       if (cpuCards.length == 0) {
         alert("You have won, good job.");
+        gameOver = true;
       }
-
       cpuDeck = [];
     }
   }
 }
-
+function autoPlay() {
+  if (gameOver != true) {
+    //setInterval(handleClick, 1);
+    handleClick();
+  }
+}
 //add sound on shuffle
 
 //found a bug, sometimes more than 1 turn is triggering at a time without being rendered
