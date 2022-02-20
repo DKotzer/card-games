@@ -41,6 +41,8 @@ let cpuWarCard = "back-red";
 let cpuWarCards = [];
 let delay = 3500;
 let warState = false;
+let oldPlayerCard = playerCard;
+let oldCpuCard = cpuCard;
 
 /*----- cached element references -----*/
 
@@ -70,15 +72,15 @@ function handleClick() {
   if (cpuCards.length == 0) {
     shuffle(cpuDeck);
   }
-  let oldPlayerCard = playerCard;
-  let oldCpuCard = cpuCard;
+  oldPlayerCard = playerCard;
+  oldCpuCard = cpuCard;
   playerCardEl.classList.remove("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
   cpuCardEl.classList.remove("back-red");
 
   playerCard = playerCards.pop();
-  console.log("player card: " + playerCard);
+  //   console.log("player card: " + playerCard);
   cpuCard = cpuCards.pop();
-  console.log(`cpu card: ${cpuCard}`);
+  //   console.log(`cpu card: ${cpuCard}`);
 
   let playerNum = playerCard[1];
   if (playerCard[2] != undefined) {
@@ -90,7 +92,7 @@ function handleClick() {
     cpuNum += cpuCard[2];
   }
   /// compare player vs cpu card values, handle win and draw
-  console.log(`${playerNum} vs ${cpuNum}`);
+  //   console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuCard[1] == "J") {
     cpuNum = "11";
   }
@@ -116,15 +118,15 @@ function handleClick() {
     playerNum = "13";
   }
 
-  console.log(`${playerNum} vs ${cpuNum}`);
+  //   console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuNum > playerNum) {
     cpuDeck.push(cpuCard);
     cpuDeck.push(playerCard);
-    console.log("CPU wins");
+    console.log("CPU wins round");
   } else if (playerNum > cpuNum) {
     playerDeck.push(cpuCard);
     playerDeck.push(playerCard);
-    console.log("Player wins");
+    console.log("Player wins round");
   } else {
     console.log("War!");
     war();
@@ -141,6 +143,7 @@ function handleClick() {
 
   function war() {
     warState = true;
+    btnEl.disabled = true;
     // let oldPlayerWarCard = playerWarCard;
     // let oldCpuWarCard = cpuWarCard;
     function resetWar() {
@@ -148,6 +151,7 @@ function handleClick() {
 
       cpuWarCardEl.classList = "card large back-red";
       warState = false;
+      btnEl.disabled = false;
     }
 
     if (playerCards.length == 0) {
@@ -156,12 +160,13 @@ function handleClick() {
     if (cpuCards.length == 0) {
       shuffle(cpuDeck);
     }
+    playerWarArrayFix = playerCards.pop();
+    cpuWarArrayFix = cpuCards.pop();
+    console.log("face down pCard: " + playerWarArrayFix);
+    console.log("face down cCard: " + cpuWarArrayFix);
 
-    //add in animated war text between cards
-    playerWarCard = playerCards.pop();
-    console.log("player war card: " + playerWarCard);
-    cpuWarCard = cpuCards.pop();
-
+    playerWarCards.push(playerWarArrayFix);
+    cpuWarCards.push(cpuWarArrayFix);
     if (playerCards.length == 0) {
       //this is here in case there is a card for the first war card but not the face down war card
       shuffle(playerDeck);
@@ -169,12 +174,10 @@ function handleClick() {
     if (cpuCards.length == 0) {
       shuffle(cpuDeck);
     }
-
-    playerWarArrayFix = playerCards.pop();
-    cpuWarArrayFix = cpuCards.pop();
-
-    playerWarCards.push(playerWarArrayFix);
-    cpuWarCards.push(cpuWarArrayFix);
+    //add in animated war text between cards
+    playerWarCard = playerCards.pop();
+    console.log("player war card: " + playerWarCard);
+    cpuWarCard = cpuCards.pop();
 
     console.log(`cpu war card: ${cpuWarCard}`);
     playerWarCardEl.classList.remove("back-blue");
@@ -184,9 +187,11 @@ function handleClick() {
 
     let playerWarNum = playerWarCard[1];
     if (playerWarCard[2] != undefined) {
-      playerWarNum += playerCard[2];
+      playerWarNum += playerWarCard[2];
     }
-
+    if (cpuWarCard[1] == undefined) {
+      console.log("CpuWarCard[1] is undefined, figure it out");
+    }
     let cpuWarNum = cpuWarCard[1];
     if (cpuWarCard[2] != undefined) {
       cpuWarNum += cpuWarCard[2];
@@ -225,11 +230,13 @@ function handleClick() {
       cpuDeck.push(playerWarCard);
       cpuDeck.push(playerWarCards);
       cpuDeck.push(cpuWarCards);
+
       cpuDeck.push(cpuWarCard);
-      playerWarCards = "";
-      cpuWarCards = "";
-      cpuWarCard = "";
-      playerWarCard = "";
+      pcuDeck = [].concat.apply([], cpuDeck);
+      playerWarCards = []; // having this as "" instead of [] was breaking the game
+      cpuWarCards = [];
+      cpuWarCard = [];
+      playerWarCard = [];
       console.log("CPU wins the WAR");
       setTimeout(resetWar, delay);
 
@@ -243,11 +250,13 @@ function handleClick() {
       playerDeck.push(cpuWarCard);
       playerDeck.push(cpuWarCards);
       playerDeck.push(playerWarCards);
+
       playerDeck.push(playerWarCard);
-      playerWarCards = "";
-      cpuWarCards = "";
-      cpuWarCard = "";
-      playerWarCard = "";
+      playerDeck = [].concat.apply([], playerDeck);
+      playerWarCards = [];
+      cpuWarCards = [];
+      cpuWarCard = [];
+      playerWarCard = [];
 
       console.log("Player wins the WAR");
       setTimeout(resetWar, delay);
@@ -305,6 +314,7 @@ function handleClick() {
       playerCards = playerDeck;
       console.log("shufflign player deck");
       if (playerCards.length == 0) {
+        render();
         alert("The Computer has won, get good.");
         gameOver = true;
       }
@@ -315,6 +325,7 @@ function handleClick() {
       cpuCards = cpuDeck;
       console.log("shufflign cpu deck");
       if (cpuCards.length == 0) {
+        render();
         alert("You have won, good job.");
         gameOver = true;
       }
