@@ -60,6 +60,9 @@ let warArea2El = document.querySelector(".warArea2");
 let playerWarArrayFix = [];
 let cpuWarArrayFix = [];
 
+let shuffleSound = new Audio("sounds/shuffle.mp3");
+let warSound = new Audio("sounds/war.wav");
+
 /*----- event listeners -----*/
 
 btnEl.addEventListener("click", handleClick);
@@ -149,6 +152,7 @@ function handleClick() {
     btnEl.disabled = true;
     warAreaEl.classList.remove("hidden");
     warArea2El.classList.remove("hidden");
+    warSound.play();
 
     // let oldPlayerWarCard = playerWarCard;
     // let oldCpuWarCard = cpuWarCard;
@@ -329,6 +333,7 @@ function handleClick() {
       playerDeck = playerDeck.sort(() => 0.5 - Math.random());
       playerCards = playerDeck;
       console.log("shufflign player deck");
+      shuffleSound.play();
       if (playerCards.length == 0) {
         render();
         alert("The Computer has won, get good.");
@@ -340,6 +345,7 @@ function handleClick() {
       cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
       cpuCards = cpuDeck;
       console.log("shufflign cpu deck");
+      shuffleSound.play();
       if (cpuCards.length == 0) {
         render();
         alert("You have won, good job.");
