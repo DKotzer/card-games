@@ -230,6 +230,7 @@ function handleClick() {
       cpuDeck.push(cpuCard);
       cpuDeck.push(playerCard);
       cpuDeck.push(playerWarCard);
+      console.log("player war cards: " + playerWarCards);
       cpuDeck.push(playerWarCards);
       cpuDeck.push(cpuWarCards);
 
@@ -252,6 +253,7 @@ function handleClick() {
       playerDeck.push(playerCard);
       playerDeck.push(cpuWarCard);
       playerDeck.push(cpuWarCards);
+      console.log("player war cards: " + playerWarCards);
       playerDeck.push(playerWarCards);
 
       playerDeck.push(playerWarCard);
@@ -271,8 +273,9 @@ function handleClick() {
       console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
       console.log("More War!");
 
-      playerWarCards = playerWarCards + playerWarCard;
-      cpuWarCards = cpuWarCards + cpuWarCard;
+      playerWarCards.push(playerWarCard);
+      cpuWarCards.push(cpuWarCard);
+      console.log("player war cards: " + playerWarCards);
       cpuWarCard = [];
       playerWarCard = [];
       setTimeout(resetWar, 3500);
