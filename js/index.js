@@ -40,6 +40,7 @@ let playerWarCards = [];
 let cpuWarCard = "back-red";
 let cpuWarCards = [];
 let delay = 3500;
+let warState = false;
 
 /*----- cached element references -----*/
 
@@ -51,6 +52,8 @@ let cpuTallyEl = document.querySelector(".cpu-tally");
 let deckList = document.querySelector(".deck-list");
 let playerWarCardEl = document.querySelector("#player-war-card");
 let cpuWarCardEl = document.querySelector("#cpu-war-card");
+let playerWarArrayFix;
+let cpuWarArrayFix;
 
 /*----- event listeners -----*/
 
@@ -137,12 +140,14 @@ function handleClick() {
   }
 
   function war() {
+    warState = true;
     // let oldPlayerWarCard = playerWarCard;
     // let oldCpuWarCard = cpuWarCard;
     function resetWar() {
       playerWarCardEl.classList = "card large back-blue";
 
       cpuWarCardEl.classList = "card large back-red";
+      warState = false;
     }
 
     if (playerCards.length == 0) {
@@ -165,8 +170,11 @@ function handleClick() {
       shuffle(cpuDeck);
     }
 
-    playerWarCards.push(playerCards.pop());
-    cpuWarCards.push(cpuCards.pop());
+    playerWarArrayFix = playerCards.pop();
+    cpuWarArrayFix = cpuCards.pop();
+
+    playerWarCards.push(playerWarArrayFix);
+    cpuWarCards.push(cpuWarArrayFix);
 
     console.log(`cpu war card: ${cpuWarCard}`);
     playerWarCardEl.classList.remove("back-blue");
@@ -218,10 +226,10 @@ function handleClick() {
       cpuDeck.push(playerWarCards);
       cpuDeck.push(cpuWarCards);
       cpuDeck.push(cpuWarCard);
-      playerWarCards = [];
-      cpuWarCards = [];
-      cpuWarCard = [];
-      playerWarCard = [];
+      playerWarCards = "";
+      cpuWarCards = "";
+      cpuWarCard = "";
+      playerWarCard = "";
       console.log("CPU wins the WAR");
       setTimeout(resetWar, delay);
 
@@ -236,10 +244,10 @@ function handleClick() {
       playerDeck.push(cpuWarCards);
       playerDeck.push(playerWarCards);
       playerDeck.push(playerWarCard);
-      playerWarCards = [];
-      cpuWarCards = [];
-      cpuWarCard = [];
-      playerWarCard = [];
+      playerWarCards = "";
+      cpuWarCards = "";
+      cpuWarCard = "";
+      playerWarCard = "";
 
       console.log("Player wins the WAR");
       setTimeout(resetWar, delay);
@@ -254,6 +262,7 @@ function handleClick() {
       playerWarCards = playerWarCards + playerWarCard;
       cpuWarCards = cpuWarCards + cpuWarCard;
       setTimeout(resetWar, 3500);
+      warState = true;
       //   playerWarCardEl.classList.add("back-blue");
       //   playerWarCardEl.classList.remove(playerWarCard);
       //   cpuWarCardEl.classList.add("back-red");
