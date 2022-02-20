@@ -235,10 +235,11 @@ function handleClick() {
 
       cpuDeck.push(cpuWarCard);
       cpuDeck = [].concat.apply([], cpuDeck);
-      playerWarCards = []; // having this as "" instead of [] was breaking the game
+      playerWarCards = [];
+      playerWarCard = []; // having this as "" instead of [] was breaking the game
       cpuWarCards = [];
       cpuWarCard = [];
-      playerWarCard = [];
+
       console.log("CPU wins the WAR");
       setTimeout(resetWar, delay);
 
@@ -272,6 +273,8 @@ function handleClick() {
 
       playerWarCards = playerWarCards + playerWarCard;
       cpuWarCards = cpuWarCards + cpuWarCard;
+      cpuWarCard = [];
+      playerWarCard = [];
       setTimeout(resetWar, 3500);
       warState = true;
       //   playerWarCardEl.classList.add("back-blue");
@@ -345,3 +348,8 @@ function autoPlay() {
 //add sound on shuffle
 
 //found a bug, sometimes more than 1 turn is triggering at a time without being rendered
+
+//to do list
+//turn some of the repeated code in to reusable functions
+//add sound to shuffle and war
+//add a player/cpu deck that you can click to draw a card instead of pressing draw button
