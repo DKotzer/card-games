@@ -35,6 +35,10 @@ let playerCard = "back-blue";
 let cpuCard = "back-red";
 let deckListDisplay = "";
 let gameOver = null;
+let playerWarCard = "back-blue";
+let playerWarCards = [];
+let cpuWarCard = "back-red";
+let cpuWarCards = [];
 
 /*----- cached element references -----*/
 
@@ -44,6 +48,8 @@ let cpuCardEl = document.querySelector("#cpu-card");
 let playerTallyEl = document.querySelector(".player-tally");
 let cpuTallyEl = document.querySelector(".cpu-tally");
 let deckList = document.querySelector(".deck-list");
+let playerWarCardEl = document.querySelector("#player-war-card");
+let cpuWarCardEl = document.querySelector("#cpu-war-card");
 
 /*----- event listeners -----*/
 
@@ -51,7 +57,7 @@ btnEl.addEventListener("click", handleClick);
 
 /*----- functions -----*/
 
-//handle movings cards from hands to decks based on turn win/draw conditions
+//handle the logic of each turn
 function handleClick() {
   let oldPlayerCard = playerCard;
   let oldCpuCard = cpuCard;
@@ -72,7 +78,7 @@ function handleClick() {
   if (cpuCard[2] != undefined) {
     cpuNum += cpuCard[2];
   }
-  /// compare player vs cpu card, handle win and draw
+  /// compare player vs cpu card values, handle win and draw
   console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuCard[1] == "J") {
     cpuNum = "11";
@@ -112,9 +118,10 @@ function handleClick() {
     playerDeck.push(playerCard);
     console.log("Player wins");
   } else {
-    console.log("Draw");
-    cpuDeck.push(cpuCard);
-    playerDeck.push(playerCard);
+    console.log("War");
+    war();
+    // cpuDeck.push(cpuCard);
+    // playerDeck.push(playerCard);
   }
   //if player or cpu runs out of cards, shuffle their deck
   if (playerCards.length == 0) {
@@ -123,7 +130,80 @@ function handleClick() {
   if (cpuCards.length == 0) {
     shuffle(cpuDeck);
   }
-  //render function, actually did not have this seperated before so this is new
+
+  function war() {
+    if (playerCards.length == 0) {
+      shuffle(playerDeck);
+    }
+    if (cpuCards.length == 0) {
+      shuffle(cpuDeck);
+    }
+    //add in animated war text between cards
+    playerWarCard = playerCards.pop();
+    console.log("player war card: " + playerWarCard);
+    cpuWarCard = cpuCards.pop();
+    console.log(`cpu war card: ${cpuWarCard}`);
+    playerWarCardEl.classList.remove("back-blue");
+    playerWarCardEl.classList.add(playerWarCard);
+    cpuWarCardEl.classList.remove("back-red");
+    cpuWarCardEl.classList.add(cpuWarCard);
+
+    let playerWarNum = playerWarCard[1];
+    if (playerWarCard[2] != undefined) {
+      playerWarNum += playerCard[2];
+    }
+
+    let cpuWarNum = cpuWarCard[1];
+    if (cpuWarCard[2] != undefined) {
+      cpuWarNum += cpuWarCard[2];
+    }
+    /// compare player vs cpu card values, handle win and draw
+    console.log(`War before conversion: ${playerWarNum} vs ${cpuWarNum}`);
+    if (cpuWarCard[1] == "J") {
+      cpuWarNum = "11";
+    }
+    if (cpuWarCard[1] == "Q") {
+      cpuWarNum = "12";
+    }
+    if (cpuWarCard[1] == "K") {
+      cpuWarNum = "12";
+    }
+    if (cpuWarCard[1] == "A") {
+      cpuWarNum = "13";
+    }
+    if (playerWarCard[1] == "J") {
+      playerWarNum = "11";
+    }
+    if (playerWarCard[1] == "Q") {
+      playerWarNum = "12";
+    }
+    if (playerWarCard[1] == "K") {
+      playerWarNum = "12";
+    }
+    if (playerWarCard[1] == "A") {
+      playerWarNum = "13";
+    }
+
+    console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
+    if (cpuWarNum > playerWarNum) {
+      cpuDeck.push(cpuCard);
+      cpuDeck.push(playerCard);
+      cpuDeck.push(playerWarCard);
+      cpuDeck.push(playerWarCards);
+      console.log("CPU wins the WAR");
+    } else if (playerWarNum > cpuWarNum) {
+      playerDeck.push(cpuCard);
+      playerDeck.push(playerCard);
+      cpuDeck.push(cpuWarCard);
+      cpuDeck.push(cpuWarCards);
+      console.log("Player wins the WAR");
+    } else {
+      console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
+      console.log("More War!");
+      war();
+    }
+  }
+
   function render() {
     playerTallyEl.textContent =
       "Player Cards: " + (playerCards.length + playerDeck.length);
@@ -134,6 +214,8 @@ function handleClick() {
     cpuCardEl.classList.remove(oldCpuCard);
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
+    // playerWarCardEl.classList.add(playerWarCard);
+
     // deckListDisplay = playerDeck + playerCards;
 
     deckListDisplay = playerDeck.join(", ") + ", " + playerCards.join(", ");
@@ -150,6 +232,7 @@ function handleClick() {
   //if cards == 0 shuffle player or cpu deck
   function shuffle(deck) {
     //my error with cards dissapearing was from a single = in this if statement
+
     if (deck == playerDeck) {
       playerDeck = playerDeck.sort(() => 0.5 - Math.random());
       playerCards = playerDeck;

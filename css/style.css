@@ -12,16 +12,6 @@ body {
   text-align: center;
 }
 
-.score-area {
-  position: absolute;
-  top: 215px;
-  left: 500px;
-  justify-content: flex-start;
-  height: 275px;
-  width: 250px;
-  border: 10px solid black;
-  border-radius: 25px;
-}
 .deck-list {
   justify-content: flex-start;
   overflow-wrap: break-word; /*  https://css-tricks.com/almanac/properties/o/overflow-wrap/ */
@@ -58,9 +48,13 @@ div {
   -webkit-text-stroke: 2px red; /* got this from https://www.youtube.com/watch?v=3LlLkapKw6Q  */
 }
 .game-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* grid-template-columns: 350px 33% 33%; */
   background-color: green;
   width: 800px;
-  padding-left: 150px;
+  padding-left: px;
   padding-right: 150px;
   margin: 0 auto;
   border-radius: 100px;
@@ -72,11 +66,24 @@ div {
 
 .under-table {
   margin: 0 auto;
-  margin-top: 5px;
+  margin-top: -35px;
 }
 .VS {
   margin-top: -43px;
   font-family: fantasy;
   font-size: large;
   -webkit-text-stroke: 2px red;
+}
+.score-area {
+  margin-top: 7%;
+  justify-content: flex-start;
+  height: 275px;
+  width: 250px;
+  border: 10px solid black;
+  border-radius: 25px;
+}
+
+.warArea {
+  justify-content: flex-end;
+  margin-left: -50px;
 }
