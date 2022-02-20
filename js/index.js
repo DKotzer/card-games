@@ -54,8 +54,8 @@ let cpuTallyEl = document.querySelector(".cpu-tally");
 let deckList = document.querySelector(".deck-list");
 let playerWarCardEl = document.querySelector("#player-war-card");
 let cpuWarCardEl = document.querySelector("#cpu-war-card");
-let playerWarArrayFix;
-let cpuWarArrayFix;
+let playerWarArrayFix = [];
+let cpuWarArrayFix = [];
 
 /*----- event listeners -----*/
 
@@ -148,10 +148,11 @@ function handleClick() {
     // let oldCpuWarCard = cpuWarCard;
     function resetWar() {
       playerWarCardEl.classList = "card large back-blue";
-
       cpuWarCardEl.classList = "card large back-red";
       warState = false;
       btnEl.disabled = false;
+      playerWarArrayFix = [];
+      cpuWarArrayFix = [];
     }
 
     if (playerCards.length == 0) {
@@ -167,6 +168,7 @@ function handleClick() {
 
     playerWarCards.push(playerWarArrayFix);
     cpuWarCards.push(cpuWarArrayFix);
+
     if (playerCards.length == 0) {
       //this is here in case there is a card for the first war card but not the face down war card
       shuffle(playerDeck);
@@ -232,7 +234,7 @@ function handleClick() {
       cpuDeck.push(cpuWarCards);
 
       cpuDeck.push(cpuWarCard);
-      pcuDeck = [].concat.apply([], cpuDeck);
+      cpuDeck = [].concat.apply([], cpuDeck);
       playerWarCards = []; // having this as "" instead of [] was breaking the game
       cpuWarCards = [];
       cpuWarCard = [];
