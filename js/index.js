@@ -54,6 +54,9 @@ let cpuTallyEl = document.querySelector(".cpu-tally");
 let deckList = document.querySelector(".deck-list");
 let playerWarCardEl = document.querySelector("#player-war-card");
 let cpuWarCardEl = document.querySelector("#cpu-war-card");
+let warAreaEl = document.querySelector(".warArea");
+let warArea2El = document.querySelector(".warArea2");
+
 let playerWarArrayFix = [];
 let cpuWarArrayFix = [];
 
@@ -144,6 +147,9 @@ function handleClick() {
   function war() {
     warState = true;
     btnEl.disabled = true;
+    warAreaEl.classList.remove("hidden");
+    warArea2El.classList.remove("hidden");
+
     // let oldPlayerWarCard = playerWarCard;
     // let oldCpuWarCard = cpuWarCard;
     function resetWar() {
@@ -153,6 +159,8 @@ function handleClick() {
       btnEl.disabled = false;
       playerWarArrayFix = [];
       cpuWarArrayFix = [];
+      warAreaEl.classList.add("hidden");
+      warArea2El.classList.add("hidden");
     }
 
     if (playerCards.length == 0) {
