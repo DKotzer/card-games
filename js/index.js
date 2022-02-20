@@ -39,6 +39,7 @@ let playerWarCard = "back-blue";
 let playerWarCards = [];
 let cpuWarCard = "back-red";
 let cpuWarCards = [];
+let delay = 3500;
 
 /*----- cached element references -----*/
 
@@ -59,6 +60,13 @@ btnEl.addEventListener("click", handleClick);
 
 //handle the logic of each turn
 function handleClick() {
+  if (playerCards.length == 0) {
+    //this is here in case there is a card for the first war card but not the face down war card
+    shuffle(playerDeck);
+  }
+  if (cpuCards.length == 0) {
+    shuffle(cpuDeck);
+  }
   let oldPlayerCard = playerCard;
   let oldCpuCard = cpuCard;
   playerCardEl.classList.remove("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
@@ -105,9 +113,6 @@ function handleClick() {
     playerNum = "13";
   }
 
-  if (playerCard[1] == "J") {
-    console.log("Player jack!");
-  }
   console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuNum > playerNum) {
     cpuDeck.push(cpuCard);
@@ -118,7 +123,7 @@ function handleClick() {
     playerDeck.push(playerCard);
     console.log("Player wins");
   } else {
-    console.log("War");
+    console.log("War!");
     war();
     // cpuDeck.push(cpuCard);
     // playerDeck.push(playerCard);
@@ -132,16 +137,37 @@ function handleClick() {
   }
 
   function war() {
+    // let oldPlayerWarCard = playerWarCard;
+    // let oldCpuWarCard = cpuWarCard;
+    function resetWar() {
+      playerWarCardEl.classList = "card large back-blue";
+
+      cpuWarCardEl.classList = "card large back-red";
+    }
+
     if (playerCards.length == 0) {
       shuffle(playerDeck);
     }
     if (cpuCards.length == 0) {
       shuffle(cpuDeck);
     }
+
     //add in animated war text between cards
     playerWarCard = playerCards.pop();
     console.log("player war card: " + playerWarCard);
     cpuWarCard = cpuCards.pop();
+
+    if (playerCards.length == 0) {
+      //this is here in case there is a card for the first war card but not the face down war card
+      shuffle(playerDeck);
+    }
+    if (cpuCards.length == 0) {
+      shuffle(cpuDeck);
+    }
+
+    playerWarCards.push(playerCards.pop());
+    cpuWarCards.push(cpuCards.pop());
+
     console.log(`cpu war card: ${cpuWarCard}`);
     playerWarCardEl.classList.remove("back-blue");
     playerWarCardEl.classList.add(playerWarCard);
@@ -166,10 +192,10 @@ function handleClick() {
       cpuWarNum = "12";
     }
     if (cpuWarCard[1] == "K") {
-      cpuWarNum = "12";
+      cpuWarNum = "13";
     }
     if (cpuWarCard[1] == "A") {
-      cpuWarNum = "13";
+      cpuWarNum = "14";
     }
     if (playerWarCard[1] == "J") {
       playerWarNum = "11";
@@ -178,10 +204,10 @@ function handleClick() {
       playerWarNum = "12";
     }
     if (playerWarCard[1] == "K") {
-      playerWarNum = "12";
+      playerWarNum = "13";
     }
     if (playerWarCard[1] == "A") {
-      playerWarNum = "13";
+      playerWarNum = "14";
     }
 
     console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
@@ -190,16 +216,48 @@ function handleClick() {
       cpuDeck.push(playerCard);
       cpuDeck.push(playerWarCard);
       cpuDeck.push(playerWarCards);
+      cpuDeck.push(cpuWarCards);
+      cpuDeck.push(cpuWarCard);
+      playerWarCards = [];
+      cpuWarCards = [];
+      cpuWarCard = [];
+      playerWarCard = [];
       console.log("CPU wins the WAR");
+      setTimeout(resetWar, delay);
+
+      //   playerWarCardEl.classList.add("back-blue");
+      //   playerWarCardEl.classList.remove(playerWarCard);
+      //   cpuWarCardEl.classList.add("back-red");
+      //   cpuWarCardEl.classList.remove(cpuWarCard);
     } else if (playerWarNum > cpuWarNum) {
       playerDeck.push(cpuCard);
       playerDeck.push(playerCard);
-      cpuDeck.push(cpuWarCard);
-      cpuDeck.push(cpuWarCards);
+      playerDeck.push(cpuWarCard);
+      playerDeck.push(cpuWarCards);
+      playerDeck.push(playerWarCards);
+      playerDeck.push(playerWarCard);
+      playerWarCards = [];
+      cpuWarCards = [];
+      cpuWarCard = [];
+      playerWarCard = [];
+
       console.log("Player wins the WAR");
+      setTimeout(resetWar, delay);
+      //   playerWarCardEl.classList.add("back-blue");
+      //   playerWarCardEl.classList.remove(playerWarCard);
+      //   cpuWarCardEl.classList.add("back-red");
+      //   cpuWarCardEl.classList.remove(cpuWarCard);
     } else {
       console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
       console.log("More War!");
+
+      playerWarCards = playerWarCards + playerWarCard;
+      cpuWarCards = cpuWarCards + cpuWarCard;
+      setTimeout(resetWar, 3500);
+      //   playerWarCardEl.classList.add("back-blue");
+      //   playerWarCardEl.classList.remove(playerWarCard);
+      //   cpuWarCardEl.classList.add("back-red");
+      //   cpuWarCardEl.classList.remove(cpuWarCard);
       war();
     }
   }
@@ -257,8 +315,9 @@ function handleClick() {
 }
 function autoPlay() {
   if (gameOver != true) {
-    //setInterval(handleClick, 1);
-    handleClick();
+    delay = 1;
+    setInterval(handleClick, 1);
+    // handleClick();
   }
 }
 //add sound on shuffle
