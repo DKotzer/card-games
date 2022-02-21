@@ -24,7 +24,7 @@
         <div class="cpu-draw-deck">
         <div id="cpu-draw-pile" class="card large back-red"></div> 
         </div>
-        <span class="spacer">spacer<span>
+        <span class="spacer">.<span>
         <div class="player-draw-deck">
         <div id="player-draw-pile" class="card large back-blue"></div>
       </div>
@@ -34,32 +34,36 @@
           <!-- <div class="card large back-red"></div> -->
           <div id="cpu-card" class="card large back-red"></div>
         </div>
-        <span class="VS">VS<span>
+        <span class="spacer">.<span></span>
         <div class="player-inPlay-container">
           <div id="player-card" class="card large back-blue"></div>
           <!-- card large h04 = 4 of hearts, hK = king of hearts, etc -->
-        </div>
-        
+        </div> 
+      </div>
+      <div class="piles">
+        <div class="cpu-pile-container"><div id="cpu-pile" class="card large hidden"></div></div>
+        <span class="VS">VS<span></span>
+        <div class="player-pile-container"><div id="player-pile" class="card large hidden"></div></div>
       </div>
       <div class="warArea hidden">
-        <div class="cpuWarZone"><div id="cpu-war-card" class="card large back-red"></div></div>
+        <div class="cpuWarZone "><div id="cpu-war-card" class="card large back-red"></div></div>
         <span class="war">WAR<span>
         <div class="playerWarZone"><div id="player-war-card" class="card large back-blue"></div></div>
       </div>
 
        <div class="warArea2 hidden">
         <div class="cpuWarZone2"><div id="cpu-war-card-stack" class="card large back-red"></div></div>
-        <span class="spacer">spacer<span>
+        <span class="war">WAR<span>
         <div class="playerWarZone"><div id="player-war-card-stack" class="card large back-blue"></div></div>
       </div>
              <div class="warArea3 hidden">
         <div class="cpuWarZone2"><div id="cpu-war-card-stack" class="card large back-red"></div></div>
-        <span class="spacer">spacer<span>
+        <span class="spacer">.<span>
         <div class="playerWarZone"><div id="player-war-card-stack" class="card large back-blue"></div></div>
       </div>
              <div class="warArea4 hidden">
         <div class="cpuWarZone2"><div id="cpu-war-card-stack" class="card large back-red"></div></div>
-        <span class="spacer">spacer<span>
+        <span class="spacer">.<span>
         <div class="playerWarZone"><div id="player-war-card-stack" class="card large back-blue"></div></div>
       </div>
       
@@ -67,7 +71,8 @@
     </div>
     <div class="under-table">
       <div class="start-container">
-        <button id="draw-card-btn">Draw Card</button>
+        <div id="bottom-text">Click your deck of cards to draw a card</div>
+        <button id="draw-card-btn" class="hidden">Start</button>
       </div>
       <div class="cpu-tally-container"></div>
       <div class="player-tally-container"></div>

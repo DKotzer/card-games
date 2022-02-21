@@ -4,6 +4,7 @@
 
 body {
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
+  background-size: cover;
   color: white;
   margin: 0 auto;
   display: flex;
@@ -67,11 +68,15 @@ div {
 }
 .inPlay-card-container {
   margin-top: 30px;
-  margin-left: -145px;
+  margin-left: -133px;
+  z-index: 100;
 }
 
 button {
   z-index: 5;
+}
+#bottom-text {
+  z-index: 50;
 }
 .under-table {
   margin: 0 auto;
@@ -106,13 +111,13 @@ button {
 }
 .draw-decks {
   justify-content: flex-end;
-  z-index: 500;
+  z-index: 10;
 }
 .warArea {
   justify-content: flex-end;
 
   z-index: 5;
-  padding-left: 50px;
+  margin-right: 5px;
 }
 
 .warArea2 {
@@ -134,10 +139,14 @@ button {
   z-index: 3;
   /* margin-right:0px; */
 }
+.piles {
+  justify-content: flex-end;
+  margin-left: -20px;
+}
 
 .animated {
-  transform: translate(100px, 0px);
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
+  transform: translate(120px, 0px);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }

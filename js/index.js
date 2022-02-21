@@ -17,10 +17,9 @@ const values = [
   "A",
 ];
 let cards = [];
+cards.push("joker", "joker");
 suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
-//initial shuffling of the deck, feels like it does a bad job sometimes
 cards = cards.sort(() => 0.5 - Math.random());
-//split cards in to a deck for each player
 let playerCards = cards.slice(26);
 let cpuCards = cards.slice(0, 26);
 console.log(cards);
@@ -39,10 +38,12 @@ let playerWarCard = "back-blue";
 let playerWarCards = [];
 let cpuWarCard = "back-red";
 let cpuWarCards = [];
-let delay = 3500;
+let delay = 4000;
 let warState = false;
 let oldPlayerCard = playerCard;
 let oldCpuCard = cpuCard;
+let OldPlayerCardClass;
+let OldCpuCardClass;
 
 /*----- cached element references -----*/
 
@@ -58,11 +59,11 @@ let warAreaEl = document.querySelector(".warArea");
 let warArea2El = document.querySelector(".warArea2");
 let warArea3El = document.querySelector(".warArea3");
 let warArea4El = document.querySelector(".warArea4");
-let deckClickEl = document.querySelector("#player-draw-pile");
+let deckClickEl = document.querySelector("#player-card");
 let cpuDeckEl = document.querySelector("#cpu-draw-pile");
 let warTextEl = document.querySelector(".war");
-let playerWarArrayFix = [];
-let cpuWarArrayFix = [];
+let playerPileEl = document.querySelector("#player-pile");
+let cpuPileEl = document.querySelector("#cpu-pile");
 
 let shuffleSound = new Audio("sounds/shuffle.mp3");
 let warSound = new Audio("sounds/warcry.mp3");
@@ -88,6 +89,8 @@ function handleClick() {
   }
   oldPlayerCard = playerCard;
   oldCpuCard = cpuCard;
+  OldPlayerCardClass = playerCardEl.classList;
+  OldCpuCardClass = cpuCardEl.classList;
   playerCardEl.classList.remove("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
   cpuCardEl.classList.remove("back-red");
 
@@ -119,6 +122,9 @@ function handleClick() {
   if (cpuCard[1] == "A") {
     cpuNum = "14";
   }
+  if (cpuCard[0] == "j") {
+    cpuNum = "15";
+  }
   if (playerCard[1] == "J") {
     playerNum = "11";
   }
@@ -131,13 +137,17 @@ function handleClick() {
   if (playerCard[1] == "A") {
     playerNum = "14";
   }
-
-  //   console.log(`${playerNum} vs ${cpuNum}`);
+  if (playerCard[0] == "j") {
+    playerNum = "15";
+  }
+  console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuNum > playerNum) {
     cpuDeck.push(cpuCard);
     cpuDeck.push(playerCard);
     console.log("CPU wins round");
+    setTimeout((playerPileEl.classList = OldPlayerCardClass), 750); //trying to switch card back to previous card if turn is a loss
   } else if (playerNum > cpuNum) {
+    console.log("test " + playerWarCardEl.classList);
     playerDeck.push(cpuCard);
     playerDeck.push(playerCard);
     console.log("Player wins round");
@@ -148,21 +158,28 @@ function handleClick() {
     // playerDeck.push(playerCard);
   }
   //if player or cpu runs out of cards, shuffle their deck
-  if (playerCards.length == 0) {
-    shuffle(playerDeck);
-  }
-  if (cpuCards.length == 0) {
-    shuffle(cpuDeck);
-  }
 
   function war() {
     warState = true;
     btnEl.disabled = true;
     deckClickEl.removeEventListener("click", handleClick);
-    warAreaEl.classList.remove("hidden");
-    warArea2El.classList.remove("hidden");
-    warArea3El.classList.remove("hidden");
-    warArea4El.classList.remove("hidden");
+    setTimeout(() => {
+      warArea2El.classList.remove("hidden");
+      clickSound.play();
+    }, 500);
+    setTimeout(() => {
+      warArea3El.classList.remove("hidden");
+      clickSound.play();
+    }, 1000);
+    setTimeout(() => {
+      warArea4El.classList.remove("hidden");
+      clickSound.play();
+    }, 1500);
+    setTimeout(() => {
+      warAreaEl.classList.remove("hidden");
+      clickSound.play();
+    }, 2000);
+
     warSound.play();
 
     // let oldPlayerWarCard = playerWarCard;
@@ -221,10 +238,10 @@ function handleClick() {
     }
     //add in animated war text between cards
     playerWarCard = playerCards.pop();
-    console.log("player war card: " + playerWarCard);
+    // console.log("player war card: " + playerWarCard);
     cpuWarCard = cpuCards.pop();
 
-    console.log(`cpu war card: ${cpuWarCard}`);
+    // console.log(`cpu war card: ${cpuWarCard}`);
     playerWarCardEl.classList.remove("back-blue");
     playerWarCardEl.classList.add(playerWarCard);
     cpuWarCardEl.classList.remove("back-red");
@@ -234,15 +251,15 @@ function handleClick() {
     if (playerWarCard[2] != undefined) {
       playerWarNum += playerWarCard[2];
     }
-    if (cpuWarCard[1] == undefined) {
-      console.log("CpuWarCard[1] is undefined, figure it out");
-    }
+    // if (cpuWarCard[1] == undefined) {
+    //   console.log("CpuWarCard[1] is undefined, figure it out");
+    // }
     let cpuWarNum = cpuWarCard[1];
     if (cpuWarCard[2] != undefined) {
       cpuWarNum += cpuWarCard[2];
     }
     /// compare player vs cpu card values, handle win and draw
-    console.log(`War before conversion: ${playerWarNum} vs ${cpuWarNum}`);
+    //console.log(`War before conversion: ${playerWarNum} vs ${cpuWarNum}`);
     if (cpuWarCard[1] == "J") {
       cpuWarNum = "11";
     }
@@ -270,10 +287,11 @@ function handleClick() {
 
     console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
     if (cpuWarNum > playerWarNum) {
+      // cpuPileEl.classList = cpuWarCardEl.classList;
       cpuDeck.push(cpuCard);
       cpuDeck.push(playerCard);
       cpuDeck.push(playerWarCard);
-      console.log("player war cards: " + playerWarCards);
+      // console.log("player war cards: " + playerWarCards);
       cpuDeck.push(playerWarCards);
       cpuDeck.push(cpuWarCards);
 
@@ -292,11 +310,12 @@ function handleClick() {
       //   cpuWarCardEl.classList.add("back-red");
       //   cpuWarCardEl.classList.remove(cpuWarCard);
     } else if (playerWarNum > cpuWarNum) {
+      playerPileEl.classList = playerWarCardEl.classList;
       playerDeck.push(cpuCard);
       playerDeck.push(playerCard);
       playerDeck.push(cpuWarCard);
       playerDeck.push(cpuWarCards);
-      console.log("player war cards: " + playerWarCards);
+      // console.log("player war cards: " + playerWarCards);
       playerDeck.push(playerWarCards);
 
       playerDeck.push(playerWarCard);
@@ -330,6 +349,13 @@ function handleClick() {
       //   cpuWarCardEl.classList.remove(cpuWarCard);
       war();
     }
+    if (playerCards.length == 0) {
+      //this is here in case there is a card for the first war card but not the face down war card
+      shuffle(playerDeck);
+    }
+    if (cpuCards.length == 0) {
+      shuffle(cpuDeck);
+    }
   }
 
   function render() {
@@ -343,10 +369,18 @@ function handleClick() {
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
     cpuCardEl.classList.add("animated");
+    playerCardEl.classList.add("animated");
     setTimeout(timeOut, 1200);
 
     function timeOut() {
+      cpuPileEl.classList = cpuCardEl.classList;
+      playerPileEl.classList = playerCardEl.classList;
+      cpuPileEl.classList.remove("animated");
+      playerPileEl.classList.remove("animated");
       cpuCardEl.classList.remove("animated");
+      playerCardEl.classList.remove("animated");
+      playerCardEl.classList.add("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
+      cpuCardEl.classList.add("back-red");
     }
     // playerWarCardEl.classList.add(playerWarCard);
 
@@ -377,8 +411,10 @@ function handleClick() {
       playerDeck = playerDeck.sort(() => 0.5 - Math.random());
       playerCards = playerDeck;
       console.log("shufflign player deck");
-      render();
+
+      // render();
       shuffleSound.play();
+      // playerPileEl.classList.add("hidden");
       if (playerCards.length == 0) {
         render();
         alert("The Computer has won, get good.");
@@ -392,9 +428,11 @@ function handleClick() {
       cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
       cpuCards = cpuDeck;
       console.log("shufflign cpu deck");
+
       shuffleSound.play();
+
+      // cpuPileEl.classList.add("hidden");
       if (cpuCards.length == 0) {
-        render();
         alert("You have won, good job.");
         location.href = "home.html";
         gameOver = true;
@@ -407,7 +445,6 @@ function autoPlay() {
   if (gameOver != true) {
     delay = 100;
     setInterval(handleClick, delay);
-    // handleClick();
   }
 }
 //add sound on shuffle
