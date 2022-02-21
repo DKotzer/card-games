@@ -61,7 +61,8 @@ let playerWarArrayFix = [];
 let cpuWarArrayFix = [];
 
 let shuffleSound = new Audio("sounds/shuffle.mp3");
-let warSound = new Audio("sounds/war.wav");
+let warSound = new Audio("sounds/warcry.mp3");
+let doubleWarSound = new Audio("sounds/war.wav");
 
 /*----- event listeners -----*/
 
@@ -106,10 +107,10 @@ function handleClick() {
     cpuNum = "12";
   }
   if (cpuCard[1] == "K") {
-    cpuNum = "12";
+    cpuNum = "13";
   }
   if (cpuCard[1] == "A") {
-    cpuNum = "13";
+    cpuNum = "14";
   }
   if (playerCard[1] == "J") {
     playerNum = "11";
@@ -118,10 +119,10 @@ function handleClick() {
     playerNum = "12";
   }
   if (playerCard[1] == "K") {
-    playerNum = "12";
+    playerNum = "13";
   }
   if (playerCard[1] == "A") {
-    playerNum = "13";
+    playerNum = "14";
   }
 
   //   console.log(`${playerNum} vs ${cpuNum}`);
@@ -291,6 +292,7 @@ function handleClick() {
       cpuWarCard = [];
       playerWarCard = [];
       setTimeout(resetWar, 3500);
+      doubleWarSound.play();
       warState = true;
       //   playerWarCardEl.classList.add("back-blue");
       //   playerWarCardEl.classList.remove(playerWarCard);
@@ -315,6 +317,7 @@ function handleClick() {
     // deckListDisplay = playerDeck + playerCards;
 
     deckListDisplay = playerDeck.join(", ") + ", " + playerCards.join(", ");
+
     //deckListDisplay.sort();
     // deckListDisplay = deckListDisplay.join(", ");
     if (deckListDisplay[0] == ",") {
@@ -322,7 +325,7 @@ function handleClick() {
     }
     deckListDisplay = deckListDisplay.toUpperCase();
 
-    deckList.textContent = deckListDisplay;
+    deckList.innerHTML = deckListDisplay;
   }
   render();
   //if cards == 0 shuffle player or cpu deck
@@ -333,6 +336,7 @@ function handleClick() {
       playerDeck = playerDeck.sort(() => 0.5 - Math.random());
       playerCards = playerDeck;
       console.log("shufflign player deck");
+      render();
       shuffleSound.play();
       if (playerCards.length == 0) {
         render();
@@ -357,8 +361,8 @@ function handleClick() {
 }
 function autoPlay() {
   if (gameOver != true) {
-    delay = 1;
-    setInterval(handleClick, 1);
+    delay = 100;
+    setInterval(handleClick, delay);
     // handleClick();
   }
 }

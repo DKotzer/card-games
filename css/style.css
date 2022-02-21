@@ -3,7 +3,7 @@
 } */
 
 body {
-  background-color: grey;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
   color: white;
   margin: 0 auto;
   display: flex;
@@ -62,11 +62,16 @@ div {
   margin: 0 auto;
   border-radius: 100px;
   border: 50px groove purple;
+  /* transform: skew(2deg, 0deg);
+  filter: drop-shadow(10px 20px 1px #00000573); */
 }
 .inPlay-card-container {
   margin-top: 30px;
 }
 
+button {
+  z-index: 5;
+}
 .under-table {
   margin: 0 auto;
   margin-top: -35px;
@@ -89,10 +94,12 @@ div {
   justify-content: flex-start;
   height: 275px;
   width: 250px;
-  border: 10px solid black;
+  border: 5px solid black;
   border-radius: 25px;
 }
-
+.draw-decks {
+  justify-content: flex-end;
+}
 .warArea {
   justify-content: flex-end;
   margin-left: -20px;
