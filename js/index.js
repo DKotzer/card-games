@@ -191,10 +191,24 @@ function handleClick() {
     // console.log("face down pCard: " + playerWarArrayFix);
     // console.log("face down cCard: " + cpuWarArrayFix);
     playerWarCards.push(playerCards.pop());
-    playerWarCards.push(playerCards.pop());
+    cpuWarCards.push(cpuCards.pop());
+
+    if (playerCards.length == 0) {
+      shuffle(playerDeck);
+    }
+    if (cpuCards.length == 0) {
+      shuffle(cpuDeck);
+    }
     playerWarCards.push(playerCards.pop());
     cpuWarCards.push(cpuCards.pop());
-    cpuWarCards.push(cpuCards.pop());
+
+    if (playerCards.length == 0) {
+      shuffle(playerDeck);
+    }
+    if (cpuCards.length == 0) {
+      shuffle(cpuDeck);
+    }
+    playerWarCards.push(playerCards.pop());
     cpuWarCards.push(cpuCards.pop());
 
     if (playerCards.length == 0) {
@@ -397,3 +411,4 @@ function autoPlay() {
 //turn some of the repeated code in to reusable functions
 //add a player/cpu deck that you can click to draw a card instead of pressing draw button
 //add timers for the drawing of war cards to face down -> face down -> face down -> face up
+//switch weird click sound to card flip sound
