@@ -58,7 +58,7 @@ div {
   background-color: green;
   width: 800px;
   padding-left: px;
-  padding-right: 150px;
+  /* padding-right: 150px; */
   margin: 0 auto;
   border-radius: 100px;
   border: 50px groove purple;
@@ -108,12 +108,26 @@ button {
 }
 .warArea {
   justify-content: flex-end;
-  margin-left: -20px;
+
   z-index: 5;
 }
 
 .warArea2 {
   justify-content: flex-end;
-  margin-left: -60px;
+  margin-left: -35px;
   z-index: 3;
+  /* margin-right:0px; */
+}
+
+.warArea3 {
+  justify-content: flex-end;
+  margin-left: -100px;
+  z-index: 3;
+  /* margin-right:0px; */
+}
+.warArea4 {
+  justify-content: flex-end;
+  margin-left: -100px;
+  z-index: 3;
+  /* margin-right:0px; */
 }

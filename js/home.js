@@ -8,6 +8,7 @@ let warEl = document.querySelector(".war-container");
 
 /*----- event listeners -----*/
 warEl.addEventListener("click", warGame);
+warEl.addEventListener("mouseover", warHover);
 
 /*----- functions -----*/
 

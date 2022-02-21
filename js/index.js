@@ -56,6 +56,8 @@ let playerWarCardEl = document.querySelector("#player-war-card");
 let cpuWarCardEl = document.querySelector("#cpu-war-card");
 let warAreaEl = document.querySelector(".warArea");
 let warArea2El = document.querySelector(".warArea2");
+let warArea3El = document.querySelector(".warArea3");
+let warArea4El = document.querySelector(".warArea4");
 let deckClickEl = document.querySelector("#player-draw-pile");
 let warTextEl = document.querySelector(".war");
 let playerWarArrayFix = [];
@@ -180,13 +182,16 @@ function handleClick() {
     if (cpuCards.length == 0) {
       shuffle(cpuDeck);
     }
-    playerWarArrayFix = playerCards.pop();
-    cpuWarArrayFix = cpuCards.pop();
-    console.log("face down pCard: " + playerWarArrayFix);
-    console.log("face down cCard: " + cpuWarArrayFix);
-
-    playerWarCards.push(playerWarArrayFix);
-    cpuWarCards.push(cpuWarArrayFix);
+    // playerWarArrayFix = playerCards.pop();
+    // cpuWarArrayFix = cpuCards.pop();
+    // console.log("face down pCard: " + playerWarArrayFix);
+    // console.log("face down cCard: " + cpuWarArrayFix);
+    playerWarCards.push(playerCards.pop());
+    playerWarCards.push(playerCards.pop());
+    playerWarCards.push(playerCards.pop());
+    cpuWarCards.push(cpuCards.pop());
+    cpuWarCards.push(cpuCards.pop());
+    cpuWarCards.push(cpuCards.pop());
 
     if (playerCards.length == 0) {
       //this is here in case there is a card for the first war card but not the face down war card
@@ -352,6 +357,8 @@ function handleClick() {
       if (playerCards.length == 0) {
         render();
         alert("The Computer has won, get good.");
+        location.href = "home.html";
+
         gameOver = true;
       }
       playerDeck = [];
@@ -364,6 +371,7 @@ function handleClick() {
       if (cpuCards.length == 0) {
         render();
         alert("You have won, good job.");
+        location.href = "home.html";
         gameOver = true;
       }
       cpuDeck = [];
@@ -384,3 +392,4 @@ function autoPlay() {
 //to do list
 //turn some of the repeated code in to reusable functions
 //add a player/cpu deck that you can click to draw a card instead of pressing draw button
+//add timers for the drawing of war cards to face down -> face down -> face down -> face up
