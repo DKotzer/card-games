@@ -160,6 +160,8 @@ function handleClick() {
     deckClickEl.removeEventListener("click", handleClick);
     warAreaEl.classList.remove("hidden");
     warArea2El.classList.remove("hidden");
+    warArea3El.classList.remove("hidden");
+    warArea4El.classList.remove("hidden");
     warSound.play();
 
     // let oldPlayerWarCard = playerWarCard;
@@ -174,6 +176,8 @@ function handleClick() {
       cpuWarArrayFix = [];
       warAreaEl.classList.add("hidden");
       warArea2El.classList.add("hidden");
+      warArea3El.classList.add("hidden");
+      warArea4El.classList.add("hidden");
     }
 
     if (playerCards.length == 0) {
