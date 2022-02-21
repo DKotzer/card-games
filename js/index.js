@@ -56,22 +56,26 @@ let playerWarCardEl = document.querySelector("#player-war-card");
 let cpuWarCardEl = document.querySelector("#cpu-war-card");
 let warAreaEl = document.querySelector(".warArea");
 let warArea2El = document.querySelector(".warArea2");
-
+let deckClickEl = document.querySelector("#player-draw-pile");
+let warTextEl = document.querySelector(".war");
 let playerWarArrayFix = [];
 let cpuWarArrayFix = [];
 
 let shuffleSound = new Audio("sounds/shuffle.mp3");
 let warSound = new Audio("sounds/warcry.mp3");
 let doubleWarSound = new Audio("sounds/war.wav");
+let clickSound = new Audio("sounds/click.mp3");
 
 /*----- event listeners -----*/
 
 btnEl.addEventListener("click", handleClick);
+deckClickEl.addEventListener("click", handleClick);
 
 /*----- functions -----*/
 
 //handle the logic of each turn
 function handleClick() {
+  clickSound.play();
   if (playerCards.length == 0) {
     //this is here in case there is a card for the first war card but not the face down war card
     shuffle(playerDeck);
@@ -151,6 +155,7 @@ function handleClick() {
   function war() {
     warState = true;
     btnEl.disabled = true;
+    deckClickEl.removeEventListener("click", handleClick);
     warAreaEl.classList.remove("hidden");
     warArea2El.classList.remove("hidden");
     warSound.play();
@@ -162,6 +167,7 @@ function handleClick() {
       cpuWarCardEl.classList = "card large back-red";
       warState = false;
       btnEl.disabled = false;
+      deckClickEl.addEventListener("click", handleClick);
       playerWarArrayFix = [];
       cpuWarArrayFix = [];
       warAreaEl.classList.add("hidden");
@@ -284,8 +290,8 @@ function handleClick() {
       //   cpuWarCardEl.classList.remove(cpuWarCard);
     } else {
       console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
-      console.log("More War!");
-
+      console.log("Double War!");
+      warTextEl.style.color = "blue";
       playerWarCards.push(playerWarCard);
       cpuWarCards.push(cpuWarCard);
       console.log("player war cards: " + playerWarCards);
@@ -377,5 +383,4 @@ function autoPlay() {
 
 //to do list
 //turn some of the repeated code in to reusable functions
-//add sound to shuffle and war
 //add a player/cpu deck that you can click to draw a card instead of pressing draw button
