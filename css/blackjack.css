@@ -1,0 +1,110 @@
+/* * {
+  box-sizing: border-box;
+} */
+
+body {
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
+  background-size: cover;
+  color: white;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/* .deck-list {
+  justify-content: flex-start;
+  overflow-wrap: break-word; 
+  padding-top: 20px;
+
+  max-width: 90%;
+  height: 70%;
+} */
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid black;
+}
+
+.start-container {
+  padding-bottom: 15px;
+  flex-direction: row;
+  gap: 5px;
+}
+
+#title {
+  font-family: fantasy;
+  font-weight: 100;
+  margin-bottom: 20px;
+  padding-top: 40px;
+  font-size: 50px;
+  color: green;
+  font-weight: bolder;
+  -webkit-text-stroke: 2px red; /* got this from https://www.youtube.com/watch?v=3LlLkapKw6Q  */
+}
+.game-container {
+  display: flex;
+  flex-direction: row;
+  /*  */
+  /* grid-template-columns: 350px 33% 33%; */
+  background-color: green;
+  width: 800px;
+  height: 300px;
+  padding-left: px;
+  /* padding-right: 150px; */
+  margin: 0 auto;
+  border-radius: 100px;
+  border: 50px groove purple;
+  /* transform: skew(2deg, 0deg); */
+  filter: drop-shadow(10px 20px 1px #00000573);
+}
+
+.topRow {
+  flex-direction: row;
+  justify-content: space-evenly; /*probably just want to have this in the dealer cards area instead, we'll see */
+}
+
+/* .inPlay-card-container {
+  margin-top: 30px;
+  margin-left: -123px;
+  z-index: 100;
+} */
+
+button {
+  z-index: 5;
+}
+#bottom-text {
+  z-index: 50;
+}
+.under-table {
+  margin: 0 auto;
+  margin-top: -35px;
+}
+
+.betting-area {
+  margin-top: 1%;
+  justify-content: flex-start;
+  height: 275px;
+  width: 175px;
+  border: 5px solid black;
+  border-radius: 25px;
+  margin-left: -25px;
+}
+.draw-decks {
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.animated {
+  transform: translate(120px, 0px);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}

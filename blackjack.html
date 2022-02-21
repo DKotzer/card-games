@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blackjack</title>
     <link rel="stylesheet" href="css/blackjack.css" />
-    <link rel="stylesheet" href="card-deck-css/css/blackjack.css" />
+    <link rel="stylesheet" href="card-deck-css/css/cardstarter.css" />
 
     <script src="js/blackjack.js" defer></script>
   </head>
-</head>
-<body>
-    
-</body>
+  <body>
+    <div id="title">BLACKJACK</div>
+    <div class="game-container">
+      <div class="left-column">
+        <div class="betting-area">betting area</div>
+      </div>
+      <div class="right-column">
+        <div class="topRow">
+          <div class="dealerCards">dealer cards</div>
+          <div class="counting-area">card counting area</div>
+        </div>
+        <div class="bottomRow">
+          player card area 1, area 2, area3 (with card 1, card2, cards 3-6 spots
+          for them as well.)
+        </div>
+      </div>
+    </div>
+    <div class="under-table">
+      <div class="start-container">
+        <!-- <div id="bottom-text"></div> -->
+        <button id="deal-btn">Deal</button>
+        <button id="rebet-btn">Rebet</button>
+        <button id="hit-btn">Hit</button>
+        <button id="dtand-btn">Stand</button>
+        <button id="insurance-btn">Insurance</button>
+      </div>
+      <div class="cpu-tally-container"></div>
+      <div class="player-tally-container"></div>
+    </div>
+  </body>
 </html>

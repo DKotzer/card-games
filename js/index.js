@@ -17,11 +17,12 @@ const values = [
   "A",
 ];
 let cards = [];
-cards.push("joker", "joker");
+cards.push("joker");
+cards.unshift("joker");
 suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
 cards = cards.sort(() => 0.5 - Math.random());
-let playerCards = cards.slice(26);
-let cpuCards = cards.slice(0, 26);
+let playerCards = cards.slice(27);
+let cpuCards = cards.slice(0, 27);
 console.log(cards);
 console.log(cards.length);
 
@@ -145,7 +146,7 @@ function handleClick() {
     cpuDeck.push(cpuCard);
     cpuDeck.push(playerCard);
     console.log("CPU wins round");
-    setTimeout((playerPileEl.classList = OldPlayerCardClass), 750); //trying to switch card back to previous card if turn is a loss
+    setTimeout((playerPileEl.classList = OldPlayerCardClass), 250); //trying to switch card back to previous card if turn is a loss
   } else if (playerNum > cpuNum) {
     console.log("test " + playerWarCardEl.classList);
     playerDeck.push(cpuCard);
@@ -154,8 +155,6 @@ function handleClick() {
   } else {
     console.log("War!");
     war();
-    // cpuDeck.push(cpuCard);
-    // playerDeck.push(playerCard);
   }
   //if player or cpu runs out of cards, shuffle their deck
 
@@ -204,10 +203,7 @@ function handleClick() {
     if (cpuCards.length == 0) {
       shuffle(cpuDeck);
     }
-    // playerWarArrayFix = playerCards.pop();
-    // cpuWarArrayFix = cpuCards.pop();
-    // console.log("face down pCard: " + playerWarArrayFix);
-    // console.log("face down cCard: " + cpuWarArrayFix);
+
     playerWarCards.push(playerCards.pop());
     cpuWarCards.push(cpuCards.pop());
 
@@ -230,15 +226,13 @@ function handleClick() {
     cpuWarCards.push(cpuCards.pop());
 
     if (playerCards.length == 0) {
-      //this is here in case there is a card for the first war card but not the face down war card
       shuffle(playerDeck);
     }
     if (cpuCards.length == 0) {
       shuffle(cpuDeck);
     }
-    //add in animated war text between cards
+
     playerWarCard = playerCards.pop();
-    // console.log("player war card: " + playerWarCard);
     cpuWarCard = cpuCards.pop();
 
     // console.log(`cpu war card: ${cpuWarCard}`);
@@ -251,9 +245,7 @@ function handleClick() {
     if (playerWarCard[2] != undefined) {
       playerWarNum += playerWarCard[2];
     }
-    // if (cpuWarCard[1] == undefined) {
-    //   console.log("CpuWarCard[1] is undefined, figure it out");
-    // }
+
     let cpuWarNum = cpuWarCard[1];
     if (cpuWarCard[2] != undefined) {
       cpuWarNum += cpuWarCard[2];
@@ -304,11 +296,6 @@ function handleClick() {
 
       console.log("CPU wins the WAR");
       setTimeout(resetWar, delay);
-
-      //   playerWarCardEl.classList.add("back-blue");
-      //   playerWarCardEl.classList.remove(playerWarCard);
-      //   cpuWarCardEl.classList.add("back-red");
-      //   cpuWarCardEl.classList.remove(cpuWarCard);
     } else if (playerWarNum > cpuWarNum) {
       playerPileEl.classList = playerWarCardEl.classList;
       playerDeck.push(cpuCard);
@@ -327,10 +314,6 @@ function handleClick() {
 
       console.log("Player wins the WAR");
       setTimeout(resetWar, delay);
-      //   playerWarCardEl.classList.add("back-blue");
-      //   playerWarCardEl.classList.remove(playerWarCard);
-      //   cpuWarCardEl.classList.add("back-red");
-      //   cpuWarCardEl.classList.remove(cpuWarCard);
     } else {
       console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
       console.log("Double War!");
@@ -343,10 +326,6 @@ function handleClick() {
       setTimeout(resetWar, 3500);
       doubleWarSound.play();
       warState = true;
-      //   playerWarCardEl.classList.add("back-blue");
-      //   playerWarCardEl.classList.remove(playerWarCard);
-      //   cpuWarCardEl.classList.add("back-red");
-      //   cpuWarCardEl.classList.remove(cpuWarCard);
       war();
     }
     if (playerCards.length == 0) {
@@ -400,6 +379,7 @@ function handleClick() {
     deckListDisplay = deckListDisplay.replaceAll("C", "&clubs;");
     deckListDisplay = deckListDisplay.replaceAll("0", "");
     deckListDisplay = deckListDisplay.replaceAll("1", "10");
+    deckListDisplay = deckListDisplay.replaceAll("JOKER", "Joker");
     deckList.innerHTML = deckListDisplay;
   }
   render();
@@ -444,6 +424,11 @@ function handleClick() {
 function autoPlay() {
   if (gameOver != true) {
     delay = 100;
+    // if (warState == true) {
+    // }
+    // if (warState == false) {
+    //   delay = 1000;
+    // }
     setInterval(handleClick, delay);
   }
 }
@@ -456,3 +441,4 @@ function autoPlay() {
 //add a player/cpu deck that you can click to draw a card instead of pressing draw button
 //add timers for the drawing of war cards to face down -> face down -> face down -> face up
 //switch rd click sound to card flip sound
+//remove butonEl stuff if not going to repurpose
