@@ -59,6 +59,7 @@ let warArea2El = document.querySelector(".warArea2");
 let warArea3El = document.querySelector(".warArea3");
 let warArea4El = document.querySelector(".warArea4");
 let deckClickEl = document.querySelector("#player-draw-pile");
+let cpuDeckEl = document.querySelector("#cpu-draw-pile");
 let warTextEl = document.querySelector(".war");
 let playerWarArrayFix = [];
 let cpuWarArrayFix = [];
@@ -341,6 +342,12 @@ function handleClick() {
     cpuCardEl.classList.remove(oldCpuCard);
     playerCardEl.classList.add(playerCard);
     cpuCardEl.classList.add(cpuCard);
+    cpuCardEl.classList.add("animated");
+    setTimeout(timeOut, 1200);
+
+    function timeOut() {
+      cpuCardEl.classList.remove("animated");
+    }
     // playerWarCardEl.classList.add(playerWarCard);
 
     // deckListDisplay = playerDeck + playerCards;
@@ -411,4 +418,4 @@ function autoPlay() {
 //turn some of the repeated code in to reusable functions
 //add a player/cpu deck that you can click to draw a card instead of pressing draw button
 //add timers for the drawing of war cards to face down -> face down -> face down -> face up
-//switch weird click sound to card flip sound
+//switch rd click sound to card flip sound
