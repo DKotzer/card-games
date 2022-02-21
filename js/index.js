@@ -324,7 +324,12 @@ function handleClick() {
       deckListDisplay = playerDeck.join(", ") + playerCards.join(", ");
     }
     deckListDisplay = deckListDisplay.toUpperCase();
-
+    deckListDisplay = deckListDisplay.replaceAll("H", "&hearts;"); //https://blog.pokercopilot.com/2017/01/how-to-use-card-suit-symbols-%E2%99%A5%E2%99%A6%E2%99%A0%E2%99%A3-on-your-computer
+    deckListDisplay = deckListDisplay.replaceAll("D", "&diams;");
+    deckListDisplay = deckListDisplay.replaceAll("S", "&spades;");
+    deckListDisplay = deckListDisplay.replaceAll("C", "&clubs;");
+    deckListDisplay = deckListDisplay.replaceAll("0", "");
+    deckListDisplay = deckListDisplay.replaceAll("1", "10");
     deckList.innerHTML = deckListDisplay;
   }
   render();
