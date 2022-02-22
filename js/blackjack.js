@@ -146,6 +146,10 @@ function dealCards() {
       dealerCard2.classList.remove("hidden");
       dealerCard2.classList.add(dealer.cards[2]);
       dealerCard2.classList.remove("back-red");
+      checkAceUp();
+      checkBlackjack(player);
+      checkBlackjack(dealer);
+      
     }, 2000);
     
   }
@@ -153,105 +157,127 @@ function dealCards() {
 }
 
 function hit() {
-  if (player.cards[3] == null) {
-    player.cards[3] = cards.pop();
-    clickSound.play();
-    playerCard3.classList.remove("hidden");
-    playerCard3.classList.add(player.cards[3]);
-    playerCard3.classList.remove("back-red");
-    player.hand.push(player.cards[3]);
-  } else if (player.cards[4] == null) {
-    player.cards[4] = cards.pop();
-    clickSound.play();
-    playerCard4.classList.remove("hidden");
-    playerCard4.classList.add(player.cards[4]);
-    playerCard4.classList.remove("back-red");
-    player.hand.push(player.cards[4]);
-  } else if (player.cards[5] == null) {
-    player.cards[5] = cards.pop();
-    clickSound.play();
-    playerCard5.classList.remove("hidden");
-    playerCard5.classList.add(player.cards[5]);
-    playerCard5.classList.remove("back-red");
-    player.hand.push(player.cards[5]);
-  } else if (player.cards[6] == null) {
-    player.cards[6] = cards.pop();
-    clickSound.play();
-    playerCard6.classList.remove("hidden");
-    playerCard6.classList.add(player.cards[6]);
-    playerCard6.classList.remove("back-red");
-    player.hand.push(player.cards[6]);
-  } else if (player.cards[7] == null) {
-    player.cards[7] = cards.pop();
-    clickSound.play();
-    playerCard7.classList.remove("hidden");
-    playerCard7.classList.add(player.cards[7]);
-    playerCard7.classList.remove("back-red");
-    player.hand.push(player.cards[7]);
-  } else if (player.cards[8] == null) {
-    player.cards[8] = cards.pop();
-    clickSound.play();
-    playerCard8.classList.remove("hidden");
-    playerCard8.classList.add(player.cards[8]);
-    playerCard8.classList.remove("back-red");
-    player.hand.push(player.card8);
+  if (player.total < 21)  {
+    if (player.cards[3] == null) {
+      player.cards[3] = cards.pop();
+      clickSound.play();
+      playerCard3.classList.remove("hidden");
+      playerCard3.classList.add(player.cards[3]);
+      playerCard3.classList.remove("back-red");
+      player.hand.push(player.cards[3]);
+      
+    } else if (player.cards[4] == null) {
+      player.cards[4] = cards.pop();
+      clickSound.play();
+      playerCard4.classList.remove("hidden");
+      playerCard4.classList.add(player.cards[4]);
+      playerCard4.classList.remove("back-red");
+      player.hand.push(player.cards[4]);
+    } else if (player.cards[5] == null) {
+      player.cards[5] = cards.pop();
+      clickSound.play();
+      playerCard5.classList.remove("hidden");
+      playerCard5.classList.add(player.cards[5]);
+      playerCard5.classList.remove("back-red");
+      player.hand.push(player.cards[5]);
+    } else if (player.cards[6] == null) {
+      player.cards[6] = cards.pop();
+      clickSound.play();
+      playerCard6.classList.remove("hidden");
+      playerCard6.classList.add(player.cards[6]);
+      playerCard6.classList.remove("back-red");
+      player.hand.push(player.cards[6]);
+    } else if (player.cards[7] == null) {
+      player.cards[7] = cards.pop();
+      clickSound.play();
+      playerCard7.classList.remove("hidden");
+      playerCard7.classList.add(player.cards[7]);
+      playerCard7.classList.remove("back-red");
+      player.hand.push(player.cards[7]);
+    } else if (player.cards[8] == null) {
+      player.cards[8] = cards.pop();
+      clickSound.play();
+      playerCard8.classList.remove("hidden");
+      playerCard8.classList.add(player.cards[8]);
+      playerCard8.classList.remove("back-red");
+      player.hand.push(player.card8);
+    }
+    checkBlackjack(player);
   }
 }
 
 function dealerHit() {
-  if (dealer.cards[3] == null) {
-    dealer.cards[3] = cards.pop();
-    clickSound.play();
-    dealerCard3.classList.remove("hidden");
-    dealerCard3.classList.add(dealer.cards[3]);
-    dealerCard3.classList.remove("back-red");
-    dealer.hand.push(dealer.cards[3]);
-  } else if (dealer.cards[4] == null) {
-    dealer.cards[4] = cards.pop();
-    clickSound.play();
-    dealerCard4.classList.remove("hidden");
-    dealerCard4.classList.add(dealer.cards[4]);
-    dealerCard4.classList.remove("back-red");
-    dealer.hand.push(dealer.cards[4]);
-  } else if (dealer.cards[5] == null) {
-    dealer.cards[5] = cards.pop();
-    clickSound.play();
-    dealerCard5.classList.remove("hidden");
-    dealerCard5.classList.add(dealer.cards[5]);
-    dealerCard5.classList.remove("back-red");
-    dealer.hand.push(dealer.cards[5]);
-  } else if (dealer.cards[6] == null) {
-    dealer.cards[6] = cards.pop();
-    clickSound.play();
-    dealerCard6.classList.remove("hidden");
-    dealerCard6.classList.add(dealer.cards[6]);
-    dealerCard6.classList.remove("back-red");
-    dealer.hand.push(dealer.cards[6]);
-  } else if (dealer.cards[7] == null) {
-    dealer.cards[7] = cards.pop();
-    clickSound.play();
-    dealerCard7.classList.remove("hidden");
-    dealerCard7.classList.add(dealer.cards[7]);
-    dealerCard7.classList.remove("back-red");
-    dealer.hand.push(dealer.cards[7]);
-  } else if (dealer.cards[8] == null) {
-    dealer.cards[8] = cards.pop();
-    clickSound.play();
-    dealerCard8.classList.remove("hidden");
-    dealerCard8.classList.add(dealer.cards[8]);
-    dealerCard8.classList.remove("back-red");
-    dealer.hand.push(dealer.cards[8]);
-  }
+  if (dealer.total < 21)  {
+    if (dealer.cards[3] == null) {
+      dealer.cards[3] = cards.pop();
+      clickSound.play();
+      dealerCard3.classList.remove("hidden");
+      dealerCard3.classList.add(dealer.cards[3]);
+      dealerCard3.classList.remove("back-red");
+      dealer.hand.push(dealer.cards[3]);
+    } else if (dealer.cards[4] == null) {
+      dealer.cards[4] = cards.pop();
+      clickSound.play();
+      dealerCard4.classList.remove("hidden");
+      dealerCard4.classList.add(dealer.cards[4]);
+      dealerCard4.classList.remove("back-red");
+      dealer.hand.push(dealer.cards[4]);
+    } else if (dealer.cards[5] == null) {
+      dealer.cards[5] = cards.pop();
+      clickSound.play();
+      dealerCard5.classList.remove("hidden");
+      dealerCard5.classList.add(dealer.cards[5]);
+      dealerCard5.classList.remove("back-red");
+      dealer.hand.push(dealer.cards[5]);
+    } else if (dealer.cards[6] == null) {
+      dealer.cards[6] = cards.pop();
+      clickSound.play();
+      dealerCard6.classList.remove("hidden");
+      dealerCard6.classList.add(dealer.cards[6]);
+      dealerCard6.classList.remove("back-red");
+      dealer.hand.push(dealer.cards[6]);
+    } else if (dealer.cards[7] == null) {
+      dealer.cards[7] = cards.pop();
+      clickSound.play();
+      dealerCard7.classList.remove("hidden");
+      dealerCard7.classList.add(dealer.cards[7]);
+      dealerCard7.classList.remove("back-red");
+      dealer.hand.push(dealer.cards[7]);
+    } else if (dealer.cards[8] == null) {
+      dealer.cards[8] = cards.pop();
+      clickSound.play();
+      dealerCard8.classList.remove("hidden");
+      dealerCard8.classList.add(dealer.cards[8]);
+      dealerCard8.classList.remove("back-red");
+      dealer.hand.push(dealer.cards[8]);
+    }
+    checkBlackjack(dealer);
+  } 
 }
+//if you have time try turning the above two functions in to 1 function that takes player for player or dealer
+
 
 function addHand(player) {  //with help from martin 
   player.total = 0;
   for (let card of player.hand) {
+    // if card[1]
     console.log(guide[card.substring(1)]);  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
     player.total += guide[card.substring(1)];
   }
   return;
  } 
+
+function checkAce (player) {
+  for (let card of player.hand) {
+    console.log(card[1]);
+  }
+}
+
+function checkAceUp() {
+  if (dealer.cards[2][1] == "A" ){
+    console.log("give player insurance option")
+  }
+}
 
 function checkBlackjack(player) {
   addHand(player);
@@ -261,10 +287,25 @@ function checkBlackjack(player) {
     console.log(`${player.name} busts with ${player.total}`)
   } else if(player.total < 21){
     console.log(`${player.name} has ${player.total}`)
-  }
-
+  } //else if(player.total > 21) && player.hand.values(player).includes('A')
 }
- 
+
+function resetHands(){
+  //reset hands code here
+}
+
+function stand(){
+  //stand code here
+}
+
+function insurance(){
+  //insurance code here
+}
+
+function betstuff(){
+  //probably break betting stuff in to multiple functions
+}
+
 
     // for (let i = 0; i < player.hand.length; i++) {
     //   if (player.hand[i][2] != undefined) {
@@ -277,9 +318,6 @@ function checkBlackjack(player) {
     //     }
     //   }
 
-
-
-addHand(player);
 
 // function addHand (player){
 //     for (i=0; i < player.hand.length; i++) {
