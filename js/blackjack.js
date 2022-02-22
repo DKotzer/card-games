@@ -24,12 +24,14 @@ suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
 cards = cards.sort(() => 0.5 - Math.random());
 
 const player = {
-  card1: null,
-  card2: null,
-  card3: null,
-  card4: null,
-  card5: null,
-  card8: null,
+  cards: {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    8: null,
+  },
   hand: [],
   total: null,
   hasAce: false,
@@ -38,12 +40,14 @@ const player = {
 };
 
 const dealer = {
-  card1: null,
-  card2: null,
-  card3: null,
-  card4: null,
-  card5: null,
-  card8: null,
+  cards: {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    8: null,
+  },
   hand: [],
   total: null,
   hasAce: false,
@@ -91,28 +95,21 @@ hitEl.addEventListener("click", hit, "player");
 /*----- functions -----*/
 
 function dealCards() {
-  player.card1 = cards.pop();
-  dealer.card1 = cards.pop();
-  player.card2 = cards.pop();
-  dealer.card2 = cards.pop();
-  player.hand.push(player.card1);
-  player.hand.push(player.card2);
-  dealer.hand.push(dealer.card1);
-  dealer.hand.push(dealer.card2);
-  console.log(player.card1 + player.card2);
-  console.log(dealer.card1 + dealer.card2);
-  //   dealerCard1.classList.add("back-red");
-  //   dealerCard2.classList.add(dealer.card2);
-  //   dealerCard2.classList.remove("back-red");
-  //   playerCard1.classList.add(player.card1);
-  //   playerCard1.classList.remove("back-red");
-  //   playerCard2.classList.add(player.card2);
-  //   playerCard2.classList.remove("back-red");
+  player.cards[1] = cards.pop();
+  dealer.cards[1] = cards.pop();
+  player.cards[2] = cards.pop();
+  dealer.cards[2] = cards.pop();
+  player.hand.push(player.cards[1]);
+  player.hand.push(player.cards[2]);
+  dealer.hand.push(dealer.cards[1]);
+  dealer.hand.push(dealer.cards[2]);
+  console.log(player.cards[1] + player.cards[2]);
+  console.log(dealer.cards[1] + dealer.cards[2]);
 
   setTimeout(() => {
     clickSound.play();
     playerCard1.classList.remove("hidden");
-    playerCard1.classList.add(player.card1);
+    playerCard1.classList.add(player.cards[1]);
     playerCard1.classList.remove("back-red");
   }, 500);
   setTimeout(() => {
@@ -122,131 +119,122 @@ function dealCards() {
   setTimeout(() => {
     clickSound.play();
     playerCard2.classList.remove("hidden");
-    playerCard2.classList.add(player.card2);
+    playerCard2.classList.add(player.cards[2]);
     playerCard2.classList.remove("back-red");
   }, 1500);
   setTimeout(() => {
     clickSound.play();
     dealerCard2.classList.remove("hidden");
-    dealerCard2.classList.add(dealer.card2);
+    dealerCard2.classList.add(dealer.cards[2]);
     dealerCard2.classList.remove("back-red");
   }, 2000);
 }
 
 function hit() {
-  if (player.card3 == null) {
-    player.card3 = cards.pop();
+  if (player.cards[3] == null) {
+    player.cards[3] = cards.pop();
     clickSound.play();
     playerCard3.classList.remove("hidden");
-    playerCard3.classList.add(player.card3);
+    playerCard3.classList.add(player.cards[3]);
     playerCard3.classList.remove("back-red");
-    player.hand.push(player.card3);
-  } else if (player.card4 == null) {
-    player.card4 = cards.pop();
+    player.hand.push(player.cards[3]);
+  } else if (player.cards[4] == null) {
+    player.cards[4] = cards.pop();
     clickSound.play();
     playerCard4.classList.remove("hidden");
-    playerCard4.classList.add(player.card4);
+    playerCard4.classList.add(player.cards[4]);
     playerCard4.classList.remove("back-red");
-    player.hand.push(player.card4);
-  } else if (player.card5 == null) {
-    player.card5 = cards.pop();
+    player.hand.push(player.cards[4]);
+  } else if (player.cards[5] == null) {
+    player.cards[5] = cards.pop();
     clickSound.play();
     playerCard5.classList.remove("hidden");
-    playerCard5.classList.add(player.card5);
+    playerCard5.classList.add(player.cards[5]);
     playerCard5.classList.remove("back-red");
-    player.hand.push(player.card5);
-  } else if (player.card6 == null) {
-    player.card6 = cards.pop();
+    player.hand.push(player.cards[5]);
+  } else if (player.cards[6] == null) {
+    player.cards[6] = cards.pop();
     clickSound.play();
     playerCard6.classList.remove("hidden");
-    playerCard6.classList.add(player.card6);
+    playerCard6.classList.add(player.cards[6]);
     playerCard6.classList.remove("back-red");
-    player.hand.push(player.card6);
-  } else if (player.card7 == null) {
-    player.card7 = cards.pop();
+    player.hand.push(player.cards[6]);
+  } else if (player.cards[7] == null) {
+    player.cards[7] = cards.pop();
     clickSound.play();
     playerCard7.classList.remove("hidden");
-    playerCard7.classList.add(player.card7);
+    playerCard7.classList.add(player.cards[7]);
     playerCard7.classList.remove("back-red");
-    player.hand.push(player.card7);
-  } else if (player.card8 == null) {
-    player.card8 = cards.pop();
+    player.hand.push(player.cards[7]);
+  } else if (player.cards[8] == null) {
+    player.cards[8] = cards.pop();
     clickSound.play();
     playerCard8.classList.remove("hidden");
-    playerCard8.classList.add(player.card8);
+    playerCard8.classList.add(player.cards[8]);
     playerCard8.classList.remove("back-red");
     player.hand.push(player.card8);
   }
 }
 
 function dealerHit() {
-  if (dealer.card3 == null) {
-    dealer.card3 = cards.pop();
+  if (dealer.cards[3] == null) {
+    dealer.cards[3] = cards.pop();
     clickSound.play();
     dealerCard3.classList.remove("hidden");
-    dealerCard3.classList.add(dealer.card3);
+    dealerCard3.classList.add(dealer.cards[3]);
     dealerCard3.classList.remove("back-red");
-    dealer.hand.push(dealer.card3);
-  } else if (dealer.card4 == null) {
-    dealer.card4 = cards.pop();
+    dealer.hand.push(dealer.cards[3]);
+  } else if (dealer.cards[4] == null) {
+    dealer.cards[4] = cards.pop();
     clickSound.play();
     dealerCard4.classList.remove("hidden");
-    dealerCard4.classList.add(dealer.card4);
+    dealerCard4.classList.add(dealer.cards[4]);
     dealerCard4.classList.remove("back-red");
-    dealer.hand.push(dealer.card4);
-  } else if (dealer.card5 == null) {
-    dealer.card5 = cards.pop();
+    dealer.hand.push(dealer.cards[4]);
+  } else if (dealer.cards[5] == null) {
+    dealer.cards[5] = cards.pop();
     clickSound.play();
     dealerCard5.classList.remove("hidden");
-    dealerCard5.classList.add(dealer.card5);
+    dealerCard5.classList.add(dealer.cards[5]);
     dealerCard5.classList.remove("back-red");
-    dealer.hand.push(dealer.card5);
-  } else if (dealer.card6 == null) {
-    dealer.card6 = cards.pop();
+    dealer.hand.push(dealer.cards[5]);
+  } else if (dealer.cards[6] == null) {
+    dealer.cards[6] = cards.pop();
     clickSound.play();
     dealerCard6.classList.remove("hidden");
-    dealerCard6.classList.add(dealer.card6);
+    dealerCard6.classList.add(dealer.cards[6]);
     dealerCard6.classList.remove("back-red");
-    dealer.hand.push(dealer.card6);
-  } else if (dealer.card7 == null) {
-    dealer.card7 = cards.pop();
+    dealer.hand.push(dealer.cards[6]);
+  } else if (dealer.cards[7] == null) {
+    dealer.cards[7] = cards.pop();
     clickSound.play();
     dealerCard7.classList.remove("hidden");
-    dealerCard7.classList.add(dealer.card7);
+    dealerCard7.classList.add(dealer.cards[7]);
     dealerCard7.classList.remove("back-red");
-    dealer.hand.push(dealer.card7);
-  } else if (dealer.card8 == null) {
-    dealer.card8 = cards.pop();
+    dealer.hand.push(dealer.cards[7]);
+  } else if (dealer.cards[8] == null) {
+    dealer.cards[8] = cards.pop();
     clickSound.play();
     dealerCard8.classList.remove("hidden");
-    dealerCard8.classList.add(dealer.card8);
+    dealerCard8.classList.add(dealer.cards[8]);
     dealerCard8.classList.remove("back-red");
-    dealer.hand.push(dealer.card8);
+    dealer.hand.push(dealer.cards[8]);
   }
 }
 
-
-function addHand (){
-    for (let i=0; i < player.hand.length; i++) {
-        
-        let 
-        if (player.card.i != undefined) {
-          playerNum += playerCard[2];
-        }
-
-        let cpuNum = cpuCard[1];
-        if (cpuCard[2] != undefined) {
-          cpuNum += cpuCard[2];
-        }
+function addHand() {
+  for (let i = 0; i < player.hand.length; i++) {
+    let playerNum = player.card[1];
+    if (player.hand[i][2] != undefined) {
+      playerNum += playerCard[2];
     }
-    
+  }
 }
-
 
 // function addHand (player){
 //     for (i=0; i < player.hand.length; i++) {
-        
-//         let 
+
+//         let
 //         if (player.cardi != undefined) {
 //           playerNum += playerCard[2];
 //         }
@@ -256,7 +244,7 @@ function addHand (){
 //           cpuNum += cpuCard[2];
 //         }
 //     }
-    
+
 // }
 
 function checkBlackjack() {}
