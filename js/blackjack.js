@@ -37,6 +37,7 @@ const player = {
   hasAce: false,
   bank: 100,
   bet: 0,
+  name: "Player",
 };
 
 const dealer = {
@@ -51,6 +52,24 @@ const dealer = {
   hand: [],
   total: null,
   hasAce: false,
+  name: "Dealer",
+};
+
+const guide = {
+  //from martin
+  "02": 2,
+  "03": 3,
+  "04": 4,
+  "05": 5,
+  "06": 6,
+  "07": 7,
+  "08": 8,
+  "09": 9,
+  "10": 10,
+  "J": 10,
+  "Q": 10,
+  "K": 10,
+  "A": 11,
 };
 
 /*----- app's state (variables) -----*/
@@ -95,39 +114,42 @@ hitEl.addEventListener("click", hit, "player");
 /*----- functions -----*/
 
 function dealCards() {
-  player.cards[1] = cards.pop();
-  dealer.cards[1] = cards.pop();
-  player.cards[2] = cards.pop();
-  dealer.cards[2] = cards.pop();
-  player.hand.push(player.cards[1]);
-  player.hand.push(player.cards[2]);
-  dealer.hand.push(dealer.cards[1]);
-  dealer.hand.push(dealer.cards[2]);
-  console.log(player.cards[1] + player.cards[2]);
-  console.log(dealer.cards[1] + dealer.cards[2]);
+  if (player.cards[1] == null){
+    player.cards[1] = cards.pop();
+    dealer.cards[1] = cards.pop();
+    player.cards[2] = cards.pop();
+    dealer.cards[2] = cards.pop();
+    player.hand.push(player.cards[1]);
+    player.hand.push(player.cards[2]);
+    dealer.hand.push(dealer.cards[1]);
+    dealer.hand.push(dealer.cards[2]);
+    console.log(player.cards[1] + player.cards[2]);
+    console.log(dealer.cards[1] + dealer.cards[2]);
+    setTimeout(() => {
+      clickSound.play();
+      playerCard1.classList.remove("hidden");
+      playerCard1.classList.add(player.cards[1]);
+      playerCard1.classList.remove("back-red");
+    }, 500);
+    setTimeout(() => {
+      clickSound.play();
+      dealerCard1.classList.remove("hidden");
+    }, 1000);
+    setTimeout(() => {
+      clickSound.play();
+      playerCard2.classList.remove("hidden");
+      playerCard2.classList.add(player.cards[2]);
+      playerCard2.classList.remove("back-red");
+    }, 1500);
+   setTimeout(() => {
+      clickSound.play();
+      dealerCard2.classList.remove("hidden");
+      dealerCard2.classList.add(dealer.cards[2]);
+      dealerCard2.classList.remove("back-red");
+    }, 2000);
+    
+  }
 
-  setTimeout(() => {
-    clickSound.play();
-    playerCard1.classList.remove("hidden");
-    playerCard1.classList.add(player.cards[1]);
-    playerCard1.classList.remove("back-red");
-  }, 500);
-  setTimeout(() => {
-    clickSound.play();
-    dealerCard1.classList.remove("hidden");
-  }, 1000);
-  setTimeout(() => {
-    clickSound.play();
-    playerCard2.classList.remove("hidden");
-    playerCard2.classList.add(player.cards[2]);
-    playerCard2.classList.remove("back-red");
-  }, 1500);
-  setTimeout(() => {
-    clickSound.play();
-    dealerCard2.classList.remove("hidden");
-    dealerCard2.classList.add(dealer.cards[2]);
-    dealerCard2.classList.remove("back-red");
-  }, 2000);
 }
 
 function hit() {
@@ -222,14 +244,42 @@ function dealerHit() {
   }
 }
 
-function addHand() {
-  for (let i = 0; i < player.hand.length; i++) {
-    let playerNum = player.card[1];
-    if (player.hand[i][2] != undefined) {
-      playerNum += playerCard[2];
-    }
+function addHand(player) {  //with help from martin 
+  player.total = 0;
+  for (let card of player.hand) {
+    console.log(guide[card.substring(1)]);  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+    player.total += guide[card.substring(1)];
   }
+  return;
+ } 
+
+function checkBlackjack(player) {
+  addHand(player);
+  if(player.total == 21){
+    console.log(`${player.name} has Blackjack! ${player.total}`)
+  } else if(player.total > 21){
+    console.log(`${player.name} busts with ${player.total}`)
+  } else if(player.total < 21){
+    console.log(`${player.name} has ${player.total}`)
+  }
+
 }
+ 
+
+    // for (let i = 0; i < player.hand.length; i++) {
+    //   if (player.hand[i][2] != undefined) {
+    //     player.total = player.total + (player.hand[i][1] + player.hand[i][2]);
+    //   }
+    //   // neither of these work.
+    //   for (let i = 0; i < player.hand.length; i++) {
+    //     if (player.cards[i][2] != undefined) {
+    //       player.total = player.total + (player.cards[i][1] + player.cards[i][2]);
+    //     }
+    //   }
+
+
+
+addHand(player);
 
 // function addHand (player){
 //     for (i=0; i < player.hand.length; i++) {
@@ -247,14 +297,10 @@ function addHand() {
 
 // }
 
-function checkBlackjack() {}
 
 /*---- plan ---- 
 
 going to try to do this one with objects instead of just arrays
 pick # of decks
 card counter display
-
-
-
 */
