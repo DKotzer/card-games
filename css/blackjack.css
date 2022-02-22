@@ -64,7 +64,7 @@ div {
   font-size: 50px;
   max-width: 500px;
   margin: 0 auto;
-  color: green;
+  color: black;
   font-weight: bolder;
   -webkit-text-stroke: 2px red; /* got this from https://www.youtube.com/watch?v=3LlLkapKw6Q  */
   -webkit-animation: pulse-red 2s infinite;
@@ -107,7 +107,44 @@ div {
   flex-direction: row;
   /* align-items: center; */
   /* align-self: flex-end; */
-  width: 690px;
+  width: 690px;  
+  height: 160px;
+}
+
+.bottomRow {
+  display: grid;
+  justify-content: left;
+  margin: auto;
+  align-self: flex-start;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fit, minmax(10px, max-content));
+}
+
+.playerValue {
+  align-self: flex-start;
+  flex-direction: row;
+}
+.middle-row {
+  margin-top: -5px;
+  margin-left: 15px;
+  padding-left: 15px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+.middle-top {
+  
+  align-self: flex-start;
+  flex-direction: row;
+  
+}
+.middle-bottom {
+  align-self: flex-start;
+  flex-direction: row;
+
+}
+.dealerValue {
+  align-self: flex-start;
+  flex-direction: row;
 }
 
 .dealerCards {
@@ -162,14 +199,6 @@ div {
   margin-left: -27px;
 }
 
-.bottomRow {
-  display: grid;
-  justify-content: left;
-  margin: auto;
-  align-self: flex-start;
-  justify-content: space-evenly;
-  grid-template-columns: repeat(auto-fit, minmax(10px, max-content));
-}
 
 .playerArea1 {
   flex-direction: row;
@@ -223,3 +252,26 @@ button {
   height: 180px;
   margin-top: 10px;
 }
+
+
+
+.pokerchip {
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+    border-radius: 75px;
+    border: 9px dotted #fff;
+    outline: 2px ridge darkslategrey;
+}
+
+
+.pokerchip div {
+    font-family: Verdana;
+    text-align: center;
+    line-height: 35px;
+    font-size: 1.2em;
+}
+.orange { background: #f7b55e }
+.green { background: #92ed40 }
+.blue { background: #4cc3fe }
+.red { background: #fd5f72 }

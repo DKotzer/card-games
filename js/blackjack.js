@@ -53,6 +53,7 @@ const dealer = {
   total: null,
   hasAces: 0,
   name: "Dealer",
+  visibleTotal: null,
 };
 
 const guide = {
@@ -100,6 +101,9 @@ let playerCard6 = document.querySelector("#player-card-6");
 let playerCard7 = document.querySelector("#player-card-7");
 let playerCard8 = document.querySelector("#player-card-8");
 
+let dealerValueEl = document.querySelector('.dealerValue')
+let playerValueEl = document.querySelector('.playerValue')
+
 // let playerCard1 = document.querySelector("#player-card-1");
 
 /*----- sounds -----*/
@@ -130,16 +134,19 @@ function dealCards() {
       playerCard1.classList.remove("hidden");
       playerCard1.classList.add(player.cards[1]);
       playerCard1.classList.remove("back-red");
+      render();
     }, 500);
     setTimeout(() => {
       clickSound.play();
       dealerCard1.classList.remove("hidden");
+      render();
     }, 1000);
     setTimeout(() => {
       clickSound.play();
       playerCard2.classList.remove("hidden");
       playerCard2.classList.add(player.cards[2]);
       playerCard2.classList.remove("back-red");
+      render();
     }, 1500);
    setTimeout(() => {
       clickSound.play();
@@ -149,11 +156,10 @@ function dealCards() {
       checkAceUp();
       checkBlackjack(player);
       checkBlackjack(dealer);
+      render();
       
     }, 2000);
-    
   }
-
 }
 
 function hit() {
@@ -252,10 +258,10 @@ function dealerHit() {
       dealer.hand.push(dealer.cards[8]);
     }
     checkBlackjack(dealer);
+    render();
   } 
 }
 //if you have time try turning the above two functions in to 1 function that takes player for player or dealer
-
 
 function addHand(player) {  // this function with help from martin
   player.total = 0;
@@ -276,9 +282,11 @@ function addHand(player) {  // this function with help from martin
       player.total -= 10;
     }
   }
+  if (player.name == "Dealer") {
+    console.log('dealer is dealer')
+    player.visibleTotal = player.total - (guide[player.hand[0].substring(1)]);
+  }
  } 
-
-
 
 function checkAceUp() {
   if (dealer.cards[2][1] == "A" ){
@@ -312,6 +320,11 @@ function insurance(){
 
 function betstuff(){
   //probably break betting stuff in to multiple functions
+}
+
+function render(){
+  playerValueEl.textContent = player.total;
+  dealerValueEl.textContent = dealer.visibleTotal;
 }
 
 
