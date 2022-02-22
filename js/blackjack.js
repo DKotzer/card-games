@@ -30,6 +30,7 @@ const player = {
   card4: null,
   card5: null,
   card8: null,
+  hand: [],
   total: null,
   hasAce: false,
   bank: 100,
@@ -43,12 +44,15 @@ const dealer = {
   card4: null,
   card5: null,
   card8: null,
+  hand: [],
   total: null,
   hasAce: false,
 };
 
 /*----- app's state (variables) -----*/
 let pot = 0;
+let playerTotal = 0;
+let dealerTotal = 0;
 
 /*----- cached element references -----*/
 
@@ -91,6 +95,10 @@ function dealCards() {
   dealer.card1 = cards.pop();
   player.card2 = cards.pop();
   dealer.card2 = cards.pop();
+  player.hand.push(player.card1);
+  player.hand.push(player.card2);
+  dealer.hand.push(dealer.card1);
+  dealer.hand.push(dealer.card2);
   console.log(player.card1 + player.card2);
   console.log(dealer.card1 + dealer.card2);
   //   dealerCard1.classList.add("back-red");
@@ -132,36 +140,42 @@ function hit() {
     playerCard3.classList.remove("hidden");
     playerCard3.classList.add(player.card3);
     playerCard3.classList.remove("back-red");
+    player.hand.push(player.card3);
   } else if (player.card4 == null) {
     player.card4 = cards.pop();
     clickSound.play();
     playerCard4.classList.remove("hidden");
     playerCard4.classList.add(player.card4);
     playerCard4.classList.remove("back-red");
+    player.hand.push(player.card4);
   } else if (player.card5 == null) {
     player.card5 = cards.pop();
     clickSound.play();
     playerCard5.classList.remove("hidden");
     playerCard5.classList.add(player.card5);
     playerCard5.classList.remove("back-red");
+    player.hand.push(player.card5);
   } else if (player.card6 == null) {
     player.card6 = cards.pop();
     clickSound.play();
     playerCard6.classList.remove("hidden");
     playerCard6.classList.add(player.card6);
     playerCard6.classList.remove("back-red");
+    player.hand.push(player.card6);
   } else if (player.card7 == null) {
     player.card7 = cards.pop();
     clickSound.play();
     playerCard7.classList.remove("hidden");
     playerCard7.classList.add(player.card7);
     playerCard7.classList.remove("back-red");
+    player.hand.push(player.card7);
   } else if (player.card8 == null) {
     player.card8 = cards.pop();
     clickSound.play();
     playerCard8.classList.remove("hidden");
     playerCard8.classList.add(player.card8);
     playerCard8.classList.remove("back-red");
+    player.hand.push(player.card8);
   }
 }
 
@@ -172,38 +186,78 @@ function dealerHit() {
     dealerCard3.classList.remove("hidden");
     dealerCard3.classList.add(dealer.card3);
     dealerCard3.classList.remove("back-red");
+    dealer.hand.push(dealer.card3);
   } else if (dealer.card4 == null) {
     dealer.card4 = cards.pop();
     clickSound.play();
     dealerCard4.classList.remove("hidden");
     dealerCard4.classList.add(dealer.card4);
     dealerCard4.classList.remove("back-red");
+    dealer.hand.push(dealer.card4);
   } else if (dealer.card5 == null) {
     dealer.card5 = cards.pop();
     clickSound.play();
     dealerCard5.classList.remove("hidden");
     dealerCard5.classList.add(dealer.card5);
     dealerCard5.classList.remove("back-red");
+    dealer.hand.push(dealer.card5);
   } else if (dealer.card6 == null) {
     dealer.card6 = cards.pop();
     clickSound.play();
     dealerCard6.classList.remove("hidden");
     dealerCard6.classList.add(dealer.card6);
     dealerCard6.classList.remove("back-red");
+    dealer.hand.push(dealer.card6);
   } else if (dealer.card7 == null) {
     dealer.card7 = cards.pop();
     clickSound.play();
     dealerCard7.classList.remove("hidden");
     dealerCard7.classList.add(dealer.card7);
     dealerCard7.classList.remove("back-red");
+    dealer.hand.push(dealer.card7);
   } else if (dealer.card8 == null) {
     dealer.card8 = cards.pop();
     clickSound.play();
     dealerCard8.classList.remove("hidden");
     dealerCard8.classList.add(dealer.card8);
     dealerCard8.classList.remove("back-red");
+    dealer.hand.push(dealer.card8);
   }
 }
+
+
+function addHand (){
+    for (let i=0; i < player.hand.length; i++) {
+        
+        let 
+        if (player.card.i != undefined) {
+          playerNum += playerCard[2];
+        }
+
+        let cpuNum = cpuCard[1];
+        if (cpuCard[2] != undefined) {
+          cpuNum += cpuCard[2];
+        }
+    }
+    
+}
+
+
+// function addHand (player){
+//     for (i=0; i < player.hand.length; i++) {
+        
+//         let 
+//         if (player.cardi != undefined) {
+//           playerNum += playerCard[2];
+//         }
+
+//         let cpuNum = cpuCard[1];
+//         if (cpuCard[2] != undefined) {
+//           cpuNum += cpuCard[2];
+//         }
+//     }
+    
+// }
 
 function checkBlackjack() {}
 
