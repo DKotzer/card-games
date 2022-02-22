@@ -82,7 +82,7 @@ let clickSound = new Audio("sounds/click.mp3");
 /*----- event listeners -----*/
 
 dealEl.addEventListener("click", dealCards);
-hitEl.addEventListener("click", hit);
+hitEl.addEventListener("click", hit, "player");
 
 /*----- functions -----*/
 
@@ -162,6 +162,46 @@ function hit() {
     playerCard8.classList.remove("hidden");
     playerCard8.classList.add(player.card8);
     playerCard8.classList.remove("back-red");
+  }
+}
+
+function dealerHit() {
+  if (dealer.card3 == null) {
+    dealer.card3 = cards.pop();
+    clickSound.play();
+    dealerCard3.classList.remove("hidden");
+    dealerCard3.classList.add(dealer.card3);
+    dealerCard3.classList.remove("back-red");
+  } else if (dealer.card4 == null) {
+    dealer.card4 = cards.pop();
+    clickSound.play();
+    dealerCard4.classList.remove("hidden");
+    dealerCard4.classList.add(dealer.card4);
+    dealerCard4.classList.remove("back-red");
+  } else if (dealer.card5 == null) {
+    dealer.card5 = cards.pop();
+    clickSound.play();
+    dealerCard5.classList.remove("hidden");
+    dealerCard5.classList.add(dealer.card5);
+    dealerCard5.classList.remove("back-red");
+  } else if (dealer.card6 == null) {
+    dealer.card6 = cards.pop();
+    clickSound.play();
+    dealerCard6.classList.remove("hidden");
+    dealerCard6.classList.add(dealer.card6);
+    dealerCard6.classList.remove("back-red");
+  } else if (dealer.card7 == null) {
+    dealer.card7 = cards.pop();
+    clickSound.play();
+    dealerCard7.classList.remove("hidden");
+    dealerCard7.classList.add(dealer.card7);
+    dealerCard7.classList.remove("back-red");
+  } else if (dealer.card8 == null) {
+    dealer.card8 = cards.pop();
+    clickSound.play();
+    dealerCard8.classList.remove("hidden");
+    dealerCard8.classList.add(dealer.card8);
+    dealerCard8.classList.remove("back-red");
   }
 }
 
