@@ -1,5 +1,5 @@
 /*----- constants -----*/
-//Creating the deck of 52 cards and storing them in the cards array
+//Creating the deck of 54 cards and storing them in the cards array
 const suits = ["h", "s", "d", "c"];
 const values = [
   "02",
@@ -28,7 +28,6 @@ console.log(cards.length);
 
 /*----- app's state (variables) -----*/
 
-const deck = [];
 let playerDeck = [];
 let cpuDeck = [];
 let playerCard = "back-blue";
