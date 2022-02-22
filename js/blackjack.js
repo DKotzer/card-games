@@ -53,6 +53,7 @@ let pot = 0;
 /*----- cached element references -----*/
 
 let dealEl = document.querySelector("#deal-btn");
+let hitEl = document.querySelector("#hit-btn");
 
 let dealerCard1 = document.querySelector("#dealer-card-1");
 let dealerCard2 = document.querySelector("#dealer-card-2");
@@ -81,6 +82,7 @@ let clickSound = new Audio("sounds/click.mp3");
 /*----- event listeners -----*/
 
 dealEl.addEventListener("click", dealCards);
+hitEl.addEventListener("click", hit);
 
 /*----- functions -----*/
 
@@ -121,6 +123,46 @@ function dealCards() {
     dealerCard2.classList.add(dealer.card2);
     dealerCard2.classList.remove("back-red");
   }, 2000);
+}
+
+function hit() {
+  if (player.card3 == null) {
+    player.card3 = cards.pop();
+    clickSound.play();
+    playerCard3.classList.remove("hidden");
+    playerCard3.classList.add(player.card3);
+    playerCard3.classList.remove("back-red");
+  } else if (player.card4 == null) {
+    player.card4 = cards.pop();
+    clickSound.play();
+    playerCard4.classList.remove("hidden");
+    playerCard4.classList.add(player.card4);
+    playerCard4.classList.remove("back-red");
+  } else if (player.card5 == null) {
+    player.card5 = cards.pop();
+    clickSound.play();
+    playerCard5.classList.remove("hidden");
+    playerCard5.classList.add(player.card5);
+    playerCard5.classList.remove("back-red");
+  } else if (player.card6 == null) {
+    player.card6 = cards.pop();
+    clickSound.play();
+    playerCard6.classList.remove("hidden");
+    playerCard6.classList.add(player.card6);
+    playerCard6.classList.remove("back-red");
+  } else if (player.card7 == null) {
+    player.card7 = cards.pop();
+    clickSound.play();
+    playerCard7.classList.remove("hidden");
+    playerCard7.classList.add(player.card7);
+    playerCard7.classList.remove("back-red");
+  } else if (player.card8 == null) {
+    player.card8 = cards.pop();
+    clickSound.play();
+    playerCard8.classList.remove("hidden");
+    playerCard8.classList.add(player.card8);
+    playerCard8.classList.remove("back-red");
+  }
 }
 
 function checkBlackjack() {}
