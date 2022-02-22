@@ -34,7 +34,7 @@ const player = {
   },
   hand: [],
   total: null,
-  hasAce: false,
+  hasAces: 0,
   bank: 100,
   bet: 0,
   name: "Player",
@@ -51,7 +51,7 @@ const dealer = {
   },
   hand: [],
   total: null,
-  hasAce: false,
+  hasAces: 0,
   name: "Dealer",
 };
 
@@ -157,7 +157,7 @@ function dealCards() {
 }
 
 function hit() {
-  if (player.total < 21)  {
+  if (player.total < 21 && player.cards[1] != null)  {
     if (player.cards[3] == null) {
       player.cards[3] = cards.pop();
       clickSound.play();
@@ -207,7 +207,7 @@ function hit() {
 }
 
 function dealerHit() {
-  if (dealer.total < 21)  {
+  if (dealer.total < 21 && dealer.cards[1] != null)  {
     if (dealer.cards[3] == null) {
       dealer.cards[3] = cards.pop();
       clickSound.play();
@@ -257,21 +257,28 @@ function dealerHit() {
 //if you have time try turning the above two functions in to 1 function that takes player for player or dealer
 
 
-function addHand(player) {  //with help from martin 
+function addHand(player) {  // this function with help from martin
   player.total = 0;
   for (let card of player.hand) {
-    // if card[1]
-    console.log(guide[card.substring(1)]);  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+    if (card[1] == "A"){
+      console.log("Ace detected")
+      player.hasAces = 1;
+    }
     player.total += guide[card.substring(1)];
   }
-  return;
+  if (player.total > 21 && player.hasAces !== 0){
+    console.log('over 21, has aces')
+    player.hasAces -= 1;
+    player.total -= 10;
+    if (player.total > 21 && player.hasAces !== 0){
+      console.log('over 21, has aces')
+      player.hasAces -= 1;
+      player.total -= 10;
+    }
+  }
  } 
 
-function checkAce (player) {
-  for (let card of player.hand) {
-    console.log(card[1]);
-  }
-}
+
 
 function checkAceUp() {
   if (dealer.cards[2][1] == "A" ){
@@ -292,6 +299,7 @@ function checkBlackjack(player) {
 
 function resetHands(){
   //reset hands code here
+  //things to reset: hasZero, hand, total, cards, insurance, bets
 }
 
 function stand(){
