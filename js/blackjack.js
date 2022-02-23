@@ -17,10 +17,12 @@ const values = [
   "A",
 ];
 let cards = [];
+
 // for (i = 0; i < deckCount; i++) {
 //   suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));  //something like this when you add in deck count
 // }
 suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
+let deckList = cards.slice();
 cards = cards.sort(() => 0.5 - Math.random());
 
 const player = {
@@ -119,6 +121,7 @@ let betEl = document.querySelector(".betTotal");
 let cashEl = document.querySelector(".cashTotal");
 
 let modalEl = document.querySelector(".win-modal");
+let betModalEl = document.querySelector(".betModal");
 
 // let playerCard1 = document.querySelector("#player-card-1");
 
@@ -340,72 +343,81 @@ function checkBlackjack(player) {
 }
 
 function checkWinner() {
+  player.previousBet = player.bet;
   if (player.total > 21 && dealer.total > 21) {
     modalEl.textContent = "Player and Dealer both Bust";
+    betModalEl.textContent = `+ ${player.bet}`;
     player.bank += player.bet;
+    player.bet = 0;
+    player.wins = true;
+  } else if (player.total == 21) {
+    modalEl.textContent = `${player.name} wins with Blackjack`;
+    betModalEl.textContent = `+ ${player.bet * 2}`;
+    player.bank += player.bet * 2;
+    player.bet = 0;
+  } else if (dealer.total == 21) {
+    modalEl.textContent = `${dealer.name} wins with Blackjack `;
+    betModalEl.textContent = "";
+    player.bet = 0;
   } else if (player.total > 21) {
     modalEl.textContent = `${player.name} busts with ${player.total}`;
+    betModalEl.textContent = "";
     player.bet = 0;
   } else if (dealer.total > 21) {
     modalEl.textContent = `${dealer.name} busts with ${dealer.total}`;
+    betModalEl.textContent = `+ ${player.bet * 2}`;
     player.bank += player.bet * 2;
+    player.bet = 0;
   } else if (player.total == dealer.total) {
+    betModalEl.textContent = `+ ${player.bet}`;
     modalEl.textContent = "Push";
     player.bank += player.bet;
     player.bet = 0;
   } else if (player.total > dealer.total) {
     modalEl.textContent = `${player.name} wins with ${player.total}`;
+    betModalEl.textContent = `+ ${player.bet * 2}`;
     player.bank += player.bet * 2;
     player.bet = 0;
   } else if (dealer.total > player.total) {
     modalEl.textContent = `${dealer.name} wins with ${dealer.total}`;
+    betModalEl.textContent = "";
     player.bet = 0;
   } else {
     console.log("something went wrong");
   }
-
+  dealer.turnComplete = true;
   console.log("checkwinner happening");
   render();
 }
 
-function resetHands() {
-  // if (dealer.turnComplete = true){
-  // }
-  for (let card in player.cards) {
-    player.cards[card] = null;
-  }
-
-  dealer.turnActive = false;
-  modalEl.classList.remove("hidden");
-
-  //reset hands code here
-  //things to reset: hasZero, hand, total, cards, insurance, bets
-}
-
 function stand() {
-  if (player.cards[1] != null && dealer.cards[1] != null) {
+  if (
+    player.cards[1] != null &&
+    dealer.cards[1] != null &&
+    dealer.turnComplete != true
+  ) {
     dealerCard1.classList.add(dealer.cards[1]);
     dealerCard1.classList.remove("back-red");
     dealerValueEl.textContent = dealer.total;
-    if (dealer.turnComplete != true) {
-      console.log("standing");
-      setInterval(dealerTurn, 1500);
-      //ask for help here
-    }
+    dealerTurn();
+    // setInterval(dealerTurn, 1500); //switch while to if and uncomment this
+    //ask for help here
   }
 }
 
 function dealerTurn() {
+  console.log("dealer turn test");
+  dealer.turnActive = true;
   if (dealer.total <= 16) {
-    dealer.turnActive = true;
     dealerHit();
     console.log("Dealer hitting");
-  } else {
+    setTimeout(() => dealerTurn(), 1500);
+  } else if (dealer.total >= 17) {
     checkWinner();
     dealer.turnComplete = true;
     console.log("Dealer over 16");
-    dealer.turnActive = false;
     modal();
+    setTimeout(() => resetHands(), 2500);
   }
 }
 
@@ -465,45 +477,81 @@ function render() {
   } else {
     dealerValueEl.textContent = dealer.total;
   }
-
   betEl.textContent = player.bet;
   cashEl.textContent = player.bank;
 }
 
 function modal() {
   modalEl.classList.remove("hidden");
-  // setTimeout(() => modalEl.classList.add("hidden"), 2000);
+  setTimeout(() => modalEl.classList.add("hidden"), 3000);
+  betModalEl.classList.remove("hidden");
+  setTimeout(() => betModalEl.classList.add("hidden"), 3000);
   // setTimeout(function () {
   //   modalEl.classList.add("hidden");
   // }, 1300);
 }
 
-// for (let i = 0; i < player.hand.length; i++) {
-//   if (player.hand[i][2] != undefined) {
-//     player.total = player.total + (player.hand[i][1] + player.hand[i][2]);
-//   }
-//   // neither of these work.
-//   for (let i = 0; i < player.hand.length; i++) {
-//     if (player.cards[i][2] != undefined) {
-//       player.total = player.total + (player.cards[i][1] + player.cards[i][2]);
-//     }
-//   }
+function resetHands() {
+  // if (dealer.turnComplete = true){
+  // }
+  for (let card in player.cards) {
+    player.cards[card] = null; //this line fixed with help of Fil, before I had cards = null instead of player.cards[card]
+  }
+  for (let card in dealer.cards) {
+    dealer.cards[card] = null;
+  }
+  dealer.hasAces = 0;
+  player.hasAces = 0;
+  player.hand = [];
+  dealer.hand = [];
+  modalEl.classList.remove("hidden");
+  player.total = null;
+  dealer.total = null;
+  dealer.visibleTotal = null;
+  dealer.turnComplete = false;
+  dealer.turnActive = false;
+  player.insurance = false;
+  modalEl.classList.add("hidden");
+  playerCard1.classList = "card large back-red hidden"; //there is probably a better way to do this in 1 or 2 lines
+  playerCard2.classList = "card large back-red hidden";
+  playerCard3.classList = "card large back-red hidden";
+  playerCard4.classList = "card large back-red hidden";
+  playerCard5.classList = "card large back-red hidden";
+  playerCard6.classList = "card large back-red hidden";
+  playerCard7.classList = "card large back-red hidden";
+  playerCard8.classList = "card large back-red hidden";
+  dealerCard1.classList = "card large back-red hidden";
+  dealerCard2.classList = "card large back-red hidden";
+  dealerCard3.classList = "card large back-red hidden";
+  dealerCard4.classList = "card large back-red hidden";
+  dealerCard5.classList = "card large back-red hidden";
+  dealerCard6.classList = "card large back-red hidden";
+  dealerCard7.classList = "card large back-red hidden";
+  dealerCard8.classList = "card large back-red hidden";
+  render();
+  //reset hands code here
+  //things to reset: hasZero, hand, total, cards, insurance, bets
+}
 
-// function addHand (player){
-//     for (i=0; i < player.hand.length; i++) {
+function shuffle() {
+  if (cards.length < 52) {
+    console.log("time to shuffle");
+    cards = deckList;
+    cards = cards.sort(() => 0.5 - Math.random());
+    shuffleSound.play();
+    modalEl.textContent = "Shuffling!";
+    modalEl.classList.remove("hidden");
+    setInterval(() => modalEl.classList.add("hidden"), 1000);
+  }
+}
 
-//         let
-//         if (player.cardi != undefined) {
-//           playerNum += playerCard[2];
-//         }
-
-//         let cpuNum = cpuCard[1];
-//         if (cpuCard[2] != undefined) {
-//           cpuNum += cpuCard[2];
-//         }
-//     }
-
-// }
+function checkLoss() {
+  if (player.bank < 1) {
+    alert(
+      "You are out of money, would you like to put a lein on your house to continue playing?"
+    );
+  }
+}
 
 /*---- plan ---- 
 
@@ -511,3 +559,5 @@ going to try to do this one with objects instead of just arrays
 pick # of decks
 card counter display
 */
+//turn off player hit after they stand
+//dealer wins if player busts

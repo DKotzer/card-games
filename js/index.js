@@ -419,7 +419,6 @@ function handleClick() {
       cpuDeck = cpuDeck.sort(() => 0.5 - Math.random());
       cpuCards = cpuDeck;
       console.log("shufflign cpu deck");
-
       shuffleSound.play();
 
       // cpuPileEl.classList.add("hidden");
