@@ -222,6 +222,7 @@ div {
   border: 5px solid black;
   border-radius: 25px;
   margin-left: 3%;
+  align-items: center;
 }
 
 .draw-decks {
@@ -253,23 +254,29 @@ button {
   margin-top: 10px;
 }
 
-
+#chips {
+  display: flex;
+  flex-direction: row;
+}
+#chips2 {
+  display: flex;
+  flex-direction: row;
+}
 
 .pokerchip {
-    width: 35px;
-    height: 35px;
+    width: 39px;
+    height: 39px;
     margin: 2px;
-    border-radius: 75px;
+    border-radius: 35px;
     border: 9px dotted #fff;
     outline: 2px ridge darkslategrey;
 }
 
-
 .pokerchip div {
     font-family: Verdana;
     text-align: center;
-    line-height: 35px;
-    font-size: 1.2em;
+    line-height: 40px;
+    font-size: 18px;
 }
 .orange { background: #f7b55e }
 .green { background: #92ed40 }

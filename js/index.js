@@ -79,9 +79,11 @@ deckClickEl.addEventListener("click", handleClick);
 
 //handle the logic of each turn
 function handleClick() {
+  OldPlayerCardClass = playerCardEl.classList;
+  OldCpuCardClass = cpuCardEl.classList;
+
   clickSound.play();
   if (playerCards.length == 0) {
-    //this is here in case there is a card for the first war card but not the face down war card
     shuffle(playerDeck);
   }
   if (cpuCards.length == 0) {
@@ -89,8 +91,9 @@ function handleClick() {
   }
   oldPlayerCard = playerCard;
   oldCpuCard = cpuCard;
-  OldPlayerCardClass = playerCardEl.classList;
-  OldCpuCardClass = cpuCardEl.classList;
+  // OldPlayerCardClass = playerCardEl.classList;
+  // OldCpuCardClass = cpuCardEl.classList;
+
   playerCardEl.classList.remove("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
   cpuCardEl.classList.remove("back-red");
 
@@ -142,12 +145,17 @@ function handleClick() {
   }
   console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuNum > playerNum) {
+    OldPlayerCardClass = playerCardEl.classList;
+    OldCpuCardClass = cpuCardEl.classList;
     cpuDeck.push(cpuCard);
     cpuDeck.push(playerCard);
     console.log("CPU wins round");
-    setTimeout((playerPileEl.classList = OldPlayerCardClass), 250); //trying to switch card back to previous card if turn is a loss
+
+    setTimeout(playerPileEl.classList.remove(playerCard), 250);
+    setTimeout(playerPileEl.classList.add(oldPlayerCard), 250); //trying to switch card back to previous card if turn is a loss
   } else if (playerNum > cpuNum) {
-    console.log("test " + playerWarCardEl.classList);
+    OldPlayerCardClass = playerCardEl.classList;
+    OldCpuCardClass = cpuCardEl.classList;
     playerDeck.push(cpuCard);
     playerDeck.push(playerCard);
     console.log("Player wins round");
@@ -296,7 +304,7 @@ function handleClick() {
       console.log("CPU wins the WAR");
       setTimeout(resetWar, delay);
     } else if (playerWarNum > cpuWarNum) {
-      playerPileEl.classList = playerWarCardEl.classList;
+      // playerPileEl.classList = playerWarCardEl.classList;
       playerDeck.push(cpuCard);
       playerDeck.push(playerCard);
       playerDeck.push(cpuWarCard);
@@ -364,7 +372,10 @@ function handleClick() {
 
     // deckListDisplay = playerDeck + playerCards;
 
-    deckListDisplay = playerDeck.join(", ") + ", " + playerCards.join(", ");
+    deckListDisplay = playerDeck.concat(playerCards);
+    deckListDisplay.sort();
+    deckListDisplay = deckListDisplay.toString();
+    // deckListDisplay = playerDeck.join(", ") + ", " + playerCards.join(", ");
 
     //deckListDisplay.sort();
     // deckListDisplay = deckListDisplay.join(", ");
@@ -379,6 +390,7 @@ function handleClick() {
     deckListDisplay = deckListDisplay.replaceAll("0", "");
     deckListDisplay = deckListDisplay.replaceAll("1", "10");
     deckListDisplay = deckListDisplay.replaceAll("JOKER", "Joker");
+    deckListDisplay = deckListDisplay.replaceAll(",", " ");
     deckList.innerHTML = deckListDisplay;
   }
   render();

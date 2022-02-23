@@ -101,8 +101,8 @@ let playerCard6 = document.querySelector("#player-card-6");
 let playerCard7 = document.querySelector("#player-card-7");
 let playerCard8 = document.querySelector("#player-card-8");
 
-let dealerValueEl = document.querySelector('.dealerValue')
-let playerValueEl = document.querySelector('.playerValue')
+let dealerValueEl = document.querySelector(".dealerValue");
+let playerValueEl = document.querySelector(".playerValue");
 
 // let playerCard1 = document.querySelector("#player-card-1");
 
@@ -118,7 +118,7 @@ hitEl.addEventListener("click", hit, "player");
 /*----- functions -----*/
 
 function dealCards() {
-  if (player.cards[1] == null){
+  if (player.cards[1] == null) {
     player.cards[1] = cards.pop();
     dealer.cards[1] = cards.pop();
     player.cards[2] = cards.pop();
@@ -148,7 +148,7 @@ function dealCards() {
       playerCard2.classList.remove("back-red");
       render();
     }, 1500);
-   setTimeout(() => {
+    setTimeout(() => {
       clickSound.play();
       dealerCard2.classList.remove("hidden");
       dealerCard2.classList.add(dealer.cards[2]);
@@ -157,13 +157,12 @@ function dealCards() {
       checkBlackjack(player);
       checkBlackjack(dealer);
       render();
-      
     }, 2000);
   }
 }
 
 function hit() {
-  if (player.total < 21 && player.cards[1] != null)  {
+  if (player.total < 21 && player.cards[1] != null) {
     if (player.cards[3] == null) {
       player.cards[3] = cards.pop();
       clickSound.play();
@@ -171,7 +170,6 @@ function hit() {
       playerCard3.classList.add(player.cards[3]);
       playerCard3.classList.remove("back-red");
       player.hand.push(player.cards[3]);
-      
     } else if (player.cards[4] == null) {
       player.cards[4] = cards.pop();
       clickSound.play();
@@ -208,12 +206,14 @@ function hit() {
       playerCard8.classList.remove("back-red");
       player.hand.push(player.card8);
     }
+
     checkBlackjack(player);
+    render();
   }
 }
 
 function dealerHit() {
-  if (dealer.total < 21 && dealer.cards[1] != null)  {
+  if (dealer.total < 21 && dealer.cards[1] != null) {
     if (dealer.cards[3] == null) {
       dealer.cards[3] = cards.pop();
       clickSound.play();
@@ -259,86 +259,85 @@ function dealerHit() {
     }
     checkBlackjack(dealer);
     render();
-  } 
+  }
 }
 //if you have time try turning the above two functions in to 1 function that takes player for player or dealer
 
-function addHand(player) {  // this function with help from martin
+function addHand(player) {
+  // this function with help from martin
   player.total = 0;
   for (let card of player.hand) {
-    if (card[1] == "A"){
-      console.log("Ace detected")
+    if (card[1] == "A") {
+      console.log("Ace detected");
       player.hasAces = 1;
     }
     player.total += guide[card.substring(1)];
   }
-  if (player.total > 21 && player.hasAces !== 0){
-    console.log('over 21, has aces')
+  if (player.total > 21 && player.hasAces !== 0) {
+    console.log("over 21, has aces");
     player.hasAces -= 1;
     player.total -= 10;
-    if (player.total > 21 && player.hasAces !== 0){
-      console.log('over 21, has aces')
+    if (player.total > 21 && player.hasAces !== 0) {
+      console.log("over 21, has aces");
       player.hasAces -= 1;
       player.total -= 10;
     }
   }
   if (player.name == "Dealer") {
-    console.log('dealer is dealer')
-    player.visibleTotal = player.total - (guide[player.hand[0].substring(1)]);
+    console.log("dealer is dealer");
+    player.visibleTotal = player.total - guide[player.hand[0].substring(1)];
   }
- } 
+}
 
 function checkAceUp() {
-  if (dealer.cards[2][1] == "A" ){
-    console.log("give player insurance option")
+  if (dealer.cards[2][1] == "A") {
+    console.log("give player insurance option");
   }
 }
 
 function checkBlackjack(player) {
   addHand(player);
-  if(player.total == 21){
-    console.log(`${player.name} has Blackjack! ${player.total}`)
-  } else if(player.total > 21){
-    console.log(`${player.name} busts with ${player.total}`)
-  } else if(player.total < 21){
-    console.log(`${player.name} has ${player.total}`)
+  if (player.total == 21) {
+    console.log(`${player.name} has Blackjack! ${player.total}`);
+  } else if (player.total > 21) {
+    console.log(`${player.name} busts with ${player.total}`);
+  } else if (player.total < 21) {
+    console.log(`${player.name} has ${player.total}`);
   } //else if(player.total > 21) && player.hand.values(player).includes('A')
 }
 
-function resetHands(){
+function resetHands() {
   //reset hands code here
   //things to reset: hasZero, hand, total, cards, insurance, bets
 }
 
-function stand(){
+function stand() {
   //stand code here
 }
 
-function insurance(){
+function insurance() {
   //insurance code here
 }
 
-function betstuff(){
+function betstuff() {
   //probably break betting stuff in to multiple functions
 }
 
-function render(){
+function render() {
   playerValueEl.textContent = player.total;
   dealerValueEl.textContent = dealer.visibleTotal;
 }
 
-
-    // for (let i = 0; i < player.hand.length; i++) {
-    //   if (player.hand[i][2] != undefined) {
-    //     player.total = player.total + (player.hand[i][1] + player.hand[i][2]);
-    //   }
-    //   // neither of these work.
-    //   for (let i = 0; i < player.hand.length; i++) {
-    //     if (player.cards[i][2] != undefined) {
-    //       player.total = player.total + (player.cards[i][1] + player.cards[i][2]);
-    //     }
-    //   }
-
+// for (let i = 0; i < player.hand.length; i++) {
+//   if (player.hand[i][2] != undefined) {
+//     player.total = player.total + (player.hand[i][1] + player.hand[i][2]);
+//   }
+//   // neither of these work.
+//   for (let i = 0; i < player.hand.length; i++) {
+//     if (player.cards[i][2] != undefined) {
+//       player.total = player.total + (player.cards[i][1] + player.cards[i][2]);
+//     }
+//   }
 
 // function addHand (player){
 //     for (i=0; i < player.hand.length; i++) {
@@ -355,7 +354,6 @@ function render(){
 //     }
 
 // }
-
 
 /*---- plan ---- 
 

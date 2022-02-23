@@ -22,7 +22,6 @@ body {
   overflow-wrap: break-word; /*  https://css-tricks.com/almanac/properties/o/overflow-wrap/ */
   margin: 0 auto;
   padding-top: 20px;
-
   max-width: 90%;
   height: 70%;
 }
@@ -145,7 +144,7 @@ button {
 }
 
 .animated {
-  transform: translate(120px, 0px);
+  transform: translate(116px, 0px);
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
