@@ -37,6 +37,7 @@ const player = {
   hasAces: 0,
   bank: 100,
   bet: 0,
+  previousBet: 0,
   name: "Player",
 };
 
@@ -104,6 +105,15 @@ let playerCard8 = document.querySelector("#player-card-8");
 let dealerValueEl = document.querySelector(".dealerValue");
 let playerValueEl = document.querySelector(".playerValue");
 
+let chip1El = document.querySelector("#chip1");
+let chip2El = document.querySelector("#chip2");
+let chip3El = document.querySelector("#chip3");
+let chip4El = document.querySelector("#chip4");
+let chip5El = document.querySelector("#chip5");
+let chip6El = document.querySelector("#chip6");
+
+let betEl = document.querySelector(".betTotal");
+
 // let playerCard1 = document.querySelector("#player-card-1");
 
 /*----- sounds -----*/
@@ -113,7 +123,14 @@ let clickSound = new Audio("sounds/click.mp3");
 /*----- event listeners -----*/
 
 dealEl.addEventListener("click", dealCards);
-hitEl.addEventListener("click", hit, "player");
+hitEl.addEventListener("click", hit);
+
+chip1El.addEventListener("click", addBet1);
+chip2El.addEventListener("click", addBet2);
+chip3El.addEventListener("click", addBet3);
+chip4El.addEventListener("click", addBet4);
+chip5El.addEventListener("click", addBet5);
+chip6El.addEventListener("click", addBet6);
 
 /*----- functions -----*/
 
@@ -323,9 +340,51 @@ function betstuff() {
   //probably break betting stuff in to multiple functions
 }
 
+function addBet1() {
+  if (player.bank >= 1) {
+    player.bet += 1;
+    player.bank -= 1;
+    render();
+  }
+}
+function addBet2() {
+  if (player.bank >= 5) {
+    player.bet += 5;
+    player.bank -= 5;
+    render();
+  }
+}
+function addBet3() {
+  if (player.bank >= 10) {
+    player.bet += 10;
+    player.bank -= 10;
+    render();
+  }
+}
+function addBet4() {
+  if (player.bank >= 25) {
+    player.bet += 25;
+    player.bank -= 25;
+    render();
+  }
+}
+function addBet5() {
+  if (player.bank >= 50) {
+    player.bet += 50;
+    player.bank -= 50;
+    render();
+  }
+}
+function addBet6() {
+  player.bet += player.bank;
+  player.bank -= player.bank;
+  render();
+}
+
 function render() {
   playerValueEl.textContent = player.total;
   dealerValueEl.textContent = dealer.visibleTotal;
+  betEl.textContent = player.bet;
 }
 
 // for (let i = 0; i < player.hand.length; i++) {
