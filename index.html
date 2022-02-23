@@ -5,77 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WAR</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="card-deck-css/css/cardstarter.css" />
 
     <script src="js/index.js" defer></script>
   </head>
   <body>
-    <div id="title">WAR</div>
+    <div id="title">Card Room</div>
     <div class="game-container">
-      <div class="score-area">
-        Player Deck
-        <div class="deck-list"></div>
-        <div class="card-display"></div>
-        <div class="cpu-tally">CPU Cards:</div>
-        <div class="player-tally">Player Cards:</div>
-      </div>
-      <div class="draw-decks">
-        <div class="cpu-draw-deck">
-        <div id="cpu-draw-pile" class="card large back-red"></div> 
+      <div class="warGame">
+        <div class="war-container">
+          WAR
+          <img
+            class="warImage"
+            src="images/war.png"
+            onmouseover="this.src='images/war2.png'"
+            onmouseleave="this.src='images/war.png'"
+            alt="Play War"
+            height="160px;"
+          />
         </div>
-        <span class="spacer">.<span>
-        <div class="player-draw-deck">
-        <div id="player-draw-pile" class="card large back-blue"></div>
       </div>
-    </div>
-      <div class="inPlay-card-container">
-        <div class="cpu-inPlay-container">
-          <!-- <div class="card large back-red"></div> -->
-          <div id="cpu-card" class="card large back-red"></div>
+      <div class="blackjackGame">
+        <div class="blackjack-container">
+          Blackjack
+          <img
+            class="blackjackImage"
+            src="images/war.png"
+            onmouseover="this.src='images/war2.png'"
+            onmouseleave="this.src='images/war.png'"
+            alt="Play Blackjack"
+            height="160px;"
+          />
         </div>
-        <span class="spacer">.<span></span>
-        <div class="player-inPlay-container">
-          <div id="player-card" class="card large back-blue"></div>
-          <!-- card large h04 = 4 of hearts, hK = king of hearts, etc -->
-        </div> 
       </div>
-      <div class="piles">
-        <div class="cpu-pile-container"><div id="cpu-pile" class="card large hidden"></div></div>
-        <span class="VS">VS<span></span>
-        <div class="player-pile-container"><div id="player-pile" class="card large hidden"></div></div>
+      <div class="videoPokerGame">
+        <div class="videoPoker-container">
+          Video Poker<img
+            class="warImage"
+            src="images/war.png"
+            onmouseover="this.src='images/war2.png'"
+            onmouseleave="this.src='images/war.png'"
+            alt="Play War"
+            height="160px;"
+          />
+        </div>
       </div>
-      <div class="warArea hidden">
-        <div class="cpuWarZone "><div id="cpu-war-card" class="card large back-red"></div></div>
-        <span class="war">WAR<span>
-        <div class="playerWarZone"><div id="player-war-card" class="card large back-blue"></div></div>
-      </div>
-
-       <div class="warArea2 hidden">
-        <div class="cpuWarZone2"><div id="cpu-war-card-stack" class="card large back-red"></div></div>
-        <span class="war">WAR<span>
-        <div class="playerWarZone"><div id="player-war-card-stack" class="card large back-blue"></div></div>
-      </div>
-             <div class="warArea3 hidden">
-        <div class="cpuWarZone2"><div id="cpu-war-card-stack" class="card large back-red"></div></div>
-        <span class="spacer">.<span>
-        <div class="playerWarZone"><div id="player-war-card-stack" class="card large back-blue"></div></div>
-      </div>
-             <div class="warArea4 hidden">
-        <div class="cpuWarZone2"><div id="cpu-war-card-stack" class="card large back-red"></div></div>
-        <span class="spacer">.<span>
-        <div class="playerWarZone"><div id="player-war-card-stack" class="card large back-blue"></div></div>
-      </div>
-      
-      </div>
-    </div>
-    <div class="under-table">
-      <div class="start-container">
-        <div id="bottom-text">Click your deck of cards to draw a card</div>
-        <button id="draw-card-btn" class="hidden">Start</button>
-      </div>
-      <div class="cpu-tally-container"></div>
-      <div class="player-tally-container"></div>
     </div>
   </body>
 </html>
