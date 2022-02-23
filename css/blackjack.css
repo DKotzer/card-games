@@ -286,3 +286,13 @@ button {
   border: 1px solid black;
   border-radius: 100px;
 }
+
+.cashTotal {
+  background-color: grey;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 100px;
+  width: 120px;
+  align-self: center;
+  line-height: 25px;
+}

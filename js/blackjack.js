@@ -35,7 +35,7 @@ const player = {
   hand: [],
   total: null,
   hasAces: 0,
-  bank: 100,
+  bank: 1000,
   bet: 0,
   previousBet: 0,
   name: "Player",
@@ -55,6 +55,7 @@ const dealer = {
   hasAces: 0,
   name: "Dealer",
   visibleTotal: null,
+  turnComplete: false,
 };
 
 const guide = {
@@ -83,6 +84,7 @@ let dealerTotal = 0;
 
 let dealEl = document.querySelector("#deal-btn");
 let hitEl = document.querySelector("#hit-btn");
+let standEl = document.querySelector("#stand-btn");
 
 let dealerCard1 = document.querySelector("#dealer-card-1");
 let dealerCard2 = document.querySelector("#dealer-card-2");
@@ -113,6 +115,7 @@ let chip5El = document.querySelector("#chip5");
 let chip6El = document.querySelector("#chip6");
 
 let betEl = document.querySelector(".betTotal");
+let cashEl = document.querySelector(".cashTotal");
 
 // let playerCard1 = document.querySelector("#player-card-1");
 
@@ -124,6 +127,7 @@ let clickSound = new Audio("sounds/click.mp3");
 
 dealEl.addEventListener("click", dealCards);
 hitEl.addEventListener("click", hit);
+standEl.addEventListener("click", stand);
 
 chip1El.addEventListener("click", addBet1);
 chip2El.addEventListener("click", addBet2);
@@ -133,6 +137,8 @@ chip5El.addEventListener("click", addBet5);
 chip6El.addEventListener("click", addBet6);
 
 /*----- functions -----*/
+
+cashEl.textContent = player.bank;
 
 function dealCards() {
   if (player.cards[1] == null && player.bet > 0) {
@@ -301,7 +307,6 @@ function addHand(player) {
     }
   }
   if (player.name == "Dealer") {
-    console.log("dealer is dealer");
     player.visibleTotal = player.total - guide[player.hand[0].substring(1)];
   }
 }
@@ -311,7 +316,7 @@ function dealerTurn() {
     dealerHit();
     console.log("Dealer hitting");
   } else {
-    console.log("dealer over 16");
+    checkWinner();
   }
 }
 
@@ -333,7 +338,16 @@ function checkBlackjack(player) {
 }
 
 function checkWinner() {
-  if (player.total == dealer.total) {
+  if (player.total > 21 && dealer.total > 21) {
+    console.log("Player and Dealer both Bust");
+    player.bank += player.bet;
+  } else if (player.total > 21) {
+    console.log("Player Busts.");
+    player.bet = 0;
+  } else if (dealer.total > 21) {
+    console.log("Dealer Busts");
+    player.bank += player.bet * 2;
+  } else if (player.total == dealer.total) {
     console.log("Push");
     player.bank += player.bet;
     player.bet = 0;
@@ -347,6 +361,8 @@ function checkWinner() {
   } else {
     console.log("something went wrong");
   }
+  dealer.turnComplete = true;
+  render();
 }
 
 function resetHands() {
@@ -355,6 +371,13 @@ function resetHands() {
 }
 
 function stand() {
+  clickSound.play();
+  dealerCard1.classList.add(dealer.cards[1]);
+  dealerCard1.classList.remove("back-red");
+  dealerValueEl.textContent = dealer.total;
+  while (dealer.turnComplete != true) {
+    setTimeout(dealerTurn(), 1500);
+  }
   //stand code here
 }
 
@@ -411,6 +434,7 @@ function render() {
   playerValueEl.textContent = player.total;
   dealerValueEl.textContent = dealer.visibleTotal;
   betEl.textContent = player.bet;
+  cashEl.textContent = player.bank;
 }
 
 // for (let i = 0; i < player.hand.length; i++) {
