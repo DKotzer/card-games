@@ -185,6 +185,7 @@ function dealCards() {
 }
 
 function hit() {
+  //if I was using arrays I could make these 5 ifs one for loop, its possible with objects too but I dont know how
   if (player.total < 21 && player.cards[1] != null) {
     if (player.cards[3] == null) {
       player.cards[3] = cards.pop();
@@ -236,6 +237,7 @@ function hit() {
 }
 
 function dealerHit() {
+  //could make this one for loop with arrays or combine it with the above one for just one function/for loop which would save ~80 lines of code
   if (dealer.total < 21 && dealer.cards[1] != null) {
     if (dealer.cards[3] == null) {
       dealer.cards[3] = cards.pop();
@@ -287,12 +289,12 @@ function dealerHit() {
 //if you have time try turning the above two functions in to 1 function that takes player for player or dealer
 
 function addHand(player) {
-  // this function with help from martin
+  // this function made with help from martin
   player.total = 0;
   for (let card of player.hand) {
     if (card[1] == "A") {
       console.log("Ace detected");
-      player.hasAces = 1;
+      player.hasAces += 1;
     }
     player.total += guide[card.substring(1)];
   }
@@ -366,6 +368,11 @@ function checkWinner() {
 }
 
 function resetHands() {
+  for (let card in player.cards) {
+    card = null;
+    render();
+  }
+
   //reset hands code here
   //things to reset: hasZero, hand, total, cards, insurance, bets
 }
