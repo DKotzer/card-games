@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
+  color: white;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+#title {
+  font-family: fantasy;
+  font-weight: 100;
+  margin-bottom: 20px;
+  padding-top: 40px;
+  font-size: 50px;
+  color: green;
+  font-weight: bolder;
+  -webkit-text-stroke: 2px red; /* got this from https://www.youtube.com/watch?v=3LlLkapKw6Q  */
+}
+.game-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 500px;
+  /* grid-template-columns: 350px 33% 33%; */
+  background-color: green;
+  width: 800px;
+  padding-left: px;
+  margin: 0 auto;
+  border-radius: 100px;
+  border: 50px groove purple;
+  transform: skew(2deg, 0deg);
+  filter: drop-shadow(10px 20px 1px #00000573);
+  font-size: x-large;
+}
+.warGame {
+  background-image: url("war.png");
+}
+.inPlay-card-container {
+  margin-top: 30px;
+}
+
+button {
+  z-index: 5;
+}

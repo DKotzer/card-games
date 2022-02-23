@@ -1,9 +1,10 @@
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 body {
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
+  background-size: cover;
   color: white;
   margin: 0 auto;
   display: flex;
@@ -16,11 +17,27 @@ body {
   visibility: hidden;
 }
 
+.deck-list {
+  justify-content: flex-start;
+  overflow-wrap: break-word; /*  https://css-tricks.com/almanac/properties/o/overflow-wrap/ */
+  margin: 0 auto;
+  padding-top: 20px;
+  max-width: 90%;
+  height: 70%;
+}
+
 div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
+}
+
+.start-container {
+  padding-bottom: 15px;
+}
+
+.inPlay-card-container {
+  align-self: center;
 }
 
 #title {
@@ -37,25 +54,98 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 500px;
   /* grid-template-columns: 350px 33% 33%; */
   background-color: green;
   width: 800px;
   padding-left: px;
+  /* padding-right: 150px; */
   margin: 0 auto;
   border-radius: 100px;
   border: 50px groove purple;
-  transform: skew(2deg, 0deg);
+  /* transform: skew(2deg, 0deg); */
   filter: drop-shadow(10px 20px 1px #00000573);
-  font-size: x-large;
-}
-.warGame {
-  background-image: url("war.png");
 }
 .inPlay-card-container {
   margin-top: 30px;
+  margin-left: -133px;
+  z-index: 100;
 }
 
 button {
   z-index: 5;
+}
+#bottom-text {
+  z-index: 50;
+}
+.under-table {
+  margin: 0 auto;
+  margin-top: -35px;
+}
+.VS {
+  margin-top: -43px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: large;
+  color: red;
+  -webkit-text-stroke: 1px black;
+}
+.war {
+  margin-top: -43px;
+  font-family: fantasy;
+  font-size: large;
+  -webkit-text-stroke: 2px red;
+}
+.spacer {
+  margin-top: -43px;
+  font-family: fantasy;
+  font-size: large;
+  color: green;
+}
+.score-area {
+  margin-top: 7%;
+  justify-content: flex-start;
+  height: 275px;
+  width: 175px;
+  border: 5px solid black;
+  border-radius: 25px;
+}
+.draw-decks {
+  justify-content: flex-end;
+  z-index: 10;
+}
+.warArea {
+  justify-content: flex-end;
+
+  z-index: 5;
+  margin-right: 5px;
+}
+
+.warArea2 {
+  justify-content: flex-end;
+  margin-left: -35px;
+  z-index: 3;
+  /* margin-right:0px; */
+}
+
+.warArea3 {
+  justify-content: flex-end;
+  margin-left: -100px;
+  z-index: 3;
+  /* margin-right:0px; */
+}
+.warArea4 {
+  justify-content: flex-end;
+  margin-left: -100px;
+  z-index: 3;
+  /* margin-right:0px; */
+}
+.piles {
+  justify-content: flex-end;
+  margin-left: -20px;
+}
+
+.animated {
+  transform: translate(116px, 0px);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }

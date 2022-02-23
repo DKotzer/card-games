@@ -317,17 +317,6 @@ function addHand(player) {
   }
 }
 
-function dealerTurn() {
-  dealer.turnActive = true;
-  if (dealer.total <= 16) {
-    dealerHit();
-    console.log("Dealer hitting");
-  } else {
-    dealer.turnComplete = true;
-    checkWinner();
-  }
-}
-
 function checkAceUp() {
   if (dealer.cards[2][1] == "A") {
     console.log("give player insurance option");
@@ -374,21 +363,20 @@ function checkWinner() {
   } else {
     console.log("something went wrong");
   }
-  dealer.turnComplete = true;
-  console.log("checkwinner happening");
 
+  console.log("checkwinner happening");
   render();
-  modal();
 }
 
 function resetHands() {
   // if (dealer.turnComplete = true){
   // }
   for (let card in player.cards) {
-    card = null;
-    dealer.turnActive = false;
-    render();
+    player.cards[card] = null;
   }
+
+  dealer.turnActive = false;
+  modalEl.classList.remove("hidden");
 
   //reset hands code here
   //things to reset: hasZero, hand, total, cards, insurance, bets
@@ -401,8 +389,23 @@ function stand() {
     dealerValueEl.textContent = dealer.total;
     if (dealer.turnComplete != true) {
       console.log("standing");
-      setInterval(dealerTurn, 1500); //ask for help here
+      setInterval(dealerTurn, 1500);
+      //ask for help here
     }
+  }
+}
+
+function dealerTurn() {
+  if (dealer.total <= 16) {
+    dealer.turnActive = true;
+    dealerHit();
+    console.log("Dealer hitting");
+  } else {
+    checkWinner();
+    dealer.turnComplete = true;
+    console.log("Dealer over 16");
+    dealer.turnActive = false;
+    modal();
   }
 }
 
@@ -469,10 +472,10 @@ function render() {
 
 function modal() {
   modalEl.classList.remove("hidden");
+  // setTimeout(() => modalEl.classList.add("hidden"), 2000);
   // setTimeout(function () {
   //   modalEl.classList.add("hidden");
   // }, 1300);
-  setTimeout(() => modalEl.classList.add("hidden"), 2000);
 }
 
 // for (let i = 0; i < player.hand.length; i++) {
