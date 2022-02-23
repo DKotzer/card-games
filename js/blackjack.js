@@ -56,6 +56,7 @@ const dealer = {
   name: "Dealer",
   visibleTotal: null,
   turnComplete: false,
+  turnActive: false,
 };
 
 const guide = {
@@ -117,6 +118,8 @@ let chip6El = document.querySelector("#chip6");
 let betEl = document.querySelector(".betTotal");
 let cashEl = document.querySelector(".cashTotal");
 
+let modalEl = document.querySelector(".win-modal");
+
 // let playerCard1 = document.querySelector("#player-card-1");
 
 /*----- sounds -----*/
@@ -176,10 +179,11 @@ function dealCards() {
       dealerCard2.classList.remove("hidden");
       dealerCard2.classList.add(dealer.cards[2]);
       dealerCard2.classList.remove("back-red");
+      playerValueEl.textContent = player.total;
       checkAceUp();
+      render();
       checkBlackjack(player);
       checkBlackjack(dealer);
-      render();
     }, 2000);
   }
 }
@@ -298,11 +302,11 @@ function addHand(player) {
     }
     player.total += guide[card.substring(1)];
   }
-  if (player.total > 21 && player.hasAces !== 0) {
+  if (player.total >= 22 && player.hasAces !== 0) {
     console.log("over 21, has aces");
     player.hasAces -= 1;
     player.total -= 10;
-    if (player.total > 21 && player.hasAces !== 0) {
+    if (player.total >= 22 && player.hasAces !== 0) {
       console.log("over 21, has aces");
       player.hasAces -= 1;
       player.total -= 10;
@@ -314,10 +318,12 @@ function addHand(player) {
 }
 
 function dealerTurn() {
+  dealer.turnActive = true;
   if (dealer.total <= 16) {
     dealerHit();
     console.log("Dealer hitting");
   } else {
+    dealer.turnComplete = true;
     checkWinner();
   }
 }
@@ -332,44 +338,55 @@ function checkBlackjack(player) {
   addHand(player);
   if (player.total == 21) {
     console.log(`${player.name} has Blackjack! ${player.total}`);
+    if (player.name == "Dealer") {
+      dealerCard1.classList.add(dealer.cards[1]);
+      dealerCard1.classList.remove("back-red");
+    }
   } else if (player.total > 21) {
     console.log(`${player.name} busts with ${player.total}`);
   } else if (player.total < 21) {
     console.log(`${player.name} has ${player.total}`);
   } //else if(player.total > 21) && player.hand.values(player).includes('A')
+  render();
 }
 
 function checkWinner() {
   if (player.total > 21 && dealer.total > 21) {
-    console.log("Player and Dealer both Bust");
+    modalEl.textContent = "Player and Dealer both Bust";
     player.bank += player.bet;
   } else if (player.total > 21) {
-    console.log("Player Busts.");
+    modalEl.textContent = `${player.name} busts with ${player.total}`;
     player.bet = 0;
   } else if (dealer.total > 21) {
-    console.log("Dealer Busts");
+    modalEl.textContent = `${dealer.name} busts with ${dealer.total}`;
     player.bank += player.bet * 2;
   } else if (player.total == dealer.total) {
-    console.log("Push");
+    modalEl.textContent = "Push";
     player.bank += player.bet;
     player.bet = 0;
   } else if (player.total > dealer.total) {
-    console.log("player wins");
+    modalEl.textContent = `${player.name} wins with ${player.total}`;
     player.bank += player.bet * 2;
     player.bet = 0;
   } else if (dealer.total > player.total) {
-    console.log("dealer wins");
+    modalEl.textContent = `${dealer.name} wins with ${dealer.total}`;
     player.bet = 0;
   } else {
     console.log("something went wrong");
   }
   dealer.turnComplete = true;
+  console.log("checkwinner happening");
+
   render();
+  modal();
 }
 
 function resetHands() {
+  // if (dealer.turnComplete = true){
+  // }
   for (let card in player.cards) {
     card = null;
+    dealer.turnActive = false;
     render();
   }
 
@@ -378,14 +395,15 @@ function resetHands() {
 }
 
 function stand() {
-  clickSound.play();
-  dealerCard1.classList.add(dealer.cards[1]);
-  dealerCard1.classList.remove("back-red");
-  dealerValueEl.textContent = dealer.total;
-  while (dealer.turnComplete != true) {
-    setTimeout(dealerTurn(), 1500);
+  if (player.cards[1] != null && dealer.cards[1] != null) {
+    dealerCard1.classList.add(dealer.cards[1]);
+    dealerCard1.classList.remove("back-red");
+    dealerValueEl.textContent = dealer.total;
+    if (dealer.turnComplete != true) {
+      console.log("standing");
+      setInterval(dealerTurn, 1500); //ask for help here
+    }
   }
-  //stand code here
 }
 
 function insurance() {
@@ -439,9 +457,22 @@ function addBet6() {
 
 function render() {
   playerValueEl.textContent = player.total;
-  dealerValueEl.textContent = dealer.visibleTotal;
+  if (dealer.turnActive != true) {
+    dealerValueEl.textContent = dealer.visibleTotal;
+  } else {
+    dealerValueEl.textContent = dealer.total;
+  }
+
   betEl.textContent = player.bet;
   cashEl.textContent = player.bank;
+}
+
+function modal() {
+  modalEl.classList.remove("hidden");
+  // setTimeout(function () {
+  //   modalEl.classList.add("hidden");
+  // }, 1300);
+  setTimeout(() => modalEl.classList.add("hidden"), 2000);
 }
 
 // for (let i = 0; i < player.hand.length; i++) {
