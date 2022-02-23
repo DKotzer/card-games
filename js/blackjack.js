@@ -135,7 +135,7 @@ chip6El.addEventListener("click", addBet6);
 /*----- functions -----*/
 
 function dealCards() {
-  if (player.cards[1] == null) {
+  if (player.cards[1] == null && player.bet > 0) {
     player.cards[1] = cards.pop();
     dealer.cards[1] = cards.pop();
     player.cards[2] = cards.pop();
@@ -306,6 +306,15 @@ function addHand(player) {
   }
 }
 
+function dealerTurn() {
+  if (dealer.total <= 16) {
+    dealerHit();
+    console.log("Dealer hitting");
+  } else {
+    console.log("dealer over 16");
+  }
+}
+
 function checkAceUp() {
   if (dealer.cards[2][1] == "A") {
     console.log("give player insurance option");
@@ -321,6 +330,23 @@ function checkBlackjack(player) {
   } else if (player.total < 21) {
     console.log(`${player.name} has ${player.total}`);
   } //else if(player.total > 21) && player.hand.values(player).includes('A')
+}
+
+function checkWinner() {
+  if (player.total == dealer.total) {
+    console.log("Push");
+    player.bank += player.bet;
+    player.bet = 0;
+  } else if (player.total > dealer.total) {
+    console.log("player wins");
+    player.bank += player.bet * 2;
+    player.bet = 0;
+  } else if (dealer.total > player.total) {
+    console.log("dealer wins");
+    player.bet = 0;
+  } else {
+    console.log("something went wrong");
+  }
 }
 
 function resetHands() {
