@@ -21,7 +21,6 @@ let deckCount = 1;
 for (i = 0; i < deckCount; i++) {
   suits.forEach((suit) => values.forEach((value) => cards.push(suit + value))); //something like this when you add in deck count
 }
-//suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
 let deckList = cards.slice(); //create array copy of cards to use for shuffling
 cards = cards.sort(() => 0.5 - Math.random());
 
@@ -72,7 +71,7 @@ const count = {
 };
 
 const guide = {
-  //from martin
+  //from martin, used to help add up hand totals. Going with my solution from war might have actually made handling aces much easier for more than 1 ace.
   "02": 2,
   "03": 3,
   "04": 4,
@@ -141,8 +140,6 @@ let modalEl = document.querySelector(".win-modal");
 let betModalEl = document.querySelector(".betModal");
 let modal = document.getElementById("myModal");
 
-// let playerCard1 = document.querySelector("#player-card-1");
-
 /*----- sounds -----*/
 let shuffleSound = new Audio("sounds/shuffle.mp3");
 let clickSound = new Audio("sounds/click.mp3");
@@ -178,8 +175,8 @@ function dealCards() {
     player.hand.push(player.cards[2]);
     dealer.hand.push(dealer.cards[1]);
     dealer.hand.push(dealer.cards[2]);
-    console.log(player.cards[1] + player.cards[2]);
-    console.log(dealer.cards[1] + dealer.cards[2]);
+    console.log("player cards: " + player.cards[1] + ", " + player.cards[2]);
+    console.log("dealer cards: " + dealer.cards[1] + ", " + dealer.cards[2]);
     setTimeout(() => {
       clickSound.play();
       playerCard1.classList.remove("hidden");
@@ -215,7 +212,11 @@ function dealCards() {
 
 function hit() {
   //if I was using arrays I could make these 5 ifs one for loop, its possible with objects too but I dont know how
-  if (player.total < 21 && player.cards[1] != null) {
+  if (
+    player.total < 21 &&
+    player.cards[1] != null &&
+    dealer.turnActive == false
+  ) {
     if (cards.length < 5) {
       shuffle();
     }
@@ -366,6 +367,9 @@ function checkBlackjack(players) {
       dealerCard1.classList.add(dealer.cards[1]);
       dealerCard1.classList.remove("back-red");
       player.total += player.insurance * 2;
+      betModalEl.textContent = `+ ${player.insurance * 2}`;
+      betModalEl.classList.remove("hidden");
+      setTimeout(() => betModalEl.classList.add("hidden"), 3000);
       console.log("Insurance bet winnings paid to player");
     }
     if (players.name == "Player") {
@@ -381,7 +385,7 @@ function checkBlackjack(players) {
     console.log(`${players.name} busts with ${players.total}`);
   } else if (players.total < 21) {
     console.log(`${players.name} has ${players.total}`);
-  } //else if(players.total > 21) && players.hand.values(players).includes('A')
+  }
   render();
 }
 
@@ -425,8 +429,6 @@ function checkWinner() {
     modalEl.textContent = `${dealer.name} wins with ${dealer.total}`;
     betModalEl.textContent = "";
     player.bet = 0;
-  } else {
-    console.log("something went wrong");
   }
   dealer.turnComplete = true;
   console.log("checkwinner happening");
@@ -447,18 +449,15 @@ function stand() {
     dealerCard1.classList.remove("back-red");
     dealerValueEl.textContent = dealer.total;
     dealerTurn();
-    // setInterval(dealerTurn, 1500); //switch while to if and uncomment this
-    //ask for help here
   }
 }
-
 function dealerTurn() {
   dealer.turnActive = true;
   if (player.total > 21) {
     console.log("dealer turn, player over 21");
     checkWinner();
     modals();
-    setTimeout(() => resetHands(), 2500);
+    setTimeout(() => resetHands(), 3500);
   } else if (dealer.total <= 16) {
     dealerHit();
     console.log("Dealer hitting");
@@ -468,10 +467,9 @@ function dealerTurn() {
     dealer.turnComplete = true;
     console.log("Dealer over 16");
     modals();
-    setTimeout(() => resetHands(), 2500);
+    setTimeout(() => resetHands(), 3500);
   }
 }
-
 function insurance() {
   if (dealer.aceUp == true && player.insurance == false) {
     if (player.bank > player.bet / 2) {
@@ -568,9 +566,6 @@ function shuffle() {
 function checkLoss() {
   if (player.bank < 1) {
     modal.style.display = "block";
-    // alert(
-    //   "You are out of money, would you like to put a lein on your house to continue playing?"
-    // );
   }
 }
 
@@ -582,7 +577,6 @@ function changeDecks(count) {
       values.forEach((value) => cards.push(suit + value))
     ); //something like this when you add in deck count
   }
-  //suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
   deckList = cards.slice(); //create array copy of cards to use for shuffling
   cards = cards.sort(() => 0.5 - Math.random());
   console.log("Deck Count changed to: " + deckCount);
