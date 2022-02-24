@@ -17,12 +17,12 @@ const values = [
   "A",
 ];
 let cards = [];
-
-// for (i = 0; i < deckCount; i++) {
-//   suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));  //something like this when you add in deck count
-// }
-suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
-let deckList = cards.slice();
+let deckCount = 1;
+for (i = 0; i < deckCount; i++) {
+  suits.forEach((suit) => values.forEach((value) => cards.push(suit + value))); //something like this when you add in deck count
+}
+//suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
+let deckList = cards.slice(); //create array copy of cards to use for shuffling
 cards = cards.sort(() => 0.5 - Math.random());
 
 const player = {
@@ -406,11 +406,11 @@ function cardCount() {
   if (cards.includes("s10") == false) {
     count.ten += 1;
   }
-  aceEl.textContent = `A:${count.A}/4`;
-  kingEl.textContent = `K:${count.K}/4`;
-  queenEl.textContent = `Q:${count.Q}/4`;
-  jackEl.textContent = `J:${count.J}/4`;
-  tenEl.textContent = `10:${count.ten}/4`;
+  aceEl.textContent = `A:${count.A}/${deckCount * 4}`;
+  kingEl.textContent = `K:${count.K}/${deckCount * 4}`;
+  queenEl.textContent = `Q:${count.Q}/${deckCount * 4}`;
+  jackEl.textContent = `J:${count.J}/${deckCount * 4}`;
+  tenEl.textContent = `10:${count.ten}/${deckCount * 4}`;
 }
 
 function checkAceUp() {
@@ -665,6 +665,20 @@ function checkLoss() {
     //   "You are out of money, would you like to put a lein on your house to continue playing?"
     // );
   }
+}
+
+function changeDecks(count) {
+  deckCount = count;
+  cards = [];
+  for (i = 0; i < deckCount; i++) {
+    suits.forEach((suit) =>
+      values.forEach((value) => cards.push(suit + value))
+    ); //something like this when you add in deck count
+  }
+  //suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
+  deckList = cards.slice(); //create array copy of cards to use for shuffling
+  cards = cards.sort(() => 0.5 - Math.random());
+  console.log("Deck Count changed to: " + deckCount);
 }
 
 /*---- plan ---- 
