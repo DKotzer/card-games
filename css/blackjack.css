@@ -263,12 +263,15 @@ button {
   height: 39px;
   margin: 2px;
   border-radius: 35px;
-  border: 9px dotted #fff;
-  outline: 2px ridge darkslategrey;
+  border: 9px dotted white;
+  outline: 1px solid white;
 }
 
 .chipNumber {
   font-family: Verdana;
+  outline: 1px solid white;
+  border-radius: 50px;
+  padding: 0;
   text-align: center;
   line-height: 40px;
   font-size: 18px;
