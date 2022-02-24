@@ -412,8 +412,8 @@ a:visited {
 
 .lose-buttons {
   position: absolute;
-  top: 15%;
-  left: 42%;
+  top: 50%;
+  left: 25%;
   justify-content: space-evenly;
 }
 
