@@ -697,5 +697,4 @@ going to try to do this one with objects instead of just arrays
 pick # of decks
 card counter display
 */
-//turn off player hit after they stand
-//dealer wins if player busts
+//add rebet if time or remove button

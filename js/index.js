@@ -79,8 +79,8 @@ deckClickEl.addEventListener("click", handleClick);
 
 //handle the logic of each turn
 function handleClick() {
-  OldPlayerCardClass = playerCardEl.classList;
-  OldCpuCardClass = cpuCardEl.classList;
+  // OldPlayerCardClass = playerCardEl.classList;
+  // OldCpuCardClass = cpuCardEl.classList;
 
   clickSound.play();
   if (playerCards.length == 0) {

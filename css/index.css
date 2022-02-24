@@ -8,7 +8,8 @@
 }
 
 body {
-  background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
+  /* background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg"); */
+  background-color: white;
   background-size: cover;
   color: white;
   margin: 0 auto;
