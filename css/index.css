@@ -2,6 +2,11 @@
   box-sizing: border-box;
 } */
 
+* {
+  font-weight: bold;
+  text-decoration: none;
+}
+
 body {
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
   background-size: cover;
@@ -40,29 +45,53 @@ div {
   align-self: center;
 }
 
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    text-shadow: 0px 0px rgba(255, 82, 82, 0.7);
+  }
+
+  50% {
+    transform: scale(1.05);
+    text-shadow: 4px -1px red;
+  }
+  100% {
+    transform: scale(0.95);
+    text-shadow: 0px 0px rgba(255, 82, 82, 0.7);
+  }
+}
 #title {
+  display: flex;
   font-family: fantasy;
   font-weight: 100;
   margin-bottom: 20px;
   padding-top: 40px;
   font-size: 50px;
-  color: green;
+  max-width: 500px;
+  margin: 0 auto;
+  color: black;
   font-weight: bolder;
   -webkit-text-stroke: 2px red; /* got this from https://www.youtube.com/watch?v=3LlLkapKw6Q  */
+  -webkit-animation: pulse-red 2s infinite;
+  -moz-animation: pulse-red 2s infinite;
+  -o-animation: pulse-red 2s infinite;
+  animation: pulse-red 2s infinite;
+  z-index: 500;
 }
+#title-text {
+  display: flex;
+}
+
 .game-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  /* grid-template-columns: 350px 33% 33%; */
   background-color: green;
   width: 800px;
-  padding-left: px;
-  /* padding-right: 150px; */
+  border: 50px groove rebeccapurple;
+  outline: 10px solid black;
   margin: 0 auto;
   border-radius: 100px;
-  border: 50px groove purple;
-  /* transform: skew(2deg, 0deg); */
   filter: drop-shadow(10px 20px 1px #00000573);
 }
 .inPlay-card-container {

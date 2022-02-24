@@ -1,5 +1,5 @@
 /*----- constants -----*/
-//Creating the deck of 54 cards and storing them in the cards array
+//Creating the deck of cards based on deckCount and storing them in the cards array + deck array
 const suits = ["h", "s", "d", "c"];
 const values = [
   "02",
@@ -263,7 +263,6 @@ function hit() {
       playerCard8.classList.remove("back-red");
       player.hand.push(player.card8);
     }
-
     checkBlackjack(player);
     render();
   }

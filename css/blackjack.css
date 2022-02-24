@@ -69,18 +69,13 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /*  */
-  /* grid-template-columns: 350px 33% 33%; */
   background-color: green;
   width: 900px;
   height: 370px;
-
-  /* padding-right: 150px; */
   margin: 0 auto;
   border-radius: 100px;
   border: 50px groove rebeccapurple;
   outline: 10px solid black;
-  /* transform: skew(2deg, 0deg); */
   filter: drop-shadow(10px 20px 1px #00000573);
 }
 .deck {
