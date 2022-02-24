@@ -1,8 +1,3 @@
-<style>
-  img {
-    border-radius: 15px;
-  }
-</style>
 <br />
 <div align="center">
   <a href="https://dkotzer.github.io/card-games/home.html">
@@ -29,29 +24,23 @@
 
 ## General Overview
 
-#
-
 Card Games is a collection of card games.
 You select which game you would like to play on the home page by clicking it. Currently there is only War and Blackjack.
 
-<img src="images/homeScreen.png" width="800">
+<img src="images/homeScreen.png" width="800" style="border-radius:15px">
 <br/><br/>
 
 ## BlackJack
-
-#
 
 The rules are simple, the play is thrilling, and there is opportunity for high strategy. If you can count cards it is one of the only casino games that is in the players favour.
 
 But even for the casual participant who plays a reasonably good game, making Blackjack one of the most attractive casino games for the player.
 
-<img src="images/blackjackScreen.png" width="800">
+<img src="images/blackjackScreen.png" width="800" style="border-radius:15px">
 
 This version of Blackjack has a card counting feature that allows you to practice your card counting skills. It also employs an insurance system if that dealer has Ace up on the flop - so you can incoproate that in to your practice as well.
 
 ### Object of the Game
-
-#
 
 The player attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.
 
