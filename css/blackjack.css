@@ -4,6 +4,7 @@
 * {
   font-weight: bold;
   text-decoration: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 body {
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
@@ -47,7 +48,6 @@ div {
 }
 #title {
   display: flex;
-  font-family: fantasy;
   font-weight: 100;
   margin-bottom: 20px;
   padding-top: 40px;
