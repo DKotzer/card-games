@@ -357,29 +357,31 @@ function checkAceUp() {
   }
 }
 
-function checkBlackjack(player) {
-  addHand(player);
-  if (player.total == 21) {
-    console.log(`${player.name} has Blackjack! ${player.total}`);
-    //if (player.name == "Dealer" ) { // trying to add in insurance -  need to replace player with players or something
-    //   dealer.visibleTotal = "21";
-    //   dealerCard1.classList.add(dealer.cards[1]);
-    //   dealerCard1.classList.remove("back-red");
-    // }
-    if (player.name == "Player") {
+function checkBlackjack(players) {
+  addHand(players);
+  if (players.total == 21) {
+    console.log(`${players.name} has Blackjack! ${players.total}`);
+    if (players.name == "Dealer" && player.insurance == true) {
+      dealer.visibleTotal = "21";
+      dealerCard1.classList.add(dealer.cards[1]);
+      dealerCard1.classList.remove("back-red");
+      player.total += player.insurance * 2;
+      console.log("Insurance bet winnings paid to player");
+    }
+    if (players.name == "Player") {
       stand();
       render();
     }
-  } else if (player.total > 21) {
-    if (player.name == "Player") {
+  } else if (players.total > 21) {
+    if (players.name == "Player") {
       render();
       console.log("this should be working");
       dealerTurn();
-    } // under same function else if player.total > 21
-    console.log(`${player.name} busts with ${player.total}`);
-  } else if (player.total < 21) {
-    console.log(`${player.name} has ${player.total}`);
-  } //else if(player.total > 21) && player.hand.values(player).includes('A')
+    } // under same function else if players.total > 21
+    console.log(`${players.name} busts with ${players.total}`);
+  } else if (players.total < 21) {
+    console.log(`${players.name} has ${players.total}`);
+  } //else if(players.total > 21) && players.hand.values(players).includes('A')
   render();
 }
 
@@ -479,11 +481,6 @@ function insurance() {
       render(); //somewhere in checkblackjack dealer do something like if insurance != false, total += insurance * 2 or whatever the insurance ratio is
     }
   }
-  //insurance code here
-}
-
-function betstuff() {
-  //probably break betting stuff in to multiple functions
 }
 
 function render() {
