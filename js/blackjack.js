@@ -40,6 +40,7 @@ const player = {
   bank: 1000,
   bet: 0,
   previousBet: 0,
+  insurance: false,
   name: "Player",
 };
 
@@ -59,6 +60,7 @@ const dealer = {
   visibleTotal: null,
   turnComplete: false,
   turnActive: false,
+  aceUp: false,
 };
 
 const count = {
@@ -96,6 +98,7 @@ let dealerTotal = 0;
 let dealEl = document.querySelector("#deal-btn");
 let hitEl = document.querySelector("#hit-btn");
 let standEl = document.querySelector("#stand-btn");
+let insuranceEl = document.querySelector("#insurance-btn");
 
 let dealerCard1 = document.querySelector("#dealer-card-1");
 let dealerCard2 = document.querySelector("#dealer-card-2");
@@ -149,6 +152,7 @@ let clickSound = new Audio("sounds/click.mp3");
 dealEl.addEventListener("click", dealCards);
 hitEl.addEventListener("click", hit);
 standEl.addEventListener("click", stand);
+insuranceEl.addEventListener("click", insurance);
 
 chip1El.addEventListener("click", addBet1);
 chip2El.addEventListener("click", addBet2);
@@ -344,78 +348,12 @@ function addHand(player) {
   }
 }
 
-function cardCount() {
-  //did this after I should have stopped for the night, might shorten later. ctrl d trick makes this way really fast to write
-  if (cards.includes("hK") == false) {
-    count.K += 1;
-  }
-  if (cards.includes("cK") == false) {
-    count.K += 1;
-  }
-  if (cards.includes("dK") == false) {
-    count.K += 1;
-  }
-  if (cards.includes("sK") == false) {
-    count.K += 1;
-  }
-  if (cards.includes("hQ") == false) {
-    count.Q += 1;
-  }
-  if (cards.includes("cQ") == false) {
-    count.Q += 1;
-  }
-  if (cards.includes("dQ") == false) {
-    count.Q += 1;
-  }
-  if (cards.includes("sQ") == false) {
-    count.Q += 1;
-  }
-  if (cards.includes("hJ") == false) {
-    count.J += 1;
-  }
-  if (cards.includes("cJ") == false) {
-    count.J += 1;
-  }
-  if (cards.includes("dJ") == false) {
-    count.J += 1;
-  }
-  if (cards.includes("sJ") == false) {
-    count.J += 1;
-  }
-  if (cards.includes("hA") == false) {
-    count.A += 1;
-  }
-  if (cards.includes("cA") == false) {
-    count.A += 1;
-  }
-  if (cards.includes("dA") == false) {
-    count.A += 1;
-  }
-  if (cards.includes("sA") == false) {
-    count.A += 1;
-  }
-  if (cards.includes("h10") == false) {
-    count.ten += 1;
-  }
-  if (cards.includes("c10") == false) {
-    count.ten += 1;
-  }
-  if (cards.includes("d10") == false) {
-    count.ten += 1;
-  }
-  if (cards.includes("s10") == false) {
-    count.ten += 1;
-  }
-  aceEl.textContent = `A:${count.A}/${deckCount * 4}`;
-  kingEl.textContent = `K:${count.K}/${deckCount * 4}`;
-  queenEl.textContent = `Q:${count.Q}/${deckCount * 4}`;
-  jackEl.textContent = `J:${count.J}/${deckCount * 4}`;
-  tenEl.textContent = `10:${count.ten}/${deckCount * 4}`;
-}
-
 function checkAceUp() {
   if (dealer.cards[2][1] == "A") {
-    console.log("give player insurance option");
+    modalEl.textContent = "Dealer Ace detected. Insurance?";
+    modalEl.classList.remove("hidden");
+    dealer.aceUp = true;
+    setTimeout(() => modalEl.classList.add("hidden"), 3000);
   }
 }
 
@@ -423,10 +361,14 @@ function checkBlackjack(player) {
   addHand(player);
   if (player.total == 21) {
     console.log(`${player.name} has Blackjack! ${player.total}`);
-    if (player.name == "Dealer") {
-      dealer.visibleTotal = "21";
-      dealerCard1.classList.add(dealer.cards[1]);
-      dealerCard1.classList.remove("back-red");
+    //if (player.name == "Dealer" ) { // trying to add in insurance -  need to replace player with players or something
+    //   dealer.visibleTotal = "21";
+    //   dealerCard1.classList.add(dealer.cards[1]);
+    //   dealerCard1.classList.remove("back-red");
+    // }
+    if (player.name == "Player") {
+      stand();
+      render();
     }
   } else if (player.total > 21) {
     if (player.name == "Player") {
@@ -529,52 +471,19 @@ function dealerTurn() {
 }
 
 function insurance() {
+  if (dealer.aceUp == true && player.insurance == false) {
+    if (player.bank > player.bet / 2) {
+      player.bank -= player.bet / 2;
+      player.insurance = player.bet / 2;
+      console.log("insurance bought");
+      render(); //somewhere in checkblackjack dealer do something like if insurance != false, total += insurance * 2 or whatever the insurance ratio is
+    }
+  }
   //insurance code here
 }
 
 function betstuff() {
   //probably break betting stuff in to multiple functions
-}
-
-function addBet1() {
-  if (player.bank >= 1) {
-    player.bet += 1;
-    player.bank -= 1;
-    render();
-  }
-}
-function addBet2() {
-  if (player.bank >= 5) {
-    player.bet += 5;
-    player.bank -= 5;
-    render();
-  }
-}
-function addBet3() {
-  if (player.bank >= 10) {
-    player.bet += 10;
-    player.bank -= 10;
-    render();
-  }
-}
-function addBet4() {
-  if (player.bank >= 25) {
-    player.bet += 25;
-    player.bank -= 25;
-    render();
-  }
-}
-function addBet5() {
-  if (player.bank >= 50) {
-    player.bet += 50;
-    player.bank -= 50;
-    render();
-  }
-}
-function addBet6() {
-  player.bet += player.bank;
-  player.bank -= player.bank;
-  render();
 }
 
 function render() {
@@ -610,6 +519,7 @@ function resetHands() {
   }
   dealer.hasAces = 0;
   player.hasAces = 0;
+  dealer.aceUp = false;
   player.hand = [];
   dealer.hand = [];
   modalEl.classList.remove("hidden");
@@ -679,6 +589,116 @@ function changeDecks(count) {
   deckList = cards.slice(); //create array copy of cards to use for shuffling
   cards = cards.sort(() => 0.5 - Math.random());
   console.log("Deck Count changed to: " + deckCount);
+}
+
+function addBet1() {
+  if (player.bank >= 1) {
+    player.bet += 1;
+    player.bank -= 1;
+    render();
+  }
+}
+function addBet2() {
+  if (player.bank >= 5) {
+    player.bet += 5;
+    player.bank -= 5;
+    render();
+  }
+}
+function addBet3() {
+  if (player.bank >= 10) {
+    player.bet += 10;
+    player.bank -= 10;
+    render();
+  }
+}
+function addBet4() {
+  if (player.bank >= 25) {
+    player.bet += 25;
+    player.bank -= 25;
+    render();
+  }
+}
+function addBet5() {
+  if (player.bank >= 50) {
+    player.bet += 50;
+    player.bank -= 50;
+    render();
+  }
+}
+function addBet6() {
+  player.bet += player.bank;
+  player.bank -= player.bank;
+  render();
+}
+
+function cardCount() {
+  //did this after I should have stopped for the night, might shorten later. ctrl d trick makes this way really fast to write
+  if (cards.includes("hK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("cK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("dK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("sK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("hQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("cQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("dQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("sQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("hJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("cJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("dJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("sJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("hA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("cA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("dA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("sA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("h10") == false) {
+    count.ten += 1;
+  }
+  if (cards.includes("c10") == false) {
+    count.ten += 1;
+  }
+  if (cards.includes("d10") == false) {
+    count.ten += 1;
+  }
+  if (cards.includes("s10") == false) {
+    count.ten += 1;
+  }
+  aceEl.textContent = `A:${count.A}/${deckCount * 4}`;
+  kingEl.textContent = `K:${count.K}/${deckCount * 4}`;
+  queenEl.textContent = `Q:${count.Q}/${deckCount * 4}`;
+  jackEl.textContent = `J:${count.J}/${deckCount * 4}`;
+  tenEl.textContent = `10:${count.ten}/${deckCount * 4}`;
 }
 
 /*---- plan ---- 

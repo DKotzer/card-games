@@ -333,32 +333,16 @@ button {
   left: 150px;
 }
 
-/* Modal Content */
-/* .modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  top: -150px;
-  padding: 0;
-  border: 1px solid #888;
-  width: 800;
-  height: 800px;
-  z-index: 1000;
-} */
-
-/* Add Animation */
-/* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   top: 100px;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 500;
 }
 
@@ -380,7 +364,6 @@ button {
   width: 75%;
   height: 75%;
   text-align: bottom;
-  /* Could be more or less, depending on screen size */
 }
 .goHome {
   position: relative;
@@ -397,7 +380,7 @@ button {
 }
 a:visited {
   text-decoration: none;
-  color: green;
+  color: white;
 }
 
 /* The Close Button */
