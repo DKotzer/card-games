@@ -1,29 +1,15 @@
-<div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-<!-- PROJECT LOGO -->
+<style>
+  img {
+    border-radius: 15px;
+  }
+</style>
 <br />
 <div align="center">
-  <a href="https://github.com/DKotzer/card-games">
+  <a href="https://dkotzer.github.io/card-games/home.html">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Card Games</h3>
+<h1 align="center">Card Games</h3>
 
   <p align="center">
     First Project for General Assembly SEI .
@@ -41,13 +27,39 @@
 
 <!-- ABOUT THE PROJECT -->
 
+## General Overview
+
+#
+
+Card Games is a collection of card games.
+You select which game you would like to play on the home page by clicking it. Currently there is only War and Blackjack.
+
+<img src="images/homescreen.png" width="800">
+<br/><br/>
+
+## BlackJack
+
+#
+
+The rules are simple, the play is thrilling, and there is opportunity for high strategy. If you can count cards it is one of the only casino games that is in the players favour.
+
+But even for the casual participant who plays a reasonably good game, making Blackjack one of the most attractive casino games for the player.
+
+<img src="images/blackjackScreen.png" width="800">
+
+This version of Blackjack has a card counting feature that allows you to practice your card counting skills. It also employs an insurance system if that dealer has Ace up on the flop - so you can incoproate that in to your practice as well.
+
+### Object of the Game
+
+#
+
+The player attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.
+
 ## About The Project
 
-For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, Blackjack and Poker. After the boot camp I could potentially come back and add more games to the home page.
+#
 
-Oops after looking up the average number of turns for a game of war I realized that two equal cards isnt a draw but a 'war'.
-
-<img src="images/screenshot.png" width="800">
+For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, and Blackjack. After the boot camp I could potentially come back and add more games to the home page.
 
 ### Installation
 
