@@ -122,6 +122,7 @@ let cashEl = document.querySelector(".cashTotal");
 
 let modalEl = document.querySelector(".win-modal");
 let betModalEl = document.querySelector(".betModal");
+let modal = document.getElementById("myModal");
 
 // let playerCard1 = document.querySelector("#player-card-1");
 
@@ -148,6 +149,9 @@ cashEl.textContent = player.bank;
 
 function dealCards() {
   if (player.cards[1] == null && player.bet > 0) {
+    if (cards.length < 5) {
+      shuffle();
+    }
     player.cards[1] = cards.pop();
     dealer.cards[1] = cards.pop();
     player.cards[2] = cards.pop();
@@ -194,6 +198,9 @@ function dealCards() {
 function hit() {
   //if I was using arrays I could make these 5 ifs one for loop, its possible with objects too but I dont know how
   if (player.total < 21 && player.cards[1] != null) {
+    if (cards.length < 5) {
+      shuffle();
+    }
     if (player.cards[3] == null) {
       player.cards[3] = cards.pop();
       clickSound.play();
@@ -246,6 +253,9 @@ function hit() {
 function dealerHit() {
   //could make this one for loop with arrays or combine it with the above one for just one function/for loop which would save ~80 lines of code
   if (dealer.total < 21 && dealer.cards[1] != null) {
+    if (cards.length < 5) {
+      shuffle();
+    }
     if (dealer.cards[3] == null) {
       dealer.cards[3] = cards.pop();
       clickSound.play();
@@ -331,6 +341,7 @@ function checkBlackjack(player) {
   if (player.total == 21) {
     console.log(`${player.name} has Blackjack! ${player.total}`);
     if (player.name == "Dealer") {
+      dealer.visibleTotal = "21";
       dealerCard1.classList.add(dealer.cards[1]);
       dealerCard1.classList.remove("back-red");
     }
@@ -554,33 +565,6 @@ function checkLoss() {
   }
 }
 
-/*--------------------- modal stuff------------------------------*/
-
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-// btn.onclick = function () {
-//   modal.style.display = "block";
-// };
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function () {
-//   modal.style.display = "none";
-// };
-
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// };
 /*---- plan ---- 
 
 going to try to do this one with objects instead of just arrays
