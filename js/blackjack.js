@@ -61,6 +61,14 @@ const dealer = {
   turnActive: false,
 };
 
+const count = {
+  ten: 0,
+  J: 0,
+  Q: 0,
+  K: 0,
+  A: 0,
+};
+
 const guide = {
   //from martin
   "02": 2,
@@ -119,6 +127,12 @@ let chip6El = document.querySelector("#chip6");
 
 let betEl = document.querySelector(".betTotal");
 let cashEl = document.querySelector(".cashTotal");
+
+let aceEl = document.querySelector(".ace-count");
+let kingEl = document.querySelector(".king-count");
+let queenEl = document.querySelector(".queen-count");
+let jackEl = document.querySelector(".jack-count");
+let tenEl = document.querySelector(".ten-count");
 
 let modalEl = document.querySelector(".win-modal");
 let betModalEl = document.querySelector(".betModal");
@@ -330,6 +344,75 @@ function addHand(player) {
   }
 }
 
+function cardCount() {
+  //did this after I should have stopped for the night, might shorten later. ctrl d trick makes this way really fast to write
+  if (cards.includes("hK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("cK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("dK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("sK") == false) {
+    count.K += 1;
+  }
+  if (cards.includes("hQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("cQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("dQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("sQ") == false) {
+    count.Q += 1;
+  }
+  if (cards.includes("hJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("cJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("dJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("sJ") == false) {
+    count.J += 1;
+  }
+  if (cards.includes("hA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("cA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("dA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("sA") == false) {
+    count.A += 1;
+  }
+  if (cards.includes("h10") == false) {
+    count.ten += 1;
+  }
+  if (cards.includes("c10") == false) {
+    count.ten += 1;
+  }
+  if (cards.includes("d10") == false) {
+    count.ten += 1;
+  }
+  if (cards.includes("s10") == false) {
+    count.ten += 1;
+  }
+  aceEl.textContent = `A:${count.A}/4`;
+  kingEl.textContent = `K:${count.K}/4`;
+  queenEl.textContent = `Q:${count.Q}/4`;
+  jackEl.textContent = `J:${count.J}/4`;
+  tenEl.textContent = `10:${count.ten}/4`;
+}
+
 function checkAceUp() {
   if (dealer.cards[2][1] == "A") {
     console.log("give player insurance option");
@@ -346,6 +429,11 @@ function checkBlackjack(player) {
       dealerCard1.classList.remove("back-red");
     }
   } else if (player.total > 21) {
+    if (player.name == "Player") {
+      render();
+      console.log("this should be working");
+      dealerTurn();
+    } // under same function else if player.total > 21
     console.log(`${player.name} busts with ${player.total}`);
   } else if (player.total < 21) {
     console.log(`${player.name} has ${player.total}`);
@@ -399,6 +487,10 @@ function checkWinner() {
   dealer.turnComplete = true;
   console.log("checkwinner happening");
   render();
+  //check for loss
+  if (player.bank < 1) {
+    setTimeout(() => (modal.style.display = "block"), 2000);
+  }
 }
 
 function stand() {
@@ -417,9 +509,13 @@ function stand() {
 }
 
 function dealerTurn() {
-  console.log("dealer turn test");
   dealer.turnActive = true;
-  if (dealer.total <= 16) {
+  if (player.total > 21) {
+    console.log("dealer turn, player over 21");
+    checkWinner();
+    modals();
+    setTimeout(() => resetHands(), 2500);
+  } else if (dealer.total <= 16) {
     dealerHit();
     console.log("Dealer hitting");
     setTimeout(() => dealerTurn(), 1500);
@@ -505,6 +601,7 @@ function modals() {
 function resetHands() {
   // if (dealer.turnComplete = true){
   // }
+  cardCount();
   for (let card in player.cards) {
     player.cards[card] = null; //this line fixed with help of Fil, before I had cards = null instead of player.cards[card]
   }
@@ -553,6 +650,11 @@ function shuffle() {
     modalEl.textContent = "Shuffling!";
     modalEl.classList.remove("hidden");
     setInterval(() => modalEl.classList.add("hidden"), 1000);
+    count.A = 0;
+    count.K = 0;
+    count.Q = 0;
+    count.J = 0;
+    count.ten = 0;
   }
 }
 
