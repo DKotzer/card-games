@@ -230,7 +230,7 @@ div {
   transition: all 0.5s ease-in-out;
 }
 button {
-  z-index: 5;
+  z-index: 4;
 }
 #bottom-text {
   z-index: 50;
@@ -328,36 +328,18 @@ button {
   left: 150px;
 }
 
-.modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
-
-/* Modal Body */
-.modal-body {
-  padding: 2px 16px;
-}
-
-/* Modal Footer */
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
-
 /* Modal Content */
-.modal-content {
+/* .modal-content {
   position: relative;
   background-color: #fefefe;
   margin: auto;
+  top: -150px;
   padding: 0;
   border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-}
+  width: 800;
+  height: 800px;
+  z-index: 1000;
+} */
 
 /* Add Animation */
 /* The Modal (background) */
@@ -372,18 +354,32 @@ button {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  z-index: 500;
 }
 
 /* Modal Content/Box */
 .modal-content {
+  position: absolute;
+  display: flex;
+  vertical-align: center;
+  margin: auto;
+  top: -230px;
+  left: 200px;
   background-color: #4c566a;
   background-image: url("images/you-lose.webp");
+  background-size: cover;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 30px;
+  width: 75%;
+  height: 75%;
+  text-align: bottom;
+  /* Could be more or less, depending on screen size */
 }
 .goHome {
+  position: relative;
+
   font-size: 35px;
   font-family: Verdana;
   color: green;
@@ -412,4 +408,15 @@ a:visited {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.lose-buttons {
+  position: absolute;
+  top: 15%;
+  left: 42%;
+  justify-content: space-evenly;
+}
+
+.modal-text {
+  font-size: 40px;
 }

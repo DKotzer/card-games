@@ -19,7 +19,7 @@
           <div id="deck" class="card large back-red"></div>
         </div>
         <div class="betting-area">
-          Betting Area
+          Place Bet
           <div id="chips">
             <div id="chip1" class="pokerchip blue">
               <div class="chipNumber">1</div>
@@ -113,18 +113,20 @@
         <button id="stand-btn">Stand</button>
         <button id="insurance-btn">Insurance</button>
       </div>
-      <button id="myBtn" class="hidden">Open Modal</button>
+
       <!-- The Modal -->
       <div id="myModal" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>You are broke.</p>
-          <p>
-            <span class="goHome blue"> <a href="home.html">Home</a></span>
-          </p>
-          <!-- <button id="homeBtn">Go Home</button>
-          <button id="depositBtn">Deposit Eth</button> -->
+          <p class="modal-text">You are broke. Go Home or play Again ?</p>
+          <div class="lose-buttons">
+            <p>
+              <span class="goHome blue"> <a href="home.html">Home</a></span>
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              <span class="goHome red">
+                <a href="blackjack.html">Again</a></span
+              >
+            </p>
+          </div>
         </div>
       </div>
     </div>
