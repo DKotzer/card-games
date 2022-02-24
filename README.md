@@ -34,7 +34,7 @@
 Card Games is a collection of card games.
 You select which game you would like to play on the home page by clicking it. Currently there is only War and Blackjack.
 
-<img src="images/homescreen.png" width="800">
+<img src="images/homeScreen.png" width="800">
 <br/><br/>
 
 ## BlackJack
