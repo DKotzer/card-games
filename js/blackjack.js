@@ -18,12 +18,14 @@ const values = [
 ];
 let cards = [];
 let deckCount = 1;
+//deck count is defaulted to 1 but with changeDecks(# of decks you want) you can change the number of decks
 for (i = 0; i < deckCount; i++) {
-  suits.forEach((suit) => values.forEach((value) => cards.push(suit + value))); //something like this when you add in deck count
+  suits.forEach((suit) => values.forEach((value) => cards.push(suit + value)));
 }
 let deckList = cards.slice(); //create array copy of cards to use for shuffling
 cards = cards.sort(() => 0.5 - Math.random());
 
+//create player object
 const player = {
   cards: {
     1: null,
@@ -42,7 +44,7 @@ const player = {
   insurance: false,
   name: "Player",
 };
-
+//create dealer object
 const dealer = {
   cards: {
     1: null,
@@ -61,7 +63,7 @@ const dealer = {
   turnActive: false,
   aceUp: false,
 };
-
+//count used to keep track of card counts
 let count = {
   ten: 0,
   J: 0,
@@ -94,12 +96,14 @@ let dealerTotal = 0;
 
 /*----- cached element references -----*/
 
+//button Els
 let dealEl = document.getElementById("deal-btn");
 let hitEl = document.getElementById("hit-btn");
 let standEl = document.getElementById("stand-btn");
 let insuranceEl = document.getElementById("insurance-btn");
 let rebetEl = document.getElementById("rebet-btn");
 
+//card Els
 let dealerCard1 = document.getElementById("dealer-card-1");
 let dealerCard2 = document.getElementById("dealer-card-2");
 let dealerCard3 = document.getElementById("dealer-card-3");
@@ -108,7 +112,6 @@ let dealerCard5 = document.getElementById("dealer-card-5");
 let dealerCard6 = document.getElementById("dealer-card-6");
 let dealerCard7 = document.getElementById("dealer-card-7");
 let dealerCard8 = document.getElementById("dealer-card-8");
-
 let playerCard1 = document.getElementById("player-card-1");
 let playerCard2 = document.getElementById("player-card-2");
 let playerCard3 = document.getElementById("player-card-3");
@@ -121,6 +124,7 @@ let playerCard8 = document.getElementById("player-card-8");
 let dealerValueEl = document.querySelector(".dealerValue");
 let playerValueEl = document.querySelector(".playerValue");
 
+//betting chip Els
 let chip1El = document.getElementById("chip1");
 let chip2El = document.getElementById("chip2");
 let chip3El = document.getElementById("chip3");
@@ -131,12 +135,14 @@ let chip6El = document.getElementById("chip6");
 let betEl = document.querySelector(".betTotal");
 let cashEl = document.querySelector(".cashTotal");
 
+//card Counter Els
 let aceEl = document.querySelector(".ace-count");
 let kingEl = document.querySelector(".king-count");
 let queenEl = document.querySelector(".queen-count");
 let jackEl = document.querySelector(".jack-count");
 let tenEl = document.querySelector(".ten-count");
 
+//modal Els
 let modalEl = document.querySelector(".win-modal");
 let betModalEl = document.querySelector(".betModal");
 let modal = document.getElementById("myModal");
@@ -149,12 +155,13 @@ let blackjackSound = new Audio("sounds/21.mp3");
 
 /*----- event listeners -----*/
 
+//button listeners
 dealEl.addEventListener("click", dealCards);
 hitEl.addEventListener("click", hit);
 standEl.addEventListener("click", stand);
 insuranceEl.addEventListener("click", insurance);
 rebetEl.addEventListener("click", rebet);
-
+//betting chip listeners
 chip1El.addEventListener("click", addBet1);
 chip2El.addEventListener("click", addBet2);
 chip3El.addEventListener("click", addBet3);
@@ -166,6 +173,7 @@ chip6El.addEventListener("click", addBet6);
 
 cashEl.textContent = player.bank;
 
+//initial card dealing for turn
 function dealCards() {
   if (player.cards[1] == null && player.bet > 0) {
     if (cards.length < 5) {
@@ -213,6 +221,7 @@ function dealCards() {
   }
 }
 
+//the player hit function
 function hit() {
   //if I was using arrays I could make these 5 ifs one for loop, its possible with objects too but I dont know how
   if (
@@ -349,7 +358,7 @@ function addHand(player) {
     player.visibleTotal = player.total - guide[player.hand[0].substring(1)];
   }
 }
-
+//check for dealer Ace up on deal, which allows for insurance side bet
 function checkAceUp() {
   if (dealer.cards[2][1] == "A") {
     modalEl.textContent = "Dealer Ace detected. Insurance?";
@@ -358,7 +367,7 @@ function checkAceUp() {
     setTimeout(() => modalEl.classList.add("hidden"), 3000);
   }
 }
-
+//takes in player or dealer object, deals with blackjack or bust logic in combination with the check winner function
 function checkBlackjack(players) {
   addHand(players);
   if (players.total == 21) {
@@ -386,7 +395,7 @@ function checkBlackjack(players) {
   }
   render();
 }
-
+//check for winner of turn logic
 function checkWinner() {
   player.previousBet = player.bet;
   if (player.total > 21 && dealer.total > 21) {
@@ -435,7 +444,7 @@ function checkWinner() {
     setTimeout(() => (modal.style.display = "block"), 2000);
   }
 }
-
+//start the dealers turn
 function stand() {
   if (
     player.cards[1] != null &&
@@ -448,6 +457,7 @@ function stand() {
     dealerTurn();
   }
 }
+//dealer hits if under 17 until over 17
 function dealerTurn() {
   dealer.turnActive = true;
   if (player.total > 21) {
@@ -464,6 +474,7 @@ function dealerTurn() {
     setTimeout(() => resetHands(), 3500);
   }
 }
+//if dealer has ace up on deal, allow insurance and pop up modal showing insurance allowed
 function insurance() {
   if (dealer.aceUp == true && player.insurance == false) {
     if (player.bank > player.bet / 2) {
@@ -473,7 +484,7 @@ function insurance() {
     }
   }
 }
-
+//renders dealer and player values to modals, hides card down value
 function render() {
   playerValueEl.textContent = player.total;
   if (dealer.turnActive != true) {
@@ -485,6 +496,7 @@ function render() {
   cashEl.textContent = player.bank;
 }
 
+//renders the bet info modal and turn result modal
 function modals() {
   modalEl.classList.remove("hidden");
   setTimeout(() => modalEl.classList.add("hidden"), 3500);
@@ -492,9 +504,8 @@ function modals() {
   setTimeout(() => betModalEl.classList.add("hidden"), 3500);
 }
 
+//resets the state of game to start of turn
 function resetHands() {
-  // if (dealer.turnComplete = true){
-  // }
   cardCount();
   for (let card in player.cards) {
     player.cards[card] = null; //this line fixed with help of Fil, before I had cards = null instead of player.cards[card]
@@ -533,10 +544,9 @@ function resetHands() {
   dealerCard7.classList = "card large back-red hidden";
   dealerCard8.classList = "card large back-red hidden";
   render();
-  //reset hands code here
-  //things to reset: hasZero, hand, total, cards, insurance, bets
 }
 
+//shuffle cards array
 function shuffle() {
   if (cards.length < 52) {
     cards = deckList;
@@ -548,12 +558,14 @@ function shuffle() {
   }
 }
 
+//game over logic
 function checkLoss() {
   if (player.bank < 1) {
     modal.style.display = "block";
   }
 }
 
+//changes the number of decks in the stack, player can decide how many
 function changeDecks(count) {
   deckCount = count;
   cards = [];
@@ -564,9 +576,10 @@ function changeDecks(count) {
   }
   deckList = cards.slice(); //create array copy of cards to use for shuffling
   cards = cards.sort(() => 0.5 - Math.random());
-  console.log("Deck Count changed to: " + deckCount) //this is not debug code I dont have a modal for this yet;
+  console.log("Deck Count changed to: " + deckCount); //this is not debug code I dont have a modal for this yet;
 }
 
+//add to bet by clicking on the poker chips
 function addBet1() {
   if (player.bank >= 1 && player.cards[1] == null) {
     player.bet += 1;
@@ -614,6 +627,7 @@ function addBet6() {
   render();
 }
 
+//use last turns bet and deal hand
 function rebet() {
   if (
     player.cards[1] == null &&
@@ -626,6 +640,7 @@ function rebet() {
   }
 }
 
+//adds up number of face cards/10s/Aces and displays them
 function cardCount() {
   count.A = 0;
   count.K = 0;
@@ -699,5 +714,3 @@ function cardCount() {
   jackEl.textContent = `J:${count.J}/${deckCount * 4}`;
   tenEl.textContent = `10:${count.ten}/${deckCount * 4}`;
 }
-
-
