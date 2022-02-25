@@ -54,7 +54,10 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 6. Whoever comes closer to 21 without going over wins. If both dealer and player have the same hand value it is a push/draw.
 
 example turns:
-https://user-images.githubusercontent.com/34380246/155640446-55d54a5d-ca2c-4d5c-80a9-ae3d9901ad8d.mp4
+
+https://user-images.githubusercontent.com/34380246/155640935-eec0e3be-42f8-455d-84e2-9e6f7fab6447.mp4
+
+
 
 ## WAR
 
