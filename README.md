@@ -31,7 +31,7 @@ You can play the game by clicking [here].
 <img src="images/homeScreen.png" width="800" style="border-radius:15px">
 <br/><br/>
 
-# BlackJack :spades:
+# :hearts: BlackJack :spades:
 
 The rules are simple, the play is thrilling, and there is opportunity for high strategy. If you can count cards it is one of the only casino games that is in the players favour.
 
@@ -58,7 +58,7 @@ example turns :camera:
 
 https://user-images.githubusercontent.com/34380246/155643322-248a41db-41ea-41e2-a31a-b9848a3c3e69.mp4
 
-# WAR :diamonds:
+# :clubs: WAR :diamonds:
 
 The deck is divided evenly among the players, giving each a face down stack. In unison, each player reveals the top card of their deck—this is a "battle"—and the player with the higher card takes both of the cards played and moves them to their stack. Aces are high, and suits are ignored.
 
@@ -79,17 +79,9 @@ The objective of the game is to win all of the cards.
 
 1. Click the deck
 
-#
+## Getting Started
 
-## About The Project
-
-For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, and Blackjack. After the boot camp I could potentially come back and add more games to the home page.
-
-## Built With
-
-- JavaScript
-- HTML
-- CSS
+### [Click here to play online](https://github.com/DKotzer/card-games)
 
 ### Installation
 
@@ -99,17 +91,28 @@ If you prefer to install the game on your machine for offline play you can clone
 git clone git@github.com:DKotzer/card-games.git
 ```
 
+## About The Project
+
+For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, and Blackjack. After the boot camp I could potentially come back and add more games to the home page.
+
+## Built With :hearts:
+
+- JavaScript
+- HTML
+- CSS
+
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [10%] Finish War
-  - [ ] Finish War CSS
-- [0%] Finish Blackjack
-  - [0%] Finish BlackJack CSS
-- [0%] Finish Poker JS
-  - [0%] Finish Poker CSS
-- [25%] Finish ReadMe
+- [ ] Fix War
+  - change cards to face down at bottom of deck after hand
+  - remove shuffle
+  - add notification modals
+- [ ] Finishing Touches on Blackjack
+  - [ ] Fix the card counting function to work with multiple decks
+  - Add in a button for the already existing choose deck size function
+- [] Add a Poker game to the game room
 
 See the [open issues](https://github.com/DKotzer/card-games/issues) for a full list of proposed features (and known issues).
 
