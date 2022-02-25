@@ -582,7 +582,7 @@ function changeDecks(count) {
 }
 
 function addBet1() {
-  if (player.bank >= 1) {
+  if (player.bank >= 1 && player.cards[1] == null) {
     player.bet += 1;
     player.bank -= 1;
     chipSound.play();
@@ -590,7 +590,7 @@ function addBet1() {
   }
 }
 function addBet2() {
-  if (player.bank >= 5) {
+  if (player.bank >= 5 && player.cards[1] == null) {
     player.bet += 5;
     player.bank -= 5;
     chipSound.play();
@@ -598,7 +598,7 @@ function addBet2() {
   }
 }
 function addBet3() {
-  if (player.bank >= 10) {
+  if (player.bank >= 10 && player.cards[1] == null) {
     player.bet += 10;
     player.bank -= 10;
     chipSound.play();
@@ -606,7 +606,7 @@ function addBet3() {
   }
 }
 function addBet4() {
-  if (player.bank >= 25) {
+  if (player.bank >= 25 && player.cards[1] == null) {
     player.bet += 25;
     player.bank -= 25;
     chipSound.play();
@@ -614,7 +614,7 @@ function addBet4() {
   }
 }
 function addBet5() {
-  if (player.bank >= 50) {
+  if (player.bank >= 50 && player.cards[1] == null) {
     player.bet += 50;
     player.bank -= 50;
     chipSound.play();
