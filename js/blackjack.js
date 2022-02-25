@@ -145,7 +145,7 @@ let modal = document.getElementById("myModal");
 let shuffleSound = new Audio("sounds/shuffle.mp3");
 let clickSound = new Audio("sounds/click.mp3");
 let chipSound = new Audio("sounds/chips.mp3");
-let blackjackSound = new Audio("sound/21.mp3");
+let blackjackSound = new Audio("sounds/21.mp3");
 
 /*----- event listeners -----*/
 
