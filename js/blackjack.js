@@ -70,10 +70,6 @@ let count = {
   A: 0,
 };
 
-let countReset = {
-  ...count, // I see why this is useful now
-};
-
 const guide = {
   //from martin, used to help add up hand totals. Going with my solution from war might have actually made handling aces much easier for more than 1 ace.
   "02": 2,
@@ -558,11 +554,6 @@ function shuffle() {
     modalEl.textContent = "Shuffling!";
     modalEl.classList.remove("hidden");
     setInterval(() => modalEl.classList.add("hidden"), 1000);
-    count.A = 0;
-    count.K = 0;
-    count.Q = 0;
-    count.J = 0;
-    count.ten = 0;
   }
 }
 
@@ -627,7 +618,11 @@ function addBet6() {
 }
 
 function cardCount() {
-  count = countReset;
+  count.A = 0;
+  count.K = 0;
+  count.Q = 0;
+  count.J = 0;
+  count.ten = 0;
   //cardCount();
   //did this after I should have stopped for the night, might shorten later. ctrl d trick makes this way really fast to write
   if (cards.includes("hK") == false) {
