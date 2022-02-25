@@ -182,7 +182,7 @@ div {
 }
 
 .animated {
-  transform: translate(116px, 0px);
+  transform: translate(10px, 0px);
   -webkit-transition: all 1s ease-in-out;
   -moz-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
