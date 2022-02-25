@@ -238,6 +238,7 @@ button:hover {
   height: 150px;
   padding-right: 5px;
   margin-top: 19px;
+  margin-right: 5px;
   text-align: left;
   background-color: rgba(128, 128, 128, 0.267);
 }

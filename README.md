@@ -128,12 +128,13 @@ For my first project at my software engineering bootcamp I am making a collectio
 
 See the [open issues](https://github.com/DKotzer/card-games/issues) for a full list of proposed features (and known issues).
 
-<!-- CONTRIBUTING -->
+## Original Plan
 
-## Lessons Learned
+<img src="images/wire1.png" width="800" style="border-radius:15px">
+<img src="images/wire2.png" width="800" style="border-radius:15px">
+<img src="images/wire3.png" width="800" style="border-radius:15px">
+<img src="images/wire4.png" width="800" style="border-radius:15px">
 
-- watch out for single = when checking if something is equal to something else. Check for this early on when troubleshooting
-- it took me a while to figure out why some cards kept dissapearing from the decks.
 <!-- CONTACT -->
 
 ## Contact

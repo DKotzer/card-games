@@ -145,7 +145,7 @@ let modal = document.getElementById("myModal");
 let shuffleSound = new Audio("sounds/shuffle.mp3");
 let clickSound = new Audio("sounds/click.mp3");
 let chipSound = new Audio("sounds/chips.mp3");
-let blackjackSound = new Audio("sound/21.aac");
+let blackjackSound = new Audio("sound/21.mp3");
 
 /*----- event listeners -----*/
 
@@ -379,14 +379,13 @@ function checkBlackjack(players) {
       console.log("Insurance bet winnings paid to player");
     }
     if (players.name == "Player") {
-      blackjackSound.play();
+      // blackjackSound.play();
       stand();
       render();
     }
   } else if (players.total > 21) {
     if (players.name == "Player") {
       render();
-      console.log("this should be working");
       dealerTurn();
     } // under same function else if players.total > 21
     console.log(`${players.name} busts with ${players.total}`);
@@ -528,6 +527,7 @@ function resetHands() {
   dealer.turnComplete = false;
   dealer.turnActive = false;
   player.insurance = false;
+  player.bet = 0;
   modalEl.classList.add("hidden");
   playerCard1.classList = "card large back-red hidden"; //there is probably a better way to do this in 1 or 2 lines
   playerCard2.classList = "card large back-red hidden";
