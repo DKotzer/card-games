@@ -98,7 +98,7 @@ let dealEl = document.getElementById("deal-btn");
 let hitEl = document.getElementById("hit-btn");
 let standEl = document.getElementById("stand-btn");
 let insuranceEl = document.getElementById("insurance-btn");
-let rebelEl = document.getElementById("rebet-btn");
+let rebetEl = document.getElementById("rebet-btn");
 
 let dealerCard1 = document.getElementById("dealer-card-1");
 let dealerCard2 = document.getElementById("dealer-card-2");
@@ -153,6 +153,7 @@ dealEl.addEventListener("click", dealCards);
 hitEl.addEventListener("click", hit);
 standEl.addEventListener("click", stand);
 insuranceEl.addEventListener("click", insurance);
+rebetEl.addEventListener("click", rebet);
 
 chip1El.addEventListener("click", addBet1);
 chip2El.addEventListener("click", addBet2);
@@ -625,6 +626,19 @@ function addBet6() {
   player.bank -= player.bank;
   chipSound.play();
   render();
+}
+
+function rebet() {
+  if (
+    player.cards[1] == null &&
+    player.bet < 1 &&
+    player.bank > player.previousBet
+  ) {
+    player.bank -= player.previousBet;
+    player.bet = player.previousBet;
+
+    dealCards();
+  }
 }
 
 function cardCount() {
