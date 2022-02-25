@@ -30,7 +30,7 @@ You can play the game by clicking [here].
 <img src="images/homeScreen.png" width="800" style="border-radius:15px">
 <br/><br/>
 
-## BlackJack
+# BlackJack
 
 The rules are simple, the play is thrilling, and there is opportunity for high strategy. If you can count cards it is one of the only casino games that is in the players favour.
 
@@ -40,7 +40,7 @@ But even for the casual participant who plays a reasonably good game, Blackjack 
 
 This version of Blackjack has a card counting feature that allows you to practice your card counting skills. It also employs an insurance system if that dealer has Ace up on the flop - so you can incoproate that in to your practice as well.
 
-### Object of the Game
+## Object of the Game
 
 The player attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.
 
@@ -55,11 +55,9 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 
 example turns:
 
-
 https://user-images.githubusercontent.com/34380246/155643322-248a41db-41ea-41e2-a31a-b9848a3c3e69.mp4
 
-
-## WAR
+# WAR
 
 The deck is divided evenly among the players, giving each a face down stack. In unison, each player reveals the top card of their deck—this is a "battle"—and the player with the higher card takes both of the cards played and moves them to their stack. Aces are high, and suits are ignored.
 
@@ -71,13 +69,25 @@ https://user-images.githubusercontent.com/34380246/155637377-3293f8a0-4624-4023-
 
 If the face-up cards are again equal then the war repeats with another set of face-down/up cards. This repeats until one player's face-up card is higher than their opponent's.
 
-### Object of the Game
+## Object of the Game
 
 The objective of the game is to win all of the cards.
+
+## Turn structure
+
+1. Click the deck
+
+#
 
 ## About The Project
 
 For my first project at my software engineering bootcamp I am making a collection of card games. I will start with War, and Blackjack. After the boot camp I could potentially come back and add more games to the home page.
+
+## Built With
+
+- JavaScript
+- HTML
+- CSS
 
 ### Installation
 
