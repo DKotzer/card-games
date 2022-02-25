@@ -50,7 +50,11 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 2. Player starts the hand by pressing Deal
 3. Player can choose to hit as long as they are below 21
 4. When player is done hitting they can hit press stand to end their turn
-5. Dealer will
+5. Dealer will then stay if over 16 or hit until they reach above 16.
+6. Whoever comes closer to 21 without going over wins. If both dealer and player have the same hand value it is a push/draw.
+
+example turns:
+https://user-images.githubusercontent.com/34380246/155640446-55d54a5d-ca2c-4d5c-80a9-ae3d9901ad8d.mp4
 
 ## WAR
 
@@ -59,6 +63,8 @@ The deck is divided evenly among the players, giving each a face down stack. In 
 <img src="images/warScreen.png" width="800" style="border-radius:15px">
 
 If the two cards played are of equal value, then there is a "war". Both players place the next three cards face down and then another card face-up. The winner of the war takes all the cards and puts them at the bottom of their deck.
+
+https://user-images.githubusercontent.com/34380246/155637377-3293f8a0-4624-4023-8e3f-329c790b69ba.mp4
 
 If the face-up cards are again equal then the war repeats with another set of face-down/up cards. This repeats until one player's face-up card is higher than their opponent's.
 
