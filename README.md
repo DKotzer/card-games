@@ -20,6 +20,7 @@
   </p>
 </div>
 <!-- ABOUT THE PROJECT -->
+
 ## General Overview
 
 Card Games is a collection of card games.
@@ -30,7 +31,7 @@ You can play the game by clicking [here].
 <img src="images/homeScreen.png" width="800" style="border-radius:15px">
 <br/><br/>
 
-# BlackJack
+# BlackJack :spades:
 
 The rules are simple, the play is thrilling, and there is opportunity for high strategy. If you can count cards it is one of the only casino games that is in the players favour.
 
@@ -53,11 +54,11 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 5. Dealer will then stay if over 16 or hit until they reach above 16.
 6. Whoever comes closer to 21 without going over wins. If both dealer and player have the same hand value it is a push/draw.
 
-example turns:
+example turns :camera:
 
 https://user-images.githubusercontent.com/34380246/155643322-248a41db-41ea-41e2-a31a-b9848a3c3e69.mp4
 
-# WAR
+# WAR :diamonds:
 
 The deck is divided evenly among the players, giving each a face down stack. In unison, each player reveals the top card of their deck—this is a "battle"—and the player with the higher card takes both of the cards played and moves them to their stack. Aces are high, and suits are ignored.
 
@@ -65,6 +66,7 @@ The deck is divided evenly among the players, giving each a face down stack. In 
 
 If the two cards played are of equal value, then there is a "war". Both players place the next three cards face down and then another card face-up. The winner of the war takes all the cards and puts them at the bottom of their deck.
 
+:camera:
 https://user-images.githubusercontent.com/34380246/155637377-3293f8a0-4624-4023-8e3f-329c790b69ba.mp4
 
 If the face-up cards are again equal then the war repeats with another set of face-down/up cards. This repeats until one player's face-up card is higher than their opponent's.
