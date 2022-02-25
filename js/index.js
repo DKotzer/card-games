@@ -314,6 +314,7 @@ function handleClick() {
       console.log(`War ${playerWarNum} vs ${cpuWarNum}`);
       console.log("Double War!");
       warTextEl.style.color = "blue";
+      setTimeout(() => (warTextEl.style.color = "red"), 1200);
       playerWarCards.push(playerWarCard);
       cpuWarCards.push(cpuWarCard);
       console.log("player war cards: " + playerWarCards);
