@@ -143,6 +143,8 @@ let modal = document.getElementById("myModal");
 /*----- sounds -----*/
 let shuffleSound = new Audio("sounds/shuffle.mp3");
 let clickSound = new Audio("sounds/click.mp3");
+let chipSound = new Audio("sounds/chips.mp3");
+let blackjackSound = new Audio("sound/21.aac");
 
 /*----- event listeners -----*/
 
@@ -203,6 +205,7 @@ function dealCards() {
       dealerCard2.classList.remove("back-red");
       playerValueEl.textContent = player.total;
       checkAceUp();
+      cardCount();
       render();
       checkBlackjack(player);
       checkBlackjack(dealer);
@@ -265,6 +268,7 @@ function hit() {
     }
     checkBlackjack(player);
     render();
+    cardCount();
   }
 }
 
@@ -319,6 +323,7 @@ function dealerHit() {
     }
     checkBlackjack(dealer);
     render();
+    cardCount();
   }
 }
 //if you have time try turning the above two functions in to 1 function that takes player for player or dealer
@@ -372,6 +377,7 @@ function checkBlackjack(players) {
       console.log("Insurance bet winnings paid to player");
     }
     if (players.name == "Player") {
+      blackjackSound.play();
       stand();
       render();
     }
@@ -493,12 +499,9 @@ function render() {
 
 function modals() {
   modalEl.classList.remove("hidden");
-  setTimeout(() => modalEl.classList.add("hidden"), 3000);
+  setTimeout(() => modalEl.classList.add("hidden"), 3500);
   betModalEl.classList.remove("hidden");
-  setTimeout(() => betModalEl.classList.add("hidden"), 3000);
-  // setTimeout(function () {
-  //   modalEl.classList.add("hidden");
-  // }, 1300);
+  setTimeout(() => betModalEl.classList.add("hidden"), 3500);
 }
 
 function resetHands() {
@@ -580,6 +583,7 @@ function addBet1() {
   if (player.bank >= 1) {
     player.bet += 1;
     player.bank -= 1;
+    chipSound.play();
     render();
   }
 }
@@ -587,6 +591,7 @@ function addBet2() {
   if (player.bank >= 5) {
     player.bet += 5;
     player.bank -= 5;
+    chipSound.play();
     render();
   }
 }
@@ -594,6 +599,7 @@ function addBet3() {
   if (player.bank >= 10) {
     player.bet += 10;
     player.bank -= 10;
+    chipSound.play();
     render();
   }
 }
@@ -601,6 +607,7 @@ function addBet4() {
   if (player.bank >= 25) {
     player.bet += 25;
     player.bank -= 25;
+    chipSound.play();
     render();
   }
 }
@@ -608,12 +615,14 @@ function addBet5() {
   if (player.bank >= 50) {
     player.bet += 50;
     player.bank -= 50;
+    chipSound.play();
     render();
   }
 }
 function addBet6() {
   player.bet += player.bank;
   player.bank -= player.bank;
+  chipSound.play();
   render();
 }
 
@@ -623,7 +632,6 @@ function cardCount() {
   count.Q = 0;
   count.J = 0;
   count.ten = 0;
-  //cardCount();
   //did this after I should have stopped for the night, might shorten later. ctrl d trick makes this way really fast to write
   if (cards.includes("hK") == false) {
     count.K += 1;
