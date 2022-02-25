@@ -50,7 +50,11 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 2. Player starts the hand by pressing Deal
 3. Player can choose to hit as long as they are below 21
 4. When player is done hitting they can hit press stand to end their turn
-5. Dealer will
+5. Dealer will then stay if over 16 or hit until they reach above 16.
+6. Whoever comes closer to 21 without going over wins. If both dealer and player have the same hand value it is a push/draw.
+
+example turns:
+https://user-images.githubusercontent.com/34380246/155640446-55d54a5d-ca2c-4d5c-80a9-ae3d9901ad8d.mp4
 
 ## WAR
 
