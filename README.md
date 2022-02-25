@@ -45,6 +45,8 @@ This version of Blackjack has a card counting feature that allows you to practic
 
 The player attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.
 
+If you run out of money you lose.
+
 ## Turn structure
 
 1. Player places bet by clicking chips
@@ -57,6 +59,16 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 example turns :camera:
 
 https://user-images.githubusercontent.com/34380246/155643322-248a41db-41ea-41e2-a31a-b9848a3c3e69.mp4
+
+### Betting Rules
+
+---
+
+- Players start with an initial $1000 in their wallet.
+- All bets are the be place before or at the end of rounds. The place bets sign will be illuminated when betting is available.
+- A bet cannot exceed the amount of money in the wallet.
+- A double bet can be placed when the amount of money in the wallet is an adequate amount, and an initial bet has been placed.
+- All bets are locked in until the end of the round.
 
 # :clubs: WAR :diamonds:
 
@@ -105,14 +117,15 @@ For my first project at my software engineering bootcamp I am making a collectio
 
 ## Roadmap
 
-- [ ] Fix War
-  - change cards to face down at bottom of deck after hand
-  - remove shuffle
-  - add notification modals
 - [ ] Finishing Touches on Blackjack
   - [ ] Fix the card counting function to work with multiple decks
-  - Add in a button for the already existing choose deck size function
-- [] Add a Poker game to the game room
+  - [ ] Add in a button for the already existing choose deck size function
+  - [ ] Add option to split hand
+- [ ] Fix War
+  - [ ] change cards to face down at bottom of deck after hand
+  - [ ] remove shuffle
+  - [ ] add notification modals
+- [ ] Add a Poker game to the game room
 
 See the [open issues](https://github.com/DKotzer/card-games/issues) for a full list of proposed features (and known issues).
 

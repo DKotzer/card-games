@@ -94,38 +94,39 @@ let dealerTotal = 0;
 
 /*----- cached element references -----*/
 
-let dealEl = document.querySelector("#deal-btn");
-let hitEl = document.querySelector("#hit-btn");
-let standEl = document.querySelector("#stand-btn");
-let insuranceEl = document.querySelector("#insurance-btn");
+let dealEl = document.getElementById("deal-btn");
+let hitEl = document.getElementById("hit-btn");
+let standEl = document.getElementById("stand-btn");
+let insuranceEl = document.getElementById("insurance-btn");
+let rebelEl = document.getElementById("rebet-btn");
 
-let dealerCard1 = document.querySelector("#dealer-card-1");
-let dealerCard2 = document.querySelector("#dealer-card-2");
-let dealerCard3 = document.querySelector("#dealer-card-3");
-let dealerCard4 = document.querySelector("#dealer-card-4");
-let dealerCard5 = document.querySelector("#dealer-card-5");
-let dealerCard6 = document.querySelector("#dealer-card-6");
-let dealerCard7 = document.querySelector("#dealer-card-7");
-let dealerCard8 = document.querySelector("#dealer-card-8");
+let dealerCard1 = document.getElementById("dealer-card-1");
+let dealerCard2 = document.getElementById("dealer-card-2");
+let dealerCard3 = document.getElementById("dealer-card-3");
+let dealerCard4 = document.getElementById("dealer-card-4");
+let dealerCard5 = document.getElementById("dealer-card-5");
+let dealerCard6 = document.getElementById("dealer-card-6");
+let dealerCard7 = document.getElementById("dealer-card-7");
+let dealerCard8 = document.getElementById("dealer-card-8");
 
-let playerCard1 = document.querySelector("#player-card-1");
-let playerCard2 = document.querySelector("#player-card-2");
-let playerCard3 = document.querySelector("#player-card-3");
-let playerCard4 = document.querySelector("#player-card-4");
-let playerCard5 = document.querySelector("#player-card-5");
-let playerCard6 = document.querySelector("#player-card-6");
-let playerCard7 = document.querySelector("#player-card-7");
-let playerCard8 = document.querySelector("#player-card-8");
+let playerCard1 = document.getElementById("player-card-1");
+let playerCard2 = document.getElementById("player-card-2");
+let playerCard3 = document.getElementById("player-card-3");
+let playerCard4 = document.getElementById("player-card-4");
+let playerCard5 = document.getElementById("player-card-5");
+let playerCard6 = document.getElementById("player-card-6");
+let playerCard7 = document.getElementById("player-card-7");
+let playerCard8 = document.getElementById("player-card-8");
 
 let dealerValueEl = document.querySelector(".dealerValue");
 let playerValueEl = document.querySelector(".playerValue");
 
-let chip1El = document.querySelector("#chip1");
-let chip2El = document.querySelector("#chip2");
-let chip3El = document.querySelector("#chip3");
-let chip4El = document.querySelector("#chip4");
-let chip5El = document.querySelector("#chip5");
-let chip6El = document.querySelector("#chip6");
+let chip1El = document.getElementById("chip1");
+let chip2El = document.getElementById("chip2");
+let chip3El = document.getElementById("chip3");
+let chip4El = document.getElementById("chip4");
+let chip5El = document.getElementById("chip5");
+let chip6El = document.getElementById("chip6");
 
 let betEl = document.querySelector(".betTotal");
 let cashEl = document.querySelector(".cashTotal");
