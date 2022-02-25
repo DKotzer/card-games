@@ -62,12 +62,16 @@ const dealer = {
   aceUp: false,
 };
 
-const count = {
+let count = {
   ten: 0,
   J: 0,
   Q: 0,
   K: 0,
   A: 0,
+};
+
+let countReset = {
+  ...count, // I see why this is useful now
 };
 
 const guide = {
@@ -623,6 +627,8 @@ function addBet6() {
 }
 
 function cardCount() {
+  count = countReset;
+  //cardCount();
   //did this after I should have stopped for the night, might shorten later. ctrl d trick makes this way really fast to write
   if (cards.includes("hK") == false) {
     count.K += 1;

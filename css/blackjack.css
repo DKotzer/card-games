@@ -7,7 +7,7 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 body {
-  background-image: url("https://static.vecteezy.com/system/resources/previews/002/127/667/large_2x/luxury-black-poker-card-symbols-background-illustration-free-vector.jpg");
+  background-image: url("images/pokerbg.jpg");
   background-size: cover;
   background-color: white;
   color: white;
@@ -70,11 +70,15 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  background-color: green;
+  background-image: url("https://media.istockphoto.com/vectors/poker-table-background-in-green-color-vector-id1206505233?k=20&m=1206505233&s=612x612&w=0&h=QBYw3shQkcZG2g1qG8udx8nrUsqnPZNooSaLNIs5elo=");
+  background-size: cover;
+  /* background-color: green; */
   width: 900px;
   height: 370px;
   margin: 0 auto;
   border-radius: 100px;
+  border-image: repeating-linear-gradient(30deg, #4d9f0c, #9198e5, #4d9f0c 20px)
+    60;
   border: 50px groove rebeccapurple;
   outline: 10px solid black;
   filter: drop-shadow(10px 20px 1px #00000573);
@@ -114,6 +118,7 @@ div {
   border: 2px solid black;
   border-radius: 15px;
   width: 600px;
+  background-color: rgba(128, 128, 128, 0.267);
 }
 .middle-top {
   align-self: flex-start;
@@ -193,6 +198,7 @@ div {
   border-radius: 25px;
   margin-left: 3%;
   align-items: center;
+  background-color: rgba(128, 128, 128, 0.267);
 }
 .draw-decks {
   justify-content: flex-end;
@@ -231,6 +237,7 @@ button:hover {
   height: 150px;
   margin-top: 10px;
   text-align: left;
+  background-color: rgba(128, 128, 128, 0.267);
 }
 
 #chips {
@@ -283,7 +290,7 @@ button:hover {
 }
 
 .betTotal {
-  background-color: grey;
+  background-color: rgba(128, 128, 128, 0.459);
   height: 25px;
   border: 1px solid black;
   border-radius: 100px;
@@ -291,7 +298,7 @@ button:hover {
   box-shadow: 1px 1px 5px #555 inset;
 }
 .cashTotal {
-  background-color: grey;
+  background-color: rgba(128, 128, 128, 0.459);
   height: 25px;
   border: 1px solid black;
   border-radius: 100px;

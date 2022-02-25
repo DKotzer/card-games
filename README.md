@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-  <a href="https://dkotzer.github.io/card-games/home.html">
+  <a href="https://dkotzer.github.io/card-games/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -54,15 +54,17 @@ The player attempts to beat the dealer by getting a count as close to 21 as poss
 
 ## WAR
 
-The deck is divided evenly, with each player receiving 26 cards, dealt one at a time, face down. Anyone may deal first. Each player places their stack of cards face down, in front of them.
+The deck is divided evenly among the players, giving each a face down stack. In unison, each player reveals the top card of their deck—this is a "battle"—and the player with the higher card takes both of the cards played and moves them to their stack. Aces are high, and suits are ignored.
 
-Each player turns up a card at the same time and the player with the higher card takes both cards and puts them, face down, on the bottom of his stack.
+<img src="images/warScreen.png" width="800" style="border-radius:15px">
 
-If the cards are the same rank, it is War. Each player turns up one card face down and one card face up. The player with the higher cards takes both piles (six cards). If the turned-up cards are again the same rank, each player places another card face down and turns another card face up. The player with the higher card takes all 10 cards, and so on.
+If the two cards played are of equal value, then there is a "war". Both players place the next three cards face down and then another card face-up. The winner of the war takes all the cards and puts them at the bottom of their deck.
+
+If the face-up cards are again equal then the war repeats with another set of face-down/up cards. This repeats until one player's face-up card is higher than their opponent's.
 
 ### Object of the Game
 
-The game ends when one player has won all the cards.
+The objective of the game is to win all of the cards.
 
 ## About The Project
 
@@ -109,4 +111,4 @@ Project Link: [https://github.com/DKotzer/card-games](https://github.com/DKotzer
 
 [linkedin-url]: https://www.linkedin.com/in/dylan-kotzer-3a5421190/
 [product-screenshot]: images/screenshot.png
-[here]: https://dkotzer.github.io/card-games/home.html
+[here]: https://dkotzer.github.io/card-games/
