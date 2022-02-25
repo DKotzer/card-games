@@ -179,8 +179,6 @@ function dealCards() {
     player.hand.push(player.cards[2]);
     dealer.hand.push(dealer.cards[1]);
     dealer.hand.push(dealer.cards[2]);
-    console.log("player cards: " + player.cards[1] + ", " + player.cards[2]);
-    console.log("dealer cards: " + dealer.cards[1] + ", " + dealer.cards[2]);
     setTimeout(() => {
       clickSound.play();
       playerCard1.classList.remove("hidden");
@@ -335,17 +333,14 @@ function addHand(player) {
   player.total = 0;
   for (let card of player.hand) {
     if (card[1] == "A") {
-      console.log("Ace detected");
       player.hasAces += 1;
     }
     player.total += guide[card.substring(1)];
   }
   if (player.total >= 22 && player.hasAces !== 0) {
-    console.log("over 21, has aces");
     player.hasAces -= 1;
     player.total -= 10;
     if (player.total >= 22 && player.hasAces !== 0) {
-      console.log("over 21, has aces");
       player.hasAces -= 1;
       player.total -= 10;
     }
@@ -367,7 +362,6 @@ function checkAceUp() {
 function checkBlackjack(players) {
   addHand(players);
   if (players.total == 21) {
-    console.log(`${players.name} has Blackjack! ${players.total}`);
     if (players.name == "Dealer" && player.insurance == true) {
       dealer.visibleTotal = "21";
       dealerCard1.classList.add(dealer.cards[1]);
@@ -376,7 +370,7 @@ function checkBlackjack(players) {
       betModalEl.textContent = `+ ${player.insurance * 2}`;
       betModalEl.classList.remove("hidden");
       setTimeout(() => betModalEl.classList.add("hidden"), 3000);
-      console.log("Insurance bet winnings paid to player");
+      console.log("Insurance bet winnings paid to player"); //this is not debug code I just dont have a modal for this yet
     }
     if (players.name == "Player") {
       // blackjackSound.play();
@@ -388,9 +382,7 @@ function checkBlackjack(players) {
       render();
       dealerTurn();
     } // under same function else if players.total > 21
-    console.log(`${players.name} busts with ${players.total}`);
   } else if (players.total < 21) {
-    console.log(`${players.name} has ${players.total}`);
   }
   render();
 }
@@ -437,7 +429,6 @@ function checkWinner() {
     player.bet = 0;
   }
   dealer.turnComplete = true;
-  console.log("checkwinner happening");
   render();
   //check for loss
   if (player.bank < 1) {
@@ -460,18 +451,15 @@ function stand() {
 function dealerTurn() {
   dealer.turnActive = true;
   if (player.total > 21) {
-    console.log("dealer turn, player over 21");
     checkWinner();
     modals();
     setTimeout(() => resetHands(), 3500);
   } else if (dealer.total <= 16) {
     dealerHit();
-    console.log("Dealer hitting");
     setTimeout(() => dealerTurn(), 1500);
   } else if (dealer.total >= 17) {
     checkWinner();
     dealer.turnComplete = true;
-    console.log("Dealer over 16");
     modals();
     setTimeout(() => resetHands(), 3500);
   }
@@ -481,7 +469,6 @@ function insurance() {
     if (player.bank > player.bet / 2) {
       player.bank -= player.bet / 2;
       player.insurance = player.bet / 2;
-      console.log("insurance bought");
       render(); //somewhere in checkblackjack dealer do something like if insurance != false, total += insurance * 2 or whatever the insurance ratio is
     }
   }
@@ -552,7 +539,6 @@ function resetHands() {
 
 function shuffle() {
   if (cards.length < 52) {
-    console.log("time to shuffle");
     cards = deckList;
     cards = cards.sort(() => 0.5 - Math.random());
     shuffleSound.play();
@@ -578,7 +564,7 @@ function changeDecks(count) {
   }
   deckList = cards.slice(); //create array copy of cards to use for shuffling
   cards = cards.sort(() => 0.5 - Math.random());
-  console.log("Deck Count changed to: " + deckCount);
+  console.log("Deck Count changed to: " + deckCount) //this is not debug code I dont have a modal for this yet;
 }
 
 function addBet1() {
@@ -714,10 +700,4 @@ function cardCount() {
   tenEl.textContent = `10:${count.ten}/${deckCount * 4}`;
 }
 
-/*---- plan ---- 
 
-going to try to do this one with objects instead of just arrays
-pick # of decks
-card counter display
-*/
-//add rebet if time or remove button
