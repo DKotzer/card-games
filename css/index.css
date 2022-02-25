@@ -9,7 +9,7 @@
 }
 
 body {
-  background-image: url("images/pokerbg/jpg");
+  background-image: url("images/pokerbg.jpg");
   background-size: cover;
   color: white;
   margin: 0 auto;
@@ -87,7 +87,7 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background-color: green;
+  background-image: url("images/table.jpg");
   width: 800px;
   border: 50px groove rebeccapurple;
   outline: 10px solid black;
@@ -100,8 +100,10 @@ div {
   margin-left: -133px;
   z-index: 100;
 }
-
-button {
+#player-card {
+  z-index: 2000;
+}
+#player-card button {
   z-index: 5;
 }
 #bottom-text {
@@ -120,16 +122,20 @@ button {
 }
 .war {
   margin-top: -43px;
-  font-family: fantasy;
+
   font-size: large;
   color: black;
   -webkit-text-stroke: 1px red;
 }
+
 .spacer {
   margin-top: -43px;
-  font-family: fantasy;
+
   font-size: large;
   color: green;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .score-area {
   margin-top: 7%;
@@ -153,7 +159,7 @@ button {
 .warArea2 {
   justify-content: flex-end;
   margin-left: -35px;
-  z-index: 3;
+  z-index: 2;
   /* margin-right:0px; */
 }
 
@@ -172,11 +178,12 @@ button {
 .piles {
   justify-content: flex-end;
   margin-left: -20px;
+  z-index: 0;
 }
 
 .animated {
   transform: translate(116px, 0px);
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }

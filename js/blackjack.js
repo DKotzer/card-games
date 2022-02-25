@@ -636,7 +636,6 @@ function rebet() {
   ) {
     player.bank -= player.previousBet;
     player.bet = player.previousBet;
-
     dealCards();
   }
 }

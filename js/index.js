@@ -42,8 +42,6 @@ let delay = 4000;
 let warState = false;
 let oldPlayerCard = playerCard;
 let oldCpuCard = cpuCard;
-let OldPlayerCardClass;
-let OldCpuCardClass;
 
 /*----- cached element references -----*/
 
@@ -79,9 +77,6 @@ deckClickEl.addEventListener("click", handleClick);
 
 //handle the logic of each turn
 function handleClick() {
-  // OldPlayerCardClass = playerCardEl.classList; // seeing if this does anything
-  // OldCpuCardClass = cpuCardEl.classList;
-
   clickSound.play();
   if (playerCards.length == 0) {
     shuffle(playerDeck);
@@ -91,8 +86,6 @@ function handleClick() {
   }
   oldPlayerCard = playerCard;
   oldCpuCard = cpuCard;
-  // OldPlayerCardClass = playerCardEl.classList;
-  // OldCpuCardClass = cpuCardEl.classList;
 
   playerCardEl.classList.remove("back-blue"); //fixed by moving player card and cpu card declaration global and as 'back-blue/red'
   cpuCardEl.classList.remove("back-red");
@@ -145,8 +138,6 @@ function handleClick() {
   }
   console.log(`${playerNum} vs ${cpuNum}`);
   if (cpuNum > playerNum) {
-    OldPlayerCardClass = playerCardEl.classList;
-    OldCpuCardClass = cpuCardEl.classList;
     cpuDeck.push(cpuCard);
     cpuDeck.push(playerCard);
     console.log("CPU wins round");
@@ -154,8 +145,6 @@ function handleClick() {
     setTimeout(playerPileEl.classList.remove(playerCard), 250);
     setTimeout(playerPileEl.classList.add(oldPlayerCard), 250); //trying to switch card back to previous card if turn is a loss
   } else if (playerNum > cpuNum) {
-    OldPlayerCardClass = playerCardEl.classList;
-    OldCpuCardClass = cpuCardEl.classList;
     playerDeck.push(cpuCard);
     playerDeck.push(playerCard);
     console.log("Player wins round");
@@ -409,7 +398,7 @@ function handleClick() {
       if (playerCards.length == 0) {
         render();
         alert("The Computer has won, get good.");
-        location.href = "home.html";
+        location.href = "index.html";
 
         gameOver = true;
       }

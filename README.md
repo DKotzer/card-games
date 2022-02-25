@@ -60,15 +60,14 @@ example turns :camera:
 
 https://user-images.githubusercontent.com/34380246/155643322-248a41db-41ea-41e2-a31a-b9848a3c3e69.mp4
 
-### Betting Rules
+## Betting Rules
 
----
-
-- Players start with an initial $1000 in their wallet.
-- All bets are the be place before or at the end of rounds. The place bets sign will be illuminated when betting is available.
-- A bet cannot exceed the amount of money in the wallet.
-- A double bet can be placed when the amount of money in the wallet is an adequate amount, and an initial bet has been placed.
-- All bets are locked in until the end of the round.
+- Players start with an initial 1000 in their bank.
+- A bet cannot go above the player bank total
+- If the dealer has an Ace up after the initial deal players have the option to pay insurance, which costs one half the bet value.
+- If the player has insurance and the dealer has blackjack, player gets 2x insurance back.
+- The result of winning is 2x your bet
+- The result of a push is getting your bet back.
 
 # :clubs: WAR :diamonds:
 
