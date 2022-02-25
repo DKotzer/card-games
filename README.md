@@ -78,7 +78,12 @@ The deck is divided evenly among the players, giving each a face down stack. In 
 If the two cards played are of equal value, then there is a "war". Both players place the next three cards face down and then another card face-up. The winner of the war takes all the cards and puts them at the bottom of their deck.
 
 :camera:
-https://user-images.githubusercontent.com/34380246/155637377-3293f8a0-4624-4023-8e3f-329c790b69ba.mp4
+
+
+
+https://user-images.githubusercontent.com/34380246/155734479-0c1c0db3-b3f2-4d4f-a1cb-fdec77bdcd4e.mp4
+
+
 
 If the face-up cards are again equal then the war repeats with another set of face-down/up cards. This repeats until one player's face-up card is higher than their opponent's.
 
