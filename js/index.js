@@ -414,7 +414,7 @@ function handleClick() {
       // cpuPileEl.classList.add("hidden");
       if (cpuCards.length == 0) {
         alert("You have won, good job.");
-        location.href = "home.html";
+        location.href = "index.html";
         gameOver = true;
       }
       cpuDeck = [];
